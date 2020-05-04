@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid text-center bg-primary py-3">
+      <h1>HardStore Home Page</h1>
+      <button type="button" class="btn btn-primary">Primary</button>
+    </div>
+
+    <!--este es el encabezado -->
+    <header>
+      <!--esta es la barra de navegacion -->
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sobre Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="LogIn.html">LogIn</a>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Categorias
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Procesadores</a>
+              <a class="dropdown-item" href="#">MotherBoard</a>
+              <a class="dropdown-item" href="#">Placas Graficas</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="inam" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="card" style="width: 300px; margin: auto;">
+                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="card" style="width: 300px;">
+                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="card" style="width: 300px;">
+                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="card" style="width: 300px; margin: auto;">
+                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="card" style="width: 300px;">
+                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="card" style="width: 300px;">
+                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="#inam" class="carousel-control-prev" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a href="#inam" class="carousel-control-next" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+{% endblock %}
