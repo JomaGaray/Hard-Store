@@ -41,9 +41,11 @@
       </ul>
     </header>
 
-    <div class="container-fluid">
+    <div class="container-fluid"> <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12 d-none d-md-block">  
+
+        <!-- Lo que busco es que no se muestre el carousel o achicarlo a un elemento, hasta que la pantalla sea mas grande que 991px, lo defino en un style en head - Agus -->
 
           <!--Empieza elemento carousel - Agus -->
           <div id="inam" class="carousel slide" data-ride="carousel">
@@ -70,7 +72,6 @@
                         </div>
                       </div>
                     </div>
-
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px;">
                         <img src="procesador.jpg" class="card-img-top" />
@@ -88,7 +89,6 @@
                         </div>
                       </div>
                     </div>
-
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px;">
                         <img src="procesador.jpg" class="card-img-top" />
