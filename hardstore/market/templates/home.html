@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-fluid text-center bg-primary py-3">
+    <div class="container-fluid text-center bg-primary py-3">
       <h1>HardStore Home Page</h1>
       <button type="button" class="btn btn-primary">Primary</button>
     </div>
@@ -44,14 +44,18 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
+
+          <!--Empieza elemento carousel-->
           <div id="inam" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
+
+              <!--Empieza primer item de tres cards-->
               <div class="carousel-item active">
                 <div class="container">
                   <div class="row">
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px; margin: auto;">
-                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Why you should use skin masks ?
@@ -69,7 +73,7 @@
 
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px;">
-                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Why you should use skin masks ?
@@ -87,7 +91,7 @@
 
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px;">
-                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Why you should use skin masks ?
@@ -105,12 +109,15 @@
                   </div>
                 </div>
               </div>
+              <!--termina primer -->
+
+              <!--Empieza segundo item de tres cards-->
               <div class="carousel-item">
                 <div class="container">
                   <div class="row">
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px; margin: auto;">
-                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Why you should use skin masks ?
@@ -127,7 +134,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px;">
-                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Why you should use skin masks ?
@@ -144,7 +151,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-4">
                       <div class="card" style="width: 300px;">
-                        <img src="./Img/procesador.jpg" class="card-img-top" />
+                        <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Why you should use skin masks ?
@@ -162,7 +169,9 @@
                   </div>
                 </div>
               </div>
+              <!--termina segundo item-->
             </div>
+
             <a href="#inam" class="carousel-control-prev" data-slide="prev">
               <span class="carousel-control-prev-icon"></span>
             </a>
@@ -170,6 +179,9 @@
               <span class="carousel-control-next-icon"></span>
             </a>
           </div>
+          <!--termina elemento carousel-->
+
         </div>
       </div>
+    </div>
 {% endblock %}
