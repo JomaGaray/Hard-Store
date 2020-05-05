@@ -43,19 +43,19 @@
 
     <div class="container-fluid"> <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
       <div class="row">
-        <div class="col-md-12 d-none d-md-block">  
+        <div class="col-12 ">  
 
         <!-- Lo que busco es que no se muestre el carousel o achicarlo a un elemento, hasta que la pantalla sea mas grande que 991px, lo defino en un style en head - Agus -->
 
           <!--Empieza elemento carousel - Agus -->
           <div id="inam" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">  <!-- Puedo definir el carousel inner dentro de un container y simplificar el codigo -->
+            <div class="container p-t-0 m-t-2 carousel-inner"><!--Puedo definir el carousel inner dentro de un container y simplificar el codigo-->
 
               <!--Empieza primer item de tres cards - Agus -->
-              <div class="carousel-item active"> <!-- Puedo definir el item dentro de una row y simplificar el codigo  -->
-                <div class="container">  <!-- Elimino este container y lo paso al carousel inner -->
-                  <div class="row">  <!--  Esta row  -->
-                    <div class="col-sm-12 col-lg-4">
+              <div class="row row-equal carousel-item active m-t-0"> <!-- Puedo definir el item dentro de una row y simplificar el codigo  -->
+                <!-- <div class="container">   Elimino este container y lo paso al carousel inner -->
+                  <!--<div class="row">    Esta row  -->
+                    <div class="col-md-4">
                       <div class="card" style="width: 300px; margin: auto;">
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
@@ -106,16 +106,16 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  <!--</div>  -->
+                <!-- </div> -->
               </div>
               <!--termina primer - Agus -->
 
               <!--Empieza segundo item de tres cards - Agus -->
-              <div class="carousel-item">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-sm-12 col-lg-4">
+              <div class="row row-equal carousel-item m-t-0">
+                <!-- <div class="container"> 
+                  <div class="row"> -->
+                    <div class="col-md-4">
                       <div class="card" style="width: 300px; margin: auto;">
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
@@ -166,8 +166,8 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                <!--  </div>
+                </div> -->
               </div>
               <!--termina segundo item - Agus -->
             </div>
