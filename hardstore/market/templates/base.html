@@ -22,7 +22,44 @@
 	</style>
 </head>
 <body style="background-color: #204465;">
-	
+	<div class="container-fluid text-center bg-primary py-3">
+      <h1>HardStore</h1>
+      <button type="button" class="btn btn-primary">Primary</button>
+    </div>
+    <!--este es el encabezado - Agus -->
+    <header>
+      <!--esta es la barra de navegacion - Agus -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item" >
+          <a class="nav-link active" href="#"  >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" >Sobre Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="LogIn.html" >LogIn</a>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Categorias
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Procesadores</a>
+              <a class="dropdown-item" href="#">MotherBoard</a>
+              <a class="dropdown-item" href="#">Placas Graficas</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </header>
 	{% block content %}{% endblock %}
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
