@@ -1,8 +1,44 @@
-{% extends home.html %} {% block content %}
-<h1>Esta es la pagina del login</h1>
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique enim,
-  ratione laboriosam impedit aliquid omnis ad vitae distinctio, amet nemo, iure
-  culpa blanditiis! Enim quos iste quaerat sit natus sunt?
-</p>
-{% enblock content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogIn</title>
+    <link rel="stylesheet" href="login.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <form action="LogIn.html" class="login-form">
+      <h1>HardStore Login</h1>
+
+      <div class="txtb">
+        <input type="text" />
+        <!-- SPAN hace bloques de elementos como div, pero en linea- Joma-->
+        <span data-placeholder="Username"></span>
+      </div>
+      <div class="txtb">
+        <input type="password" />
+        <span data-placeholder="Pasword"></span>
+      </div>
+
+      <input type="submit" class="logbtn" value="Login" />
+
+      <div class="bottom-text">
+        No tenes una cuenta? <a href="#">Registrate!</a>
+      </div>
+    </form>
+
+    <!--js para el movimiento en passwprd y usuario - Joma-->
+    <!--
+    <script type="text/javascript">
+      $(".txtb input").on("focus", function () {
+        $(this).addClass("focus");
+      });
+
+      $(".txtb input").on("blur", function () {
+        if ($(this).val() == "") $(this).removeClass("focus");
+      });
+    </script>
+  --></body>
+</html>
