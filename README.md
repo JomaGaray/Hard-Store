@@ -1,2 +1,1 @@
 Hard-Store
-joma puto
