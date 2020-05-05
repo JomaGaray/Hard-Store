@@ -1,6 +1,7 @@
 {% extends "base.html" %} 
 
 {% block content %}
+
     <div class="container-fluid text-center bg-primary py-3">
       <h1>HardStore Home Page</h1>
       <button type="button" class="btn btn-primary">Primary</button>
@@ -42,22 +43,22 @@
       </ul>
     </header>
 
-    <div class="container-fluid"> <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
+    <div class="container-fluid" style="height: 1000px"> <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
       <div class="row">
-        <div class="col-md-12 d-none d-md-block">  
+        <div class="col-12 ">  
 
         <!-- Lo que busco es que no se muestre el carousel o achicarlo a un elemento, hasta que la pantalla sea mas grande que 991px, lo defino en un style en head - Agus -->
 
           <!--Empieza elemento carousel - Agus -->
-          <div id="inam" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
+          <div id="inam" class="carousel slide" data-ride="carousel" >
+            <div class="container carousel-inner"><!--Puedo definir el carousel inner dentro de un container y simplificar el codigo-->
 
               <!--Empieza primer item de tres cards - Agus -->
               <div class="carousel-item active">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-sm-12 col-lg-4">
-                      <div class="card" style="width: 300px; margin: auto;">
+
+                  <div class="row justify-content-center">
+                    <div class="d-none col-md-4 d-md-block" >
+                      <div class="card" style="width:200px">
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
@@ -73,8 +74,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-lg-4">
-                      <div class="card" style="width: 300px;">
+                    <div class="col-8 col-md-4 d-md-block " >
+                      <div class="card" style="width:200px" >
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
@@ -90,8 +91,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-12 col-lg-4">
-                      <div class="card" style="width: 300px;">
+                    <div class="d-none col-md-4 d-md-block" >
+                      <div class="card" style="width:200px">
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
@@ -108,16 +109,51 @@
                       </div>
                     </div>
                   </div>
-                </div>
+
+                <!-- </div> -->
               </div>
-              <!--termina primer - Agus -->
+              <!--termina primer item- Agus -->
 
               <!--Empieza segundo item de tres cards - Agus -->
               <div class="carousel-item">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-sm-12 col-lg-4">
-                      <div class="card" style="width: 300px; margin: auto;">
+                
+                  <div class="row justify-content-center">
+                    <div class="d-none col-md-4 d-md-block justify-content-center" >
+                      <div class="card" style="width:200px">
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8 col-md-4 d-md-block justify-content-center" >
+                      <div class="card" style="width:200px" >
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Why you should use skin masks ?
+                          </h4>
+                          <p class="card-text">
+                            Skin masks help us to make are skin fresh and also
+                            they protect our skin from the harm rays of sun
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Read More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-none col-md-4 d-md-block justify-content-center" >
+                      <div class="card" style="width:200px">
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
@@ -134,45 +170,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                  <div class="card" style="width: 300px;">
-                    <img
-                      src="../../assets/procesador.jpg"
-                      class="card-img-top"
-                    />
-                    <div class="card-body">
-                      <h4 class="card-title">
-                        Procesador
-                      </h4>
-                      <p class="card-text">
-                        Aca va la descripcion del producto
-                      </p>
-                      <button type="button" class="btn btn-warning">
-                        Read More
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                  <div class="card" style="width: 300px;">
-                    <img
-                      src="../../assets/procesador.jpg"
-                      class="card-img-top"
-                    />
-                    <div class="card-body">
-                      <h4 class="card-title">
-                        Procesador
-                      </h4>
-                      <p class="card-text">
-                        Aca va la descripcion del producto
-                      </p>
-                      <button type="button" class="btn btn-warning">
-                        Read More
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               <!--termina segundo item - Agus -->
             </div>
