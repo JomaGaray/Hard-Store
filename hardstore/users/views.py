@@ -5,4 +5,8 @@ def login(request):
 
     return render(request, 'login.html', {'titulo': 'Login'})
 
-# Create your views here.
+
+def regitro(request):
+
+    return render(request, 'registro.html', {'titulo': 'Registro'})
+
