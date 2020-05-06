@@ -1,8 +1,11 @@
-from django.urls import path
-from . import views
 
-urlpatterns = [
 
-    path('', views.home, name='hardstore-home'),
+#  from django.urls import path
+# from . import views
 
-]
+# urlpatterns = [
+
+#    path('', views.home, name='hardstore-home'),
+
+
+# ]
