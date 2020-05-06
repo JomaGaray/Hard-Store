@@ -2,49 +2,12 @@
 <!--aca van la barra de navegacioin -Joma-->
 {% block content %}
 
-<!--
-    <div class="container-fluid text-center bg-primary py-3">
-      <h1>HardStore Home Page</h1>
-    </div>
-
-
-
-<header>
-
-  <ul class="nav">
-    <li class="nav-item" >
-      <a class="nav-link active" href="#" style="color: white" >Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" style="color: white">Sobre Nosotros</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="../../users/templates/login.html" style="color:white">LogIn</a>
-    </li>
-    <li class="nav-item">
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Categorias
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Procesadores</a>
-          <a class="dropdown-item" href="#">MotherBoard</a>
-          <a class="dropdown-item" href="#">Placas Graficas</a>
+    <div class="container-fluid" > <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
+      <div class="row" style="margin-top:80px">
+        <div class="col-12 text-center" style="background-color: white">
+              <h3>Productos en oferta</h3>
         </div>
       </div>
-    </li>
-  </ul>
-</header> -->
-
-
-    <div class="container-fluid" style="height: 1000px"> <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
       <div class="row">
         <div class="col-12 ">  
 
@@ -52,7 +15,7 @@
 
           <!--Empieza elemento carousel - Agus -->
           <div id="inam" class="carousel slide" data-ride="carousel" >
-            <div class="container carousel-inner"><!--Puedo definir el carousel inner dentro de un container y simplificar el codigo-->
+            <div class="carousel-inner"><!--Puedo definir el carousel inner dentro de un container y simplificar el codigo-->
 
               <!--Empieza primer item de tres cards - Agus -->
               <div class="carousel-item active">
@@ -63,14 +26,13 @@
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
-                            Why you should use skin masks ?
+                            Nombre del producto
                           </h4>
                           <p class="card-text">
-                            Skin masks help us to make are skin fresh and also
-                            they protect our skin from the harm rays of sun
+                            Descripcion del producto
                           </p>
                           <button type="button" class="btn btn-warning">
-                            Read More
+                            Ver producto
                           </button>
                         </div>
                       </div>
@@ -80,14 +42,13 @@
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
-                            Why you should use skin masks ?
+                            Nombre del producto
                           </h4>
                           <p class="card-text">
-                            Skin masks help us to make are skin fresh and also
-                            they protect our skin from the harm rays of sun
+                            Descripcion del producto
                           </p>
                           <button type="button" class="btn btn-warning">
-                            Read More
+                            Ver producto
                           </button>
                         </div>
                       </div>
@@ -97,21 +58,20 @@
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
-                            Why you should use skin masks ?
+                            Nombre del producto
                           </h4>
                           <p class="card-text">
-                            Skin masks help us to make are skin fresh and also
-                            they protect our skin from the harm rays of sun
+                            Descripcion del producto
                           </p>
                           <button type="button" class="btn btn-warning">
-                            Read More
+                            Ver producto
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                <!-- </div> -->
+                
               </div>
               <!--termina primer item- Agus -->
 
@@ -124,14 +84,13 @@
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
-                            Why you should use skin masks ?
+                            Nombre del producto
                           </h4>
                           <p class="card-text">
-                            Skin masks help us to make are skin fresh and also
-                            they protect our skin from the harm rays of sun
+                            Descripcion del producto
                           </p>
                           <button type="button" class="btn btn-warning">
-                            Read More
+                            Ver producto
                           </button>
                         </div>
                       </div>
@@ -141,14 +100,13 @@
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
-                            Why you should use skin masks ?
+                            Nombre del producto
                           </h4>
                           <p class="card-text">
-                            Skin masks help us to make are skin fresh and also
-                            they protect our skin from the harm rays of sun
+                            Descripcion del producto
                           </p>
                           <button type="button" class="btn btn-warning">
-                            Read More
+                            Ver producto
                           </button>
                         </div>
                       </div>
@@ -158,14 +116,13 @@
                         <img src="procesador.jpg" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
-                            Why you should use skin masks ?
+                            Nombre del producto
                           </h4>
                           <p class="card-text">
-                            Skin masks help us to make are skin fresh and also
-                            they protect our skin from the harm rays of sun
+                            Descripcion del producto
                           </p>
                           <button type="button" class="btn btn-warning">
-                            Read More
+                            Ver producto
                           </button>
                         </div>
                       </div>
@@ -177,17 +134,155 @@
             </div>
           </div>
           <!--termina elemento carousel - Agus -->
-
+          <a href="#inam" class="carousel-control-prev" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a href="#inam" class="carousel-control-next" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
         </div>
 
-        <a href="#inam" class="carousel-control-prev" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a href="#inam" class="carousel-control-next" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
+        
       </div>
       <!--termina elemento carousel-->
+    </div>
+    <div class="container-fluid" >
+      <div class="row" style="margin-top:50px">
+        <div class="col-12 text-center" style="background-color: white">
+              <h3>Destacados</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 ">  
+
+          <!--Empieza elemento carousel - Agus -->
+          <div id="carrusel2" class="carousel slide" data-ride="carousel" >
+            <div class="carousel-inner">
+
+              <!--Empieza primer item de tres cards - Agus -->
+              <div class="carousel-item active">
+
+                  <div class="row justify-content-center">
+                    <div class="d-none col-md-4 d-md-block" >
+                      <div class="card" style="width:200px">
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Nombre del producto
+                          </h4>
+                          <p class="card-text">
+                            Descripcion del producto
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Ver producto
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8 col-md-4 d-md-block " >
+                      <div class="card" style="width:200px" >
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Nombre del producto
+                          </h4>
+                          <p class="card-text">
+                            Descripcion del producto
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Ver producto
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-none col-md-4 d-md-block" >
+                      <div class="card" style="width:200px">
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Nombre del producto
+                          </h4>
+                          <p class="card-text">
+                            Descripcion del producto
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Ver producto
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <!--termina primer item- Agus -->
+
+              <!--Empieza segundo item de tres cards - Agus -->
+              <div class="carousel-item">
+                
+                  <div class="row justify-content-center">
+                    <div class="d-none col-md-4 d-md-block justify-content-center" >
+                      <div class="card" style="width:200px">
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Nombre del producto
+                          </h4>
+                          <p class="card-text">
+                            Descripcion del producto
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Ver producto
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8 col-md-4 d-md-block justify-content-center" >
+                      <div class="card" style="width:200px" >
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Nombre del producto
+                          </h4>
+                          <p class="card-text">
+                            Descripcion del producto
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Ver producto
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-none col-md-4 d-md-block justify-content-center" >
+                      <div class="card" style="width:200px">
+                        <img src="procesador.jpg" class="card-img-top" />
+                        <div class="card-body">
+                          <h4 class="card-title">
+                            Nombre del producto
+                          </h4>
+                          <p class="card-text">
+                            Descripcion del producto
+                          </p>
+                          <button type="button" class="btn btn-warning">
+                            Ver producto
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+              </div>
+              <!--termina segundo item - Agus -->
+            </div>
+          </div>
+          <!--termina elemento carousel - Agus -->
+          <a href="#carrusel2" class="carousel-control-prev" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a href="#carrusel2" class="carousel-control-next" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
