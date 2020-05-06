@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include('market.urls')), manera menos directa -Joma
     path('login/', user_views.login, name='login'),
-    path('', market_views.home, name='home')
+    path('', market_views.home, name='home'),
 ]
