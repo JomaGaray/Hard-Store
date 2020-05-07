@@ -1,4 +1,6 @@
 {% extends "base.html" %} 
+
+{% load static %}
 <!--aca van la barra de navegacioin -Joma-->
 {% block content %}
 
@@ -25,7 +27,7 @@
                     <div class="d-none col-md-4 d-md-block" >
                       <div class="card" style="width:200px">
 
-                        <img src="procesador.jpg" class="card-img-top" />
+                        <img src="{% static 'market/procesador.jpg' %}" class="card-img-top" />
                         <div class="card-body">
                           <h4 class="card-title">
                             Nombre del producto 
