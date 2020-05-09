@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+<head>
+  {% block estilo %}
+  <link rel="stylesheet" href="../static/signup.css" />
+  {% endblock %}
+</head>
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="brand"><span> HardStore </span>SignUp</h1>
+    </div>
+  </div>
+
+  <!--aca van los inputs para registrarse-Joma-->
+  <div class="registro">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <label>Nombre</label>
+          <input type="text" name="Nombre" />
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <label>Apellido</label>
+          <input type="text" name="Apellido" />
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <label>Email</label>
+          <input type="email" name="Email" />
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <label>Contraseña</label>
+          <input type="password" name="Contraseña" />
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-4">
+          <label>Repetir Contraseña</label>
+          <input type="password" name="Contraseña" />
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <button type="button" class="btn btn-success">
+            Registrarse
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
