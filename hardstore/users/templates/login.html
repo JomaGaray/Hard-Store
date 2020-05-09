@@ -1,31 +1,42 @@
 {% extends "base.html" %}
 <head>
   {% block estilo %}
-  <link rel="stylesheet" href="../static/login.css" />
+  <link rel="stylesheet" href="../static/signup.css" />
   {% endblock %}
 </head>
 
 {% block content %}
 
-<form action="LogIn.html" class="login-form">
-  <h1>HardStore Login</h1>
-
-  <div class="txtb">
-    <input type="text" />
-    <!-- SPAN hace bloques de elementos como div, pero en linea- Joma-->
-    <span data-placeholder="Username"></span>
-  </div>
-  <div class="txtb">
-    <input type="password" />
-    <span data-placeholder="Pasword"></span>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="brand"><span> HardStore </span>SignUp</h1>
+    </div>
   </div>
 
-  <input type="submit" class="logbtn" value="Login" />
+  <!--aca van los inputs para registrarse-Joma-->
+  <div class="registro">
+    <form>
+      <div class="row">
+        <div class="col-sm-12 col-lg-6">
+          <label>Email</label>
+          <input type="email" name="Email" />
+        </div>
 
-  <div class="bottom-text">
-    No tenes una cuenta? <a href="#">Registrate!</a>
+        <div class="col-sm-12 col-lg-6">
+          <label>Contraseña</label>
+          <input type="password" name="Contraseña" />
+        </div>
+
+        <div class="col-12">
+          <button type="button" class="btn btn-success">
+            login
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-</form>
+</div>
 
 {% endblock %}
 
