@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {%load static%}
 <head>
   {% block estilo %}
-  <link rel="stylesheet" href="../static/signup.css" />
+  <link rel="stylesheet" href="{% static 'signup.css' %}" />
   {% endblock %}
 </head>
 
