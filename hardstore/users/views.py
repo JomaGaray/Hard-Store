@@ -6,7 +6,6 @@ def login(request):
     return render(request, 'login.html', {'titulo': 'Login'})
 
 
-def regitro(request):
+def signup(request):
 
-    return render(request, 'registro.html', {'titulo': 'Registro'})
-
+    return render(request, 'signup.html', {'titulo': 'SignUp'})
