@@ -39,3 +39,7 @@ body {
   float: left;
   margin-top: 30px;
 }
+
+.registro form h5 {
+  margin-top: 30px;
+}
