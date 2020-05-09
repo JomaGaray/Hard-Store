@@ -121,6 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Importante para que levanten los archivos estaticos, css, JS, Imagenes
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
