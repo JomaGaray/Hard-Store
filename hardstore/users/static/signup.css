@@ -1,0 +1,45 @@
+body {
+  background-color: #204465;
+  color: black;
+  line-height: normal; /*espacio entre los tags*/
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1em;
+  margin-top: 40px;
+}
+
+.brand {
+  text-align: center;
+}
+
+.brand span {
+  /*solo un detalle al titulo- Joma */
+  color: white;
+}
+
+.registro {
+  background-color: white;
+  padding: 1em;
+}
+
+.registro form label {
+  display: block;
+}
+
+.registro form input {
+  width: 70%;
+  padding: 0.5em;
+  border: 2px solid #c9e6ff;
+}
+
+.registro form button {
+  width: 40%;
+  padding: 0.5em;
+  border: 1px;
+  text-transform: uppercase;
+  float: left;
+  margin-top: 30px;
+}
+
+.registro form h5 {
+  margin-top: 30px;
+}
