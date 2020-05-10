@@ -56,7 +56,7 @@ ROOT_URLCONF = 'hardstore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [], #ACA PUEDO PONER LA DIRECCIÓN DIRECTA EN DONDE BUSCAR LOS TEMPLATES - Agus
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
