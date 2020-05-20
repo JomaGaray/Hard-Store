@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
 from .models import Category,Product,Order,Customer
+from django.views import View
 import datetime
 
-def home(request):
-	products = Product.objects.all()
-	return render(request, 'home.html', {'titulo':'Home','products' : products })
+class VistaHome(View):
+	def get(self,request):
+		products = Product.objects.all()
+		context = {'titulo':'Home','products' : products }
+		return render(request, 'home.html', context)
 	
