@@ -1,20 +1,20 @@
 <!--Empieza elemento carousel - Agus -->
-<div id="carrusel2" class="carousel slide" data-ride="carousel" >
+<div id="carrusel_ofertas" class="carousel slide" data-ride="carousel" >
   <div class="carousel-inner">
 
     <!--Empieza primer item de tres cards - Agus -->
     <div class="carousel-item active">
 
         <div class="row justify-content-center">
-          <div class="d-none col-md-4 d-md-block" >
+          <div class="d-none col-md-4 d-md-block">
             <div class="card" style="width:200px">
-              <img src="procesador.jpg" class="card-img-top" />
+              <img src="" class="card-img-top" />
               <div class="card-body">
                 <h4 class="card-title">
-                  Nombre del producto
+                  {{ofertas.0.name}}
                 </h4>
                 <p class="card-text">
-                  Descripcion del producto
+                  {{ofertas.0.description}}
                 </p>
                 <button type="button" class="btn btn-warning">
                   Ver producto
@@ -22,25 +22,25 @@
               </div>
             </div>
           </div>
-          <div class="col-8 col-md-4 d-md-block " >
-            <div class="card" style="width:200px" >
-              <img src="procesador.jpg" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  Nombre del producto
-                </h4>
-                <p class="card-text">
-                  Descripcion del producto
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="d-none col-md-4 d-md-block" >
+          <div class="d-none col-md-4 d-md-block">
             <div class="card" style="width:200px">
-              <img src="procesador.jpg" class="card-img-top" />
+              <img src="" class="card-img-top" />
+              <div class="card-body">
+                <h4 class="card-title">
+                  {{ofertas.1.name}}
+                </h4>
+                <p class="card-text">
+                  {{ofertas.1.description}}
+                </p>
+                <button type="button" class="btn btn-warning">
+                  Ver producto
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-8 col-md-4 d-md-block ">
+            <div class="card" style="width:200px">
+              <img src="" class="card-img-top" />
               <div class="card-body">
                 <h4 class="card-title">
                   Nombre del producto
@@ -54,6 +54,7 @@
               </div>
             </div>
           </div>
+          
         </div>
     </div>
     <!--termina primer item- Agus -->
@@ -62,15 +63,15 @@
     <div class="carousel-item">
       
         <div class="row justify-content-center">
-          <div class="d-none col-md-4 d-md-block justify-content-center" >
+          <div class="d-none col-md-4 d-md-block">
             <div class="card" style="width:200px">
-              <img src="procesador.jpg" class="card-img-top" />
+              <img src="" class="card-img-top" />
               <div class="card-body">
                 <h4 class="card-title">
-                  Nombre del producto
+                  {{products.name}}
                 </h4>
                 <p class="card-text">
-                  Descripcion del producto
+                  {{products.description}}
                 </p>
                 <button type="button" class="btn btn-warning">
                   Ver producto
@@ -78,25 +79,9 @@
               </div>
             </div>
           </div>
-          <div class="col-8 col-md-4 d-md-block justify-content-center" >
-            <div class="card" style="width:200px" >
-              <img src="procesador.jpg" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  Nombre del producto
-                </h4>
-                <p class="card-text">
-                  Descripcion del producto
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="d-none col-md-4 d-md-block justify-content-center" >
+          <div class="d-none col-md-4 d-md-block">
             <div class="card" style="width:200px">
-              <img src="procesador.jpg" class="card-img-top" />
+              <img src="" class="card-img-top" />
               <div class="card-body">
                 <h4 class="card-title">
                   Nombre del producto
@@ -110,6 +95,23 @@
               </div>
             </div>
           </div>
+          <div class="col-8 col-md-4 d-md-block ">
+            <div class="card" style="width:200px">
+              <img src="" class="card-img-top" />
+              <div class="card-body">
+                <h4 class="card-title">
+                  Nombre del producto
+                </h4>
+                <p class="card-text">
+                  Descripcion del producto
+                </p>
+                <button type="button" class="btn btn-warning">
+                  Ver producto
+                </button>
+              </div>
+            </div>
+          </div>
+          
         </div>
       
     </div>
@@ -117,9 +119,9 @@
   </div>
 </div>
 <!--termina elemento carousel - Agus -->
-<a href="#carrusel2" class="carousel-control-prev" data-slide="prev">
+<a href="#carrusel_ofertas" class="carousel-control-prev" data-slide="prev">
   <span class="carousel-control-prev-icon"></span>
 </a>
-<a href="#carrusel2" class="carousel-control-next" data-slide="next">
+<a href="#carrusel_ofertas" class="carousel-control-next" data-slide="next">
   <span class="carousel-control-next-icon"></span>
 </a>
