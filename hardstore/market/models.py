@@ -23,6 +23,13 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name
 
+class Oferta(models.Model):
+	producto = models.ManyToManyField(Product)
+	descuento = models.FloatField(null=True)
+	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	finish_date = models.DateTimeField(null=True)
+
+
 class Customer(models.Model):
 	name = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
