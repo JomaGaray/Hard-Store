@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import Group
-from .models import Product,Customer,Order,Category,Oferta
+from .models import Producto,Cliente,Orden,Categoria,Oferta
 
 admin.site.unregister(Group)
-admin.site.register(Product)
-admin.site.register(Order)
-admin.site.register(Category)
+admin.site.register(Producto)
+admin.site.register(Orden)
+admin.site.register(Categoria)
 admin.site.register(Oferta)

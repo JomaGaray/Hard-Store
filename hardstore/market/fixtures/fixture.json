@@ -1,0 +1,147 @@
+[
+{
+	"model":"market.Categoria",
+	"pk":1,
+	"fields": {
+		"nombre":"Procesador"
+	}
+},
+{
+	"model":"market.Categoria",
+	"pk":2,
+	"fields": {
+		"nombre":"Placas Graficas"		
+	}
+},
+{
+	"model":"market.Categoria",
+	"pk":3,
+	"fields": {
+		"nombre":"MotherBoard"	
+	}
+},
+
+{
+	"model":"market.Producto",
+	"pk":1,
+	"fields": {
+		"nombre": "Procesador Intel Core i7-10700",  
+		"descripcion": "16 Mb caché ; 8 núcleos ; 4.50 Ghz",
+		"precio": 10000.0,
+		"categoria": 1
+	}
+},
+{
+	"model":"market.Producto",
+	"pk":2,
+	"fields": {
+		"nombre": "Procesador Intel Core i7-7700", 
+		"descripcion": "8 Mb caché ; 4 núcleos ; 4.20 Ghz",
+		"precio" : 7000.0,
+		"categoria": 1
+	}
+},
+{
+	"model":"market.Producto",
+	"pk":3,
+	"fields": {
+		"nombre": "Procesador AMD Ryzen™ Threadripper™ 3990X", 
+		"descripcion": "4 Mb caché ; 64 núcleos ; 2.9 Ghz",
+		"precio" : 5000.0,
+		"categoria": 1
+	}
+},
+{
+	"model":"market.Producto",
+	"pk":4,
+	"fields": {
+		"nombre": "GeForce GTX 1080", 
+		"descripcion": "8 GB GDDR5X",
+		"precio" : 15000.0,
+		"categoria": 3
+	}
+},
+{
+	"model":"market.Producto",
+	"pk":5,
+	"fields": {
+		"nombre": "Radeon™ RX 580X", 
+		"descripcion": "8 GB GDDR5",
+		"precio" : 9000.0,
+		"categoria": 3
+	}
+},
+{
+	"model":"market.Producto",
+	"pk":6,
+	"fields": {
+		"nombre": "Intel Z490 GAMING", 
+		"descripcion": "Dual Channel ; Soporta 10th Gen Intel® Core™ Series",
+		"precio" : 4500.0,
+		"categoria": 2
+	}
+},
+{
+	"model":"market.Producto",
+	"pk":7,
+	"fields": {
+		"nombre": "Z490 VISION G", 
+		"descripcion": "Front USB 3.2 Gen2 Type-C™ Header ; Soporta 10th Gen Intel® Core™ Series",
+		"precio" : 6500.0,
+		"categoria": 2
+	}
+},
+
+
+{
+	"model":"market.Oferta",
+	"pk":1,
+	"fields": {
+		"producto": 3, 
+		"descuento": 0.5
+	}
+},
+{
+	"model":"market.Oferta",
+	"pk":2,
+	"fields": {
+		"producto": 5, 
+		"descuento": 0.2
+	}
+},
+
+
+{
+	"model":"market.Cliente",
+	"pk":1,
+	"fields": {
+		"nombre": "Agustin", 
+		"email": "agus123@hotmail.com"
+	}
+},
+{
+	"model":"market.Cliente",
+	"pk":2,
+	"fields": {
+		"nombre": "Jose" , 
+		"email": "jose@gmail.com"
+	}
+},
+{
+	"model":"market.Cliente",
+	"pk":3,
+	"fields": {
+		"nombre": "Lucas", 
+		"email": "lucas@gmail.com"
+	}
+},
+{
+	"model":"market.Cliente",
+	"pk":4,
+	"fields": {
+		"nombre": "Lucia", 
+		"email": "lucia123@hotmail.com"
+	}
+}
+
+]

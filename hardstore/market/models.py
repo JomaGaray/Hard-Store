@@ -7,51 +7,51 @@ from django.utils import timezone
 #class (models.Model):
 #class (models.Model):
 
-class Category(models.Model):
-	name = models.CharField(max_length=200, null=True)
+class Categoria(models.Model):
+	nombre = models.CharField(max_length=200, null=True)
 
 	def __str__(self):
-		return self.name
+		return self.nombre
 
-class Product(models.Model):
-	name = models.CharField(max_length=200, null=True)
-	description = models.CharField(max_length=200, null=True, blank=True)
-	price = models.FloatField(null=True)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
-	category = models.ManyToManyField(Category)
+class Producto(models.Model):
+	nombre = models.CharField(max_length=200, null=True)
+	descripcion = models.CharField(max_length=200, null=True, blank=True)
+	precio = models.FloatField(null=True)
+	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
+	categoria = models.ForeignKey(Categoria, null=True, on_delete = models.SET_NULL)
 
 	def __str__(self):
-		return self.name
+		return self.nombre
 
 class Oferta(models.Model):
-	product = models.ForeignKey(Product, null=True, on_delete = models.SET_NULL)
-	discount = models.FloatField(null=True)
-	#price = product.price * discount  ----- tengo que almacenar el precio con el descuento aplicado
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
-	finish_date = models.DateTimeField(null=True)
+	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
+	descuento = models.FloatField(null=True)
+	#precio = producto.precio * discount  ----- tengo que almacenar el precio con el descuento aplicado
+	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
+	f_expira = models.DateTimeField(null=True)
 
 	def __str__(self):
-		return self.product.name
+		return self.producto.nombre
 
 
-class Customer(models.Model):
-	name = models.CharField(max_length=200, null=True)
+class Cliente(models.Model):
+	nombre = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200, null=True)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __str__(self):
-		return self.name
+		return self.nombre
 
 
-class Order(models.Model):
-	STATUS = (	('Pendiente','Pendiente'),
+class Orden(models.Model):
+	ESTADO = (	('Pendiente','Pendiente'),
 				('Confirmada','Confirmada'),
 				('Cancelada','Cancelada')
 		)
-	#referencia a product
-	product = models.ForeignKey(Product, null=True, on_delete = models.SET_NULL)
+	#referencia a Producto
+	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
 	#referencia a customer
-	customer = models.ForeignKey(Customer, null=True, on_delete = models.SET_NULL)
+	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.SET_NULL)
 
-	status = models.CharField(max_length=200, null=True, choices=STATUS)
+	estado = models.CharField(max_length=200, null=True, choices=ESTADO)
 
