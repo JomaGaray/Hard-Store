@@ -7,19 +7,19 @@ from django.views import View
 class VistaHome(View):
 	def get(self,request):
 		productos = Producto.objects.all()
-		ofertas = Oferta.objects.all() #tengo que filtrar 6 ofertas
+		ofertas = Oferta.objects.all()[:6] #tengo que filtrar 6 ofertas
 
 		# por ahora los destacados van a ser los productos cargados mas recientemente
 		# hago una query de los 6 mas destacados
 		
-		#destacados = Product.objects.filter()
+		destacados = Producto.objects.all()[:6]
 
 		
 		context = {
 		'titulo':'Home',
 		'productos' : productos,
-		'ofertas' : ofertas 
-		#'destacados' : destacados  
+		'ofertas' : ofertas ,
+		'destacados' : destacados  
 		}
 		return render(request, 'home.html', context)
 	
