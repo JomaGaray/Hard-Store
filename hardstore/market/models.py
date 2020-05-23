@@ -19,7 +19,7 @@ class Producto(models.Model):
 	precio = models.FloatField(null=True)
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	categoria = models.ForeignKey(Categoria, null=True, on_delete = models.SET_NULL)
-
+	imagen = models.ImageField(default='default.jpg',upload_to='img_productos') #img_productos es un directorio que contendrá todas las images
 	def __str__(self):
 		return self.nombre
 
