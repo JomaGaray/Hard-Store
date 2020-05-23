@@ -24,5 +24,6 @@ urlpatterns = [
     # path('', include('market.urls')), manera menos directa -Joma
     path('login/', user_views.login, name='login'),
     path('signup/', user_views.signup, name='signup'),
+    path('producto/', market_views.VistaProducto.as_view(), name='producto'),
     path('', market_views.VistaHome.as_view(), name='home'),
 ]
