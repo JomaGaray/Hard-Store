@@ -1,35 +1,28 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block estilo %}
-<link rel="stylesheet" href="{% static 'producto.css' %}">
-{% endblock %}
-{% block content %}
-    <div class="container">
-      <div class="row">
-        <div class="col-md-5">
-          <img src="../static/Images/mother.jpg" alt="" />
-        </div>
-        <div class="col-md-7">
-            <!-- me imprime todo-->
-              
-              <p class="categoria text-center">{{ producto.categoria }}</p>
-              <h2>{{ producto.nombre }}</h2>
-              <p class="price">{{ producto.precio }}</p>
-              <p><b>Stock:</b> En Stock</p>
-              <p><b>Condition:</b>Nuevo</p>
-              <p><b>Marca:</b>{{ producto.marca }}</p>
-              <p>{{ producto.descripcion }}</p>
-              <label>Cantidad</label>
-              <input type="text" value="1" />
-              <button type="button" class="btnb btn-default carrito">
-                Agregar al Carrito
-              </button>
-            
-          
-        </div>
-      </div>
+{% extends 'base.html' %} {% load static %} {% block estilo %}
+<link rel="stylesheet" href="{% static 'producto.css' %}" />
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="../static/Images/mother.jpg" alt="" />
     </div>
+    <div class="col-md-7">
+      <!-- me imprime todo-->
+
+      <p class="categoria text-center">{{ producto.categoria }}</p>
+      <h2>{{ producto.nombre }}</h2>
+      <p class="price">{{ producto.precio }}</p>
+      <p><b>Stock:</b> En Stock</p>
+      <p><b>Condition:</b>Nuevo</p>
+      <p><b>Marca:</b>{{ producto.marca }}</p>
+      <p>{{ producto.descripcion }}</p>
+      <label>Cantidad</label>
+      <input type="text" value="1" />
+      <button type="button" class="btnb btn-default carrito">
+        Agregar al Carrito
+      </button>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
-
-
