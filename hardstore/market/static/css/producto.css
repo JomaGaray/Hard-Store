@@ -1,0 +1,42 @@
+.container {
+  margin-top: 100px;
+}
+
+.categoria {
+  background: green;
+  width: 100px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.col-md-7 {
+  color: #555;
+}
+
+.price {
+  color: #fe980f;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-weight: bold;
+  height: 33px;
+  text-align: center;
+  width: 30px;
+}
+
+.carrito {
+  background-color: #fe980f;
+  color: #fff;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+img {
+  width: 70%;
+  height: 70%;
+}
