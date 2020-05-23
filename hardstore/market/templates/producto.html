@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block estilo %}
-<link rel="stylesheet" href="../static/css/producto.css">
+<link rel="stylesheet" href="{% static 'producto.css' %}">
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -10,22 +10,22 @@
           <img src="../static/Images/mother.jpg" alt="" />
         </div>
         <div class="col-md-7">
-            {% for p in productos %} <!-- me imprime todo-->
+            <!-- me imprime todo-->
               
-              <p class="categoria text-center">{{ p.categoria }}</p>
-              <h2>{{ p.nombre }}</h2>
-              
-              <p class="price">{{ p.precio }}</p>
+              <p class="categoria text-center">{{ producto.categoria }}</p>
+              <h2>{{ producto.nombre }}</h2>
+              <p class="price">{{ producto.precio }}</p>
               <p><b>Stock:</b> En Stock</p>
               <p><b>Condition:</b>Nuevo</p>
-              <p><b>Marca:</b>{{ p.marca }}</p>
-              <p>{{ p.descripcion }}</p>
+              <p><b>Marca:</b>{{ producto.marca }}</p>
+              <p>{{ producto.descripcion }}</p>
               <label>Cantidad</label>
               <input type="text" value="1" />
-            {% endfor %}
-          <button type="button" class="btnb btn-default carrito">
-            Agregar al Carrito
-          </button>
+              <button type="button" class="btnb btn-default carrito">
+                Agregar al Carrito
+              </button>
+            
+          
         </div>
       </div>
     </div>
