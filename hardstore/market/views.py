@@ -23,3 +23,6 @@ class VistaHome(View):
 		}
 		return render(request, 'home.html', context)
 	
+class VistaProducto(View):
+	def get(self,request):
+		return render(request, 'producto.html')
