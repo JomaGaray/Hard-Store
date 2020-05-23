@@ -24,6 +24,11 @@ urlpatterns = [
     # path('', include('market.urls')), manera menos directa -Joma
     path('login/', user_views.login, name='login'),
     path('signup/', user_views.signup, name='signup'),
-    path('producto/', market_views.VistaProducto.as_view(), name='producto'),
+  
+    #path para productos de una categoria en particular
+    path('productos/', market_views.VistaMuchosProductos.as_view(), name='productos'),
+  
+  #path para un prodcuto en particular, un path dinamico <str:pk_prod>
+    path('producto/<str:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
     path('', market_views.VistaHome.as_view(), name='home'),
 ]

@@ -1,125 +1,126 @@
 <!--Empieza elemento carousel - Agus -->
-<div id="carrusel_ofertas" class="carousel slide" data-ride="carousel" >
+<div id="carrusel_ofertas" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-
     <!--Empieza primer item de tres cards - Agus -->
     <div class="carousel-item active">
-
-        <div class="row justify-content-center">
-          <div class="d-none col-md-4 d-md-block">
-            <div class="card" style="width:200px">
-              <img src="" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{ofertas.0.producto.nombre}}
-                </h4>
-                <p class="card-text">
-                  {{ofertas.0.descuento}}
-                  {{ofertas.0.producto.descripcion}}
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
+      <div class="row justify-content-center">
+        <div class="d-none col-md-4 d-md-block">
+          <div class="card" style="width: 200px;">
+            <img src="" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title">
+                {{ofertas.0.producto.nombre}}
+              </h4>
+              <p class="card-text">
+                {{ofertas.0.descuento}} {{ofertas.0.producto.descripcion}}
+              </p>
+              <!-- linkeo a un producto en particular-->
+              <a
+                href="{% url 'producto' ofertas.0.producto.id %}"
+                class="btn btn-primary"
+                >Ver</a
+              >
             </div>
           </div>
-          <div class="d-none col-md-4 d-md-block">
-            <div class="card" style="width:200px">
-              <img src="" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{ofertas.1.producto.nombre}}
-                </h4>
-                <p class="card-text">
-                  {{ofertas.1.descuento}}
-                  {{ofertas.1.producto.descripcion}}
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-8 col-md-4 d-md-block ">
-            <div class="card" style="width:200px">
-              <img src="" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{ofertas.2.producto.nombre}}
-                </h4>
-                <p class="card-text">
-                  {{ofertas.2.descuento}}
-                  {{ofertas.2.producto.descripcion}}
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
-            </div>
-          </div>
-          
         </div>
+        <div class="d-none col-md-4 d-md-block">
+          <div class="card" style="width: 200px;">
+            <img src="" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title">
+                {{ofertas.1.producto.nombre}}
+              </h4>
+              <p class="card-text">
+                {{ofertas.1.descuento}} {{ofertas.1.producto.descripcion}}
+              </p>
+              <a
+                href="{% url 'producto' ofertas.1.producto.id %}"
+                class="btn btn-primary"
+                >Ver</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-8 col-md-4 d-md-block">
+          <div class="card" style="width: 200px;">
+            <img src="" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title">
+                {{ofertas.2.producto.nombre}}
+              </h4>
+              <p class="card-text">
+                {{ofertas.2.descuento}} {{ofertas.2.producto.descripcion}}
+              </p>
+              <a
+                href="{% url 'producto' ofertas.0.producto.id %}"
+                class="btn btn-primary"
+                >Ver</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--termina primer item- Agus -->
 
     <!--Empieza segundo item de tres cards - Agus -->
     <div class="carousel-item">
-      
-        <div class="row justify-content-center">
-          <div class="d-none col-md-4 d-md-block">
-            <div class="card" style="width:200px">
-              <img src="" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{ofertas.3.producto.nombre}}
-                </h4>
-                <p class="card-text">
-                  {{ofertas.3.descuento}}
-                  {{ofertas.3.producto.descripcion}}
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
+      <div class="row justify-content-center">
+        <div class="d-none col-md-4 d-md-block">
+          <div class="card" style="width: 200px;">
+            <img src="" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title">
+                {{ofertas.3.producto.nombre}}
+              </h4>
+              <p class="card-text">
+                {{ofertas.3.descuento}} {{ofertas.3.producto.descripcion}}
+              </p>
+              <a
+                href="{% url 'producto' ofertas.0.producto.id %}"
+                class="btn btn-primary"
+                >Ver</a
+              >
             </div>
           </div>
-          <div class="d-none col-md-4 d-md-block">
-            <div class="card" style="width:200px">
-              <img src="" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{ofertas.4.producto.nombre}}
-                </h4>
-                <p class="card-text">
-                  {{ofertas.4.descuento}}
-                  {{ofertas.4.producto.descripcion}}
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-8 col-md-4 d-md-block ">
-            <div class="card" style="width:200px">
-              <img src="" class="card-img-top" />
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{ofertas.5.producto.nombre}}
-                </h4>
-                <p class="card-text">
-                  {{ofertas.5.descuento}}
-                  {{ofertas.5.producto.descripcion}}
-                </p>
-                <button type="button" class="btn btn-warning">
-                  Ver producto
-                </button>
-              </div>
-            </div>
-          </div>
-          
         </div>
-      
+        <div class="d-none col-md-4 d-md-block">
+          <div class="card" style="width: 200px;">
+            <img src="" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title">
+                {{ofertas.4.producto.nombre}}
+              </h4>
+              <p class="card-text">
+                {{ofertas.4.descuento}} {{ofertas.4.producto.descripcion}}
+              </p>
+              <a
+                href="{% url 'producto' ofertas.0.producto.id %}"
+                class="btn btn-primary"
+                >Ver</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-8 col-md-4 d-md-block">
+          <div class="card" style="width: 200px;">
+            <img src="" class="card-img-top" />
+            <div class="card-body">
+              <h4 class="card-title">
+                {{ofertas.5.producto.nombre}}
+              </h4>
+              <p class="card-text">
+                {{ofertas.5.descuento}} {{ofertas.5.producto.descripcion}}
+              </p>
+              <a
+                href="{% url 'producto' ofertas.0.producto.id %}"
+                class="btn btn-primary"
+                >Ver</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--termina segundo item - Agus -->
   </div>

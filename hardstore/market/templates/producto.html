@@ -1,67 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="stylesheet" href="producto.css" />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <title>Producto</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-5">
-          <img src="procesador.jpg" alt="" />
-        </div>
-        <div class="col-md-7">
-          <p class="categoria text-center">Procesadores</p>
-          <h2>Nombre Del Producto</h2>
-          <p>Codigo del Producto</p>
-          <p class="price">ARS $500</p>
-          <p><b>Stock:</b> En Stock</p>
-          <p><b>Consition:</b>Nuevo</p>
-          <p><b>Marca:</b>Intel</p>
-          <label>Cantidad</label>
-          <input type="text" value="1" />
-          <button type="button" class="btnb btn-default carrito">
-            Agregar al Carrito
-          </button>
-        </div>
-      </div>
+{% extends 'base.html' %} {% load static %} {% block estilo %}
+<link rel="stylesheet" href="{% static 'producto.css' %}" />
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="../static/Images/mother.jpg" alt="" />
     </div>
+    <div class="col-md-7">
+      <!-- me imprime todo-->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+      <p class="categoria text-center">{{ producto.categoria }}</p>
+      <h2>{{ producto.nombre }}</h2>
+      <p class="price">{{ producto.precio }}</p>
+      <p><b>Stock:</b> En Stock</p>
+      <p><b>Condition:</b>Nuevo</p>
+      <p><b>Marca:</b>{{ producto.marca }}</p>
+      <p>{{ producto.descripcion }}</p>
+      <label>Cantidad</label>
+      <input type="text" value="1" />
+      <button type="button" class="btnb btn-default carrito">
+        Agregar al Carrito
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

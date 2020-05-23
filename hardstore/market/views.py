@@ -22,7 +22,29 @@ class VistaHome(View):
 		'destacados' : destacados  
 		}
 		return render(request, 'home.html', context)
-	
-class VistaProducto(View):
+
+#vista para muchos productos de una categoria en particular 
+class VistaMuchosProductos(View):
 	def get(self,request):
-		return render(request, 'producto.html')
+		#paso una lista de productos 
+		#renderizando los datos al template
+		productos= Producto.objects.all()
+		
+		context={
+			'productos':productos,
+		}
+		
+		return render(request, 'producto.html', context)
+
+#vista para un producto en particular
+
+class VistaUnProducto(View):
+	def get(self,request, pk_producto):
+		#url dinamico, solo busco un producto en particular 
+		producto= Producto.objects.get(id = pk_producto)
+		
+		context={
+			'producto':producto,
+		}
+		
+		return render(request, 'producto.html', context)
