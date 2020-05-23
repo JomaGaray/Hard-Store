@@ -18,7 +18,8 @@
                   {{ofertas.0.producto.descripcion}}
                 </p>
                 <button type="button" class="btn btn-warning">
-                  Ver producto
+                  <!-- linkeo el boton de manera dinamica hacia el template de Producto -->
+                 <a href="{% url 'producto' ofertas.0.producto.id %}"></a> Ver Producto 
                 </button>
               </div>
             </div>
