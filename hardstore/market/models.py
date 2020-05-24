@@ -13,13 +13,22 @@ class Categoria(models.Model):
 	def __str__(self):
 		return self.nombre
 
+class ProductoManager(models.Manager):
+	def crear_producto(self,nombre,descripcion,precio,categoria):
+		producto = self.create(nombre=nombre,descripcion=descripcion,precio=precio)
+		return producto
+
 class Producto(models.Model):
 	nombre = models.CharField(max_length=200, null=True)
 	descripcion = models.CharField(max_length=200, null=True, blank=True)
 	precio = models.FloatField(null=True)
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	categoria = models.ForeignKey(Categoria, null=True, on_delete = models.SET_NULL)
-	imagen = models.ImageField(default='default.jpg',upload_to='img_productos') #img_productos es un directorio que contendrá todas las images
+	#img_productos es un directorio que contendrá todas las images
+	imagen = models.ImageField(default='default.jpg',upload_to='img_productos') 
+
+	objects = ProductoManager()
+
 	def __str__(self):
 		return self.nombre
 
