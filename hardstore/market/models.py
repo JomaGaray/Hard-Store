@@ -1,11 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from users.models import Cliente
-#class Image(models.Model):
-#class Like(models.Model):
-#class Cart(models.Model):
-#class (models.Model):
-#class (models.Model):
 
 class Categoria(models.Model):
 	nombre = models.CharField(max_length=200, null=True)
@@ -49,9 +44,15 @@ class Orden(models.Model):
 				('Cancelada','Cancelada')
 		)
 	#referencia a Producto
-	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
+	producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
 	#referencia a cliente
-	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.SET_NULL)
+	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
 
 	estado = models.CharField(max_length=200, null=True, choices=ESTADO)
 
+
+#class Carrito(models.Model):
+#	referencia a un cliente
+#	cliente = models.OneToOneField(Cliente , null = True , on_delete = models.CASCADE)
+#	referencia  las ordenes que tenga
+#	orden = models.ForeignKey(Orden, null=True, on_delete = models.CASCADE)
