@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from users.models import Cliente
 #class Image(models.Model):
 #class Like(models.Model):
 #class Cart(models.Model):
@@ -43,15 +43,6 @@ class Oferta(models.Model):
 		return self.producto.nombre
 
 
-class Cliente(models.Model):
-	nombre = models.CharField(max_length=200, null=True)
-	email = models.CharField(max_length=200, null=True)
-	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
-
-	def __str__(self):
-		return self.nombre
-
-
 class Orden(models.Model):
 	ESTADO = (	('Pendiente','Pendiente'),
 				('Confirmada','Confirmada'),
@@ -59,7 +50,7 @@ class Orden(models.Model):
 		)
 	#referencia a Producto
 	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
-	#referencia a customer
+	#referencia a cliente
 	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.SET_NULL)
 
 	estado = models.CharField(max_length=200, null=True, choices=ESTADO)
