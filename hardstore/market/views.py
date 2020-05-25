@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
 from .models import Categoria,Producto,Orden,Cliente,Oferta
-from django.views import View
+from django.views.generic import View,ListView,TemplateView
 
 
 class VistaHome(View):
@@ -24,10 +24,8 @@ class VistaHome(View):
 		return render(request, 'home.html', context)
 
 #vista para muchos productos de una categoria en particular 
-class VistaMuchosProductos(View):
+class VistaMuchosProductos(View): #se comporta como una ListView
 	def get(self,request):
-		#paso una lista de productos 
-		#renderizando los datos al template
 		productos= Producto.objects.all()
 		
 		context={
@@ -35,8 +33,11 @@ class VistaMuchosProductos(View):
 		}
 		
 		return render(request, 'producto.html', context)
-
-#vista para un producto en particular
+#Implementacion vistaMuchosProductos con ListView
+#class ProductosList(ListView)
+#	template_name = 'abc.html'
+#	model = Producto
+#	context_object_name = 'productos'
 
 class VistaUnProducto(View):
 	def get(self,request, pk_producto):
@@ -48,3 +49,4 @@ class VistaUnProducto(View):
 		}
 		
 		return render(request, 'producto.html', context)
+
