@@ -27,5 +27,5 @@ class VistaLogin(View):
 #		if form.is_valid():
 #			form.save()
 #			username = form.cleaned_data.get('username')
-#			return redirect('')
+#			return redirect('login')
 #		return render(request,  'signup.html', {'titulo': 'SignUp','form':form})
