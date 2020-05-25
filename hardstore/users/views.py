@@ -10,7 +10,9 @@ class VistaLogin(View):
 	def get(self,request):
 		return render(request, 'login.html', {'titulo': 'Login'})
 
-# Corey - https://www.youtube.com/watch?v=q4jPR-M0TAQ&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=6
+# Corey - 
+#   https://www.youtube.com/watch?v=q4jPR-M0TAQ&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=6
+#   https://www.youtube.com/watch?v=3aVqWaLjqS4&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=7
 #
 # Hay que fijarse en los templates los formularios ( form )
 #
