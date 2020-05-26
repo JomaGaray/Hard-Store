@@ -50,6 +50,10 @@ class VistaMuchosProductos(View): #se comporta como una ListView
 #	template_name = 'abc.html'
 #	model = Producto
 #	context_object_name = 'productos'
+#
+#	el url que hace referencia a una categoria contendra dinamicamente el nombre
+#   traera el nombre como parametro y poder asi realizar la queryset filtrado por esa categoria
+# y devolver el template con la lista
 
 
 #Implementacion con TemplateView

@@ -31,3 +31,22 @@ class VistaLogin(View):
 #			username = form.cleaned_data.get('username')
 #			return redirect('login')
 #		return render(request,  'signup.html', {'titulo': 'SignUp','form':form})
+#
+#	No es recomendable tener un metedo "get" ya que puede ser utiliza para varias cosas 
+# como eliminar o consultar datos. Post en cambio puede ser analizado ya que solo servira 
+# para guardar datos 
+
+# Hay que crear los formularios para login y signup, definir sus campos así será mas facil 
+# a la hora de renderizarlos en el template tan solo llamando un objeto.
+# Ejemplo
+#
+#	<form method = "POST" class = "post-form">
+#		{% csrf_token %}
+#		{{ objeto }}
+#		<bt/>
+#		<input type = "submit" value = "Guardar">
+#		<a href = "/mascotas">Cancelar</a>
+#	</form>
+#
+
+
