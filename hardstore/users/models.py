@@ -4,15 +4,18 @@ from django.contrib.auth.models import User
 #from market.models import Producto
 
 #class Favorito(models.Model):
-#	referencia a un producto
+#	referencia a un cliente
+#   cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
 #   
-#	def __str__(self):
-#		return self.producto.nombre
+#	referencia a producto
+#
+#	producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
+#
 
 class Cliente(models.Model):
 	usuario = models.OneToOneField(User , null = True , on_delete = models.CASCADE)
 	f_creacion = models.DateTimeField(auto_now_add = True ,null = True)
-	#favorito = models.ForeignKey(Favorito, null=True, on_delete = models.CASCADE)
+	
 
 	def __str__(self):
 		return self.usuario.first_name +' '+ self.usuario.last_name
