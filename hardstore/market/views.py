@@ -16,19 +16,17 @@ class VistaHome(TemplateView):
 		return context
 
 
-
-
 #Implementacion vistaMuchosProductos con ListView
 class ProductosList(ListView):
 	template_name = 'variosProductos.html' #template al que apuntamos
-	model = Producto #modelo al que apuntamos
 	context_object_name = 'productosCategoria' # solo un nombre
 
+	#aca tedria que ir un  def get_queryset(self):
 	#ahora uso esa query en el context
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		categoria = kwargs['categoria']
-		context['productos'] = Producto.objects.filter(categoria = categoria)
+		cat = kwargs['categoria']
+		context['productos'] = Producto.objects.filter(categoria = cat)
 		return context
 
 
