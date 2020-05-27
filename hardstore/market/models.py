@@ -34,8 +34,8 @@ class Oferta(models.Model):
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	f_expira = models.DateTimeField(null=True)
 
-	def __str__(self):
-		return self.producto.nombre
+	#def __str__(self):
+	#	return self.producto.nombre
 
 
 class Orden(models.Model):
@@ -51,8 +51,10 @@ class Orden(models.Model):
 	estado = models.CharField(max_length=200, null=True, choices=ESTADO)
 
 
-#class Carrito(models.Model):
-#	referencia a un cliente
-#	cliente = models.OneToOneField(Cliente , null = True , on_delete = models.CASCADE)
-#	referencia  las ordenes que tenga
-#	orden = models.ForeignKey(Orden, null=True, on_delete = models.CASCADE)
+"""
+class Carrito(models.Model):
+	referencia a un cliente
+	cliente = models.OneToOneField(Cliente , null = True , on_delete = models.CASCADE)
+	referencia  las ordenes que tenga
+	orden = models.ForeignKey(Orden, null=True, on_delete = models.CASCADE)
+"""
