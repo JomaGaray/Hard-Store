@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
-from .models import Categoria,Producto,Orden,Cliente,Oferta
+from .models import Categoria,Producto,Orden,Cliente#,Oferta
 from django.views.generic import View,ListView,TemplateView
 
 #Implementacion con TemplateView
@@ -10,46 +10,26 @@ class VistaHome(TemplateView):
 	def get_context_data(self,**kwargs):
 		context = super().get_context_data(**kwargs)
 		context['productos'] = Producto.objects.all()
-		context['ofertas'] = Oferta.objects.all()[:6]
+		#context['ofertas'] = Oferta.objects.all()[:6]
 		context['destacados'] = Producto.objects.all()[:6]
 		context['titulo'] = 'home'
 		return context
 
-#Implementacion anterior
-#class VistaHome(View):
-#	def get(self,request):
-#		productos = Producto.objects.all()
-#		ofertas = Oferta.objects.all()[:6] #tengo que filtrar 6 ofertas
-#
-#		# por ahora los destacados van a ser los productos cargados mas recientemente
-#		# hago una query de los 6 mas destacados
-#		
-#		destacados = Producto.objects.all()[:6]
-#
-#		
-#		context = {
-#		'titulo':'Home',
-#		'productos' : productos,
-#		'ofertas' : ofertas ,
-#		'destacados' : destacados  
-#		}
-#		return render(request, 'home.html', context)
 
-#vista para muchos productos de una categoria en particular 
-class VistaMuchosProductos(View): #se comporta como una ListView
-	def get(self,request):
-		productos= Producto.objects.all()
-		
-		context={
-			'productos':productos,
-		}
-		
-		return render(request, 'producto.html', context)
+
+
 #Implementacion vistaMuchosProductos con ListView
-#class ProductosList(ListView)
-#	template_name = 'abc.html'
-#	model = Producto
-#	context_object_name = 'productos'
+class ProductosList(ListView):
+	template_name = 'variosProductos.html' #template al que apuntamos
+	model = Producto #modelo al que apuntamos
+	context_object_name = 'productosCategoria' # solo un nombre
+
+	#ahora uso esa query en el context
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		categoria = kwargs['categoria']
+		context['productos'] = Producto.objects.filter(categoria = categoria)
+		return context
 
 
 #Implementacion con TemplateView
@@ -63,14 +43,51 @@ class VistaUnProducto(TemplateView):
 								#y le asigno una queryset para que seleccione el producto especifico 
 		return context
 
-#Implementacion anterior	
-#class VistaUnProducto(View):
-#	def get(self,request, pk_producto):
-#		#url dinamico, solo busco un producto en particular 
-#		producto= Producto.objects.get(id = pk_producto)
-#		
-#		context={
-#			'producto':producto,
-#		}
-#		
-#		return render(request, 'producto.html', context)
+
+"""
+IMPLEMETACIONES ANTERIORES
+
+Implementacion anterior	
+class VistaUnProducto(View):
+	def get(self,request, pk_producto):
+		url dinamico, solo busco un producto en particular 
+		producto= Producto.objects.get(id = pk_producto)
+		
+		context={
+			'producto':producto,
+		}
+		
+		return render(request, 'producto.html', context)
+
+
+Implementacion anterior
+class VistaHome(View):
+	def get(self,request):
+		productos = Producto.objects.all()
+		ofertas = Oferta.objects.all()[:6] tengo que filtrar 6 ofertas
+
+		 por ahora los destacados van a ser los productos cargados mas recientemente
+		 hago una query de los 6 mas destacados
+		
+		destacados = Producto.objects.all()[:6]
+
+		
+		context = {
+		'titulo':'Home',
+		'productos' : productos,
+		'ofertas' : ofertas ,
+		'destacados' : destacados  
+		}
+		return render(request, 'home.html', context)
+
+vista para muchos productos de una categoria en particular 
+class VistaMuchosProductos(View): #se comporta como una ListView
+	def get(self,request):
+		productos= Producto.objects.all()
+		
+		context={
+			'productos':productos,
+		}
+		
+		return render(request, 'producto.html', context)
+"""
