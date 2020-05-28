@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpRequest
 from .models import Categoria,Producto,Orden,Cliente,Oferta
+from .forms import ProductoForm
 from django.views.generic import View,ListView,TemplateView
+
+
+################ VISTA DEL HOME ################
 
 #Implementacion con TemplateView
 class VistaHome(TemplateView):
@@ -35,6 +39,9 @@ class VistaHome(TemplateView):
 #		}
 #		return render(request, 'home.html', context)
 
+
+################ VISTA DE UN PRODUCTO ################
+
 #vista para muchos productos de una categoria en particular 
 class VistaMuchosProductos(View): #se comporta como una ListView
 	def get(self,request):
@@ -55,6 +62,7 @@ class VistaMuchosProductos(View): #se comporta como una ListView
 #   traera el nombre como parametro y poder asi realizar la queryset filtrado por esa categoria
 # y devolver el template con la lista
 
+################ VISTA DE UN PRODUCTO ###################
 
 #Implementacion con TemplateView
 class VistaUnProducto(TemplateView):
@@ -78,3 +86,34 @@ class VistaUnProducto(TemplateView):
 #		}
 #		
 #		return render(request, 'producto.html', context)
+
+#################### VISTA CREATE,READ,UPDATE,DELETE ########################
+
+#ESTA VISTA DEBE SER IMPLEMENTADA SOLAMENTE PARA LOS ADMINISTRADORES
+
+class VistaCRUDProducto(View):
+
+	def CrearProducto(request):
+		form = ProductoForm()
+		if request.method == 'POST':
+			form = ProductoForm(request.POST)
+			if form.is_valid():
+				form.save()
+				return redirect('/') #redirecciona a la lista de productos
+		return render(request,'producto_form.html',{'producto':form})
+
+	def ModProducto(request,id):
+		producto = get_object_or_404(Producto,pk=id)
+		form = ProductoForm(instance=producto)
+		if request.method == 'POST':
+			form = ProductoForm(request.POST, instance=producto)
+			if form.is_valid():
+				form.save()
+				return redirect('/') #redirecciona a la lista de productos
+		return render(request,'producto_form.html',{'producto':form})
+
+	#def EliminarProducto(request,id):
+	#Producto.objecets.filter(pk=id).delete()
+
+	# redirecciona a una lista de productos que NO va a ser la misma de los clientes
+	#return redirect('VistaMuchosProductos')
