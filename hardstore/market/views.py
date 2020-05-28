@@ -1,45 +1,52 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpRequest
-from .models import Categoria,Producto,Orden,Cliente#,Oferta
-from django.views.generic import View,ListView,TemplateView
+from django.http import HttpResponse, HttpRequest
+from .models import Categoria, Producto, Orden, Cliente  # ,Oferta
+from django.views.generic import View, ListView, TemplateView
 
-#Implementacion con TemplateView
+# Implementacion con TemplateView
+
+
 class VistaHome(TemplateView):
-	template_name = 'home.html'
-	
-	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs)
-		context['productos'] = Producto.objects.all()
-		#context['ofertas'] = Oferta.objects.all()[:6]
-		context['destacados'] = Producto.objects.all()[:6]
-		context['titulo'] = 'home'
-		return context
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['productos'] = Producto.objects.all()
+        # context['ofertas'] = Oferta.objects.all()[:6]
+        context['destacados'] = Producto.objects.all()[:6]
+        context['titulo'] = 'home'
+        return context
 
 
-#Implementacion vistaMuchosProductos con ListView
-class ProductosList(ListView):
-	template_name = 'variosProductos.html' #template al que apuntamos
-	context_object_name = 'productosCategoria' # solo un nombre
+# Implementacion vistaMuchosProductos con ListView
+class VistaMuchosProductos(ListView):
+    model = Producto
+    template_name = 'variosProductos.html'  # template al que apuntamos
+   # context_object_name = 'productosCategoria'  # solo un nombre
+    paginate_by = 5  # cantidad de productos que se van a desplegar
 
-	#aca tedria que ir un  def get_queryset(self):
-	#ahora uso esa query en el context
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		cat = kwargs['categoria']
-		context['productos'] = Producto.objects.filter(categoria = cat)
-		return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cat = kwargs['categoria']
+        # obtengo la producos de una categoria especifica
+        context['productos'] = Producto.objects.filter(
+            categoria=cat)  # hago la consulta y mando
+        return context
 
 
-#Implementacion con TemplateView
+# Implementacion con TemplateView
 class VistaUnProducto(TemplateView):
-	template_name = 'producto.html'
-	
-	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
-		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
-		context['producto'] = Producto.objects.get(id = pk_producto) #añado otro field al modelo
-								#y le asigno una queryset para que seleccione el producto especifico 
-		return context
+    template_name = 'producto.html'
+
+    def get_context_data(self, **kwargs):
+        # obtiene los datos del modelo, en este caso "Producto"
+        context = super().get_context_data(**kwargs)
+        # tomo el argumento del url que indica el numero id del producto
+        pk_producto = kwargs['pk_producto']
+        context['producto'] = Producto.objects.get(
+            id=pk_producto)  # añado otro field al modelo
+        # y le asigno una queryset para que seleccione el producto especifico
+        return context
 
 
 """
