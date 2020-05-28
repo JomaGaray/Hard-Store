@@ -29,7 +29,20 @@ urlpatterns = [
     # path('producto/<str:id_categoria>/', market_views.ProductosList.as_view(), name='productos')
     path('productos/', market_views.VistaMuchosProductos.as_view(), name='productos'),
 
-    # path para un prodcuto en particular, un path dinamico <str:pk_prod>
+    #crear un producto
+
+    #voy a ingresar a este path mediante un boton "Crear producto" 
+    path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto , name='crear_producto'),
+
+    #modificar un producto
+
+    #voy a ingresar a este path mediante un boton "Actualizar"
+    path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
+
+    #eliminar un producto
+    #path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
+
+    # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico <str:pk_prod>
     path('producto/<str:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
 
     path('', market_views.VistaHome.as_view(), name='home'),
