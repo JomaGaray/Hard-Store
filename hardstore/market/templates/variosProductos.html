@@ -6,6 +6,7 @@
 <div class="container-fluid">
   <h2>Procesadores</h2>
   <div class="row">
+    {% for producto in productosCategoria %}
     <div class="col-sm-12 col-md-6 col-lg-4">
       <div class="product-top">
         <img src="../static/Img/nvidea.jpg" alt="" />
@@ -26,10 +27,11 @@
         </div>
       </div>
       <div class="producto-bottom text-center">
-        <h3>Nombre del Producto</h3>
-        <h5>100.00$</h5>
+        <h3>producto.nombre</h3>
+        <h5>producto.precio</h5>
       </div>
     </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
