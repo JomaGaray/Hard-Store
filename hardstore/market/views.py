@@ -17,6 +17,8 @@ class VistaHome(TemplateView):
 		context['ofertas'] = Oferta.objects.all()[:6]
 		context['destacados'] = Producto.objects.all()[:6]
 		context['titulo'] = 'home'
+		# traigo todas las categorias
+        context['categorias'] = Categoria.objects.all()
 		return context
 
 
@@ -24,24 +26,20 @@ class VistaHome(TemplateView):
 ################ VISTA DE UN PRODUCTO ################
 
 #vista para muchos productos de una categoria en particular 
-class VistaMuchosProductos(View): #se comporta como una ListView
-	def get(self,request):
-		productos= Producto.objects.all()
-		
-		context={
-			'productos':productos,
-		}
-		
-		return render(request, 'producto.html', context)
-#Implementacion vistaMuchosProductos con ListView
-#class ProductosList(ListView)
-#	template_name = 'abc.html'
-#	model = Producto
-#	context_object_name = 'productos'
-#
-#	el url que hace referencia a una categoria contendra dinamicamente el nombre
-#   traera el nombre como parametro y poder asi realizar la queryset filtrado por esa categoria
-# y devolver el template con la lista
+class VistaMuchosProductos(ListView):
+    template_name = 'productosCategoria.html'
+    model = Producto
+    context_object_name = 'productsList'  # para el for
+#    queryset = Producto.objects.filter(categoria=self.kwargs['pk_categoria'])
+
+    def get_queryset(self):
+        self.pk_categoria = get_object_or_404(
+            Categoria, id=self.kwargs['pk_categoria'])
+        return Producto.objects.filter(categoria=self.pk_categoria)
+
+# https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
+# https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
+
 
 ################ VISTA DE UN PRODUCTO ###################
 
