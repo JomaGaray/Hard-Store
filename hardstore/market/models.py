@@ -24,7 +24,7 @@ class Producto(models.Model):
 
 	# es necesario un modelo imagen que solo contenga esta relación -----------------------------------= ?????
 
-	imagen = models.ImageField(default='default.jpg',upload_to='img_productos') 
+	imagen = models.ImageField(null=True,blank=True,default='default.jpg') 
 
 	objects = ProductoManager()
 
@@ -105,6 +105,9 @@ class Orden(models.Model):
 #	cliente = models.OneToOneField(Cliente , null = True , on_delete = models.CASCADE)
 #
 #
+# Puede ser representado como la lista de ordenes que posee el cliente
+
+
 #####	MODELOS DE Favorito	 	####
 #
 ## Primer Modelo de Favorito

@@ -69,6 +69,7 @@ class VistaCRUDProducto(View):
 			form = ProductoForm(request.POST)
 			if form.is_valid():
 				form.save()
+				# post.user = request.user - A futuro para saber que administrador realizo esta accion
 				return redirect('/') #redirecciona a la lista de productos
 		return render(request,'producto_form.html',{'producto':form})
 
