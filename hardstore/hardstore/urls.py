@@ -25,12 +25,12 @@ urlpatterns = [
     path('login/', user_views.VistaLogin.as_view(), name='login'),
     path('signup/', user_views.VistaSignup.as_view(), name='signup'),
 
-    # path para productos de una categoria en particular
-    path('productos/<str:categoria>/',
-         market_views.VistaMuchosProductos.as_view(), name='productosCategoria'),
-
     # path para un prodcuto en particular, un path dinamico <str:pk_prod>
-    path('producto/<str:pk_producto>/',
+    path('producto/<int:pk_producto>/',
          market_views.VistaUnProducto.as_view(), name='producto'),
+
+    path('categoriaList/<int:pk_categoria>',
+         market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
+
     path('', market_views.VistaHome.as_view(), name='home'),
 ]
