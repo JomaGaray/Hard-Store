@@ -82,8 +82,12 @@ class VistaCRUDProducto(View):
 				return redirect('/') #redirecciona a la lista de productos
 		return render(request,'producto_form.html',{'producto':form})
 
-	#def EliminarProducto(request,id):
-	#Producto.objecets.filter(pk=id).delete()
-
-	# redirecciona a una lista de productos que NO va a ser la misma de los clientes
-	#return redirect('VistaMuchosProductos')
+	def EliminarProducto(request,id):
+		#Producto.objecets.filter(pk=id).delete()
+		producto = get_object_or_404(Producto,pk=id)
+		if request.method == 'POST':
+			producto.delete()
+			return redirect('/') #redirecciona a la lista de productos
+		args = {'producto':producto}
+		# redirecciona a una lista de productos que NO va a ser la misma de los clientes
+		return render(request, 'eliminar_producto.html' , args)
