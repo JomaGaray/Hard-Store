@@ -1,45 +1,31 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpRequest
-from .models import Categoria, Producto, Orden, Cliente, Oferta
-from django.views.generic import View, ListView, TemplateView
-
-# from pprint import pprint
-
-# Implementacion con TemplateView
+from django.shortcuts import render,get_object_or_404,redirect
+from django.http import HttpResponse,HttpRequest
+from .models import Categoria,Producto,Orden,Cliente,Oferta
+from .forms import ProductoForm
+from django.views.generic import View,ListView,TemplateView
 
 
+################ VISTA DEL HOME ################
+
+#Implementacion con TemplateView
 class VistaHome(TemplateView):
-    template_name = 'home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['productos'] = Producto.objects.all()
-        context['ofertas'] = Oferta.objects.all()[:6]
-        context['destacados'] = Producto.objects.all()[:6]
-        context['titulo'] = 'home'
-        # traigo todas las categorias
-        context['categorias'] = Categoria.objects.all()
-        return context
-
-
-# Implementacion vistaMuchosProductos con ListView
+	template_name = 'home.html'
+	
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context['productos'] = Producto.objects.all()
+		context['ofertas'] = Oferta.objects.all()[:6]
+		context['destacados'] = Producto.objects.all()[:6]
+		context['titulo'] = 'home'
+		# traigo todas las categorias
+		context['categorias'] = Categoria.objects.all()
+		return context
 
 
-# Implementacion con TemplateView
-class VistaUnProducto(TemplateView):
-    template_name = 'producto.html'
 
-    def get_context_data(self, **kwargs):
-        # obtiene los datos del modelo, en este caso "Producto"
-        context = super().get_context_data(**kwargs)
-        # tomo el argumento del url que indica el numero id del producto
-        pk_producto = kwargs['pk_producto']
-        context['producto'] = Producto.objects.get(
-            id=pk_producto)  # añado otro field al modelo
-        # y le asigno una queryset para que seleccione el producto especifico
-        return context
+################ VISTA DE UN PRODUCTO ################
 
-
+#vista para muchos productos de una categoria en particular 
 class VistaMuchosProductos(ListView):
     template_name = 'productosCategoria.html'
     model = Producto
@@ -55,60 +41,52 @@ class VistaMuchosProductos(ListView):
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
 
 
-"""
- def get_queryset(self, *args, **kwargs):
-        # original qs
-        productos = super().get_queryset()
-        # filter by a variable captured from url, for example
-        return productos.filter(categooria=self.kwargs['categoria'])
+################ VISTA DE UN PRODUCTO ###################
 
-def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['productos'] = Producto.objects.filte
-        return context
-IMPLEMETACIONES ANTERIORES
-
-Implementacion anterior	
-class VistaUnProducto(View):
-	def get(self,request, pk_producto):
-		url dinamico, solo busco un producto en particular 
-		producto= Producto.objects.get(id = pk_producto)
-		
-		context={
-			'producto':producto,
-		}
-		
-		return render(request, 'producto.html', context)
+#Implementacion con TemplateView
+class VistaUnProducto(TemplateView):
+	template_name = 'producto.html'
+	
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
+		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
+		context['producto'] = Producto.objects.get(id = pk_producto) #añado otro field al modelo
+								#y le asigno una queryset para que seleccione el producto especifico 
+		return context
 
 
-Implementacion anterior
-class VistaHome(View):
-	def get(self,request):
-		productos = Producto.objects.all()
-		ofertas = Oferta.objects.all()[:6] tengo que filtrar 6 ofertas
+#################### VISTA CREATE,READ,UPDATE,DELETE ########################
 
-		 por ahora los destacados van a ser los productos cargados mas recientemente
-		 hago una query de los 6 mas destacados
-		
-		destacados = Producto.objects.all()[:6]
+#ESTA VISTA DEBE SER IMPLEMENTADA SOLAMENTE PARA LOS ADMINISTRADORES
 
-		
-		context = {
-		'titulo':'Home',
-		'productos' : productos,
-		'ofertas' : ofertas ,
-		'destacados' : destacados  
-		}
-		return render(request, 'home.html', context)
+class VistaCRUDProducto(View):
 
-vista para muchos productos de una categoria en particular 
-class VistaMuchosProductos(View): #se comporta como una ListView
-	def get(self,request):
-		productos= Producto.objects.all()
-		
-		context={
-			'productos':productos,
-		}
-		
-		return render(request, 'producto.html', context)
-"""
+	def CrearProducto(request):
+		form = ProductoForm()
+		if request.method == 'POST':
+			form = ProductoForm(request.POST)
+			if form.is_valid():
+				form.save()
+				# post.user = request.user - A futuro para saber que administrador realizo esta accion
+				return redirect('/') #redirecciona a la lista de productos
+		return render(request,'producto_form.html',{'producto':form})
+
+	def ModProducto(request,id):
+		producto = get_object_or_404(Producto,pk=id)
+		form = ProductoForm(instance=producto)
+		if request.method == 'POST':
+			form = ProductoForm(request.POST, request.FILES, instance=producto) #request.FILES es debido a las imagenes
+			if form.is_valid():
+				form.save()
+				return redirect('/') #redirecciona a la lista de productos
+		return render(request,'producto_form.html',{'producto':form})
+
+	def EliminarProducto(request,id):
+		#Producto.objecets.filter(pk=id).delete()
+		producto = get_object_or_404(Producto,pk=id)
+		if request.method == 'POST':
+			producto.delete()
+			return redirect('/') #redirecciona a la lista de productos
+		args = {'producto':producto}
+		# redirecciona a una lista de productos que NO va a ser la misma de los clientes
+		return render(request, 'eliminar_producto.html' , args)

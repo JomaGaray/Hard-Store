@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form class="post-form" method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
+	{% csrf_token %}
+	{{ producto }}
+	<input type="submit" name="Submit">
+	
+</form>
+{% endblock %}
