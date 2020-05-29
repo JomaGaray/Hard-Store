@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest
-from .models import Categoria, Producto, Orden, Cliente  # ,Oferta
+from .models import Categoria, Producto, Orden, Cliente, Oferta
 from django.views.generic import View, ListView, TemplateView
+
+# from pprint import pprint
 
 # Implementacion con TemplateView
 
@@ -12,26 +14,15 @@ class VistaHome(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['productos'] = Producto.objects.all()
-        # context['ofertas'] = Oferta.objects.all()[:6]
+        context['ofertas'] = Oferta.objects.all()[:6]
         context['destacados'] = Producto.objects.all()[:6]
         context['titulo'] = 'home'
+        # traigo todas las categorias
+        context['categorias'] = Categoria.objects.all()
         return context
 
 
 # Implementacion vistaMuchosProductos con ListView
-class VistaMuchosProductos(ListView):
-    model = Producto
-    template_name = 'variosProductos.html'  # template al que apuntamos
-   # context_object_name = 'productosCategoria'  # solo un nombre
-    paginate_by = 5  # cantidad de productos que se van a desplegar
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        cat = kwargs['categoria']
-        # obtengo la producos de una categoria especifica
-        context['productos'] = Producto.objects.filter(
-            categoria=cat)  # hago la consulta y mando
-        return context
 
 
 # Implementacion con TemplateView
@@ -49,7 +40,32 @@ class VistaUnProducto(TemplateView):
         return context
 
 
+class VistaMuchosProductos(ListView):
+    template_name = 'prueba3.html'
+    model = Producto
+    context_object_name = 'productosDeUnaCategoria'  # para el for
+#    queryset = Producto.objects.filter(categoria=self.kwargs['pk_categoria'])
+
+    def get_queryset(self):
+        self.pk_categoria = get_object_or_404(
+            Categoria, id=self.kwargs['pk_categoria'])
+        return Producto.objects.filter(categoria=self.pk_categoria)
+
+# https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects
+# https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
+
+
 """
+ def get_queryset(self, *args, **kwargs):
+        # original qs
+        productos = super().get_queryset()
+        # filter by a variable captured from url, for example
+        return productos.filter(categooria=self.kwargs['categoria'])
+
+def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['productos'] = Producto.objects.filte
+        return context
 IMPLEMETACIONES ANTERIORES
 
 Implementacion anterior	
