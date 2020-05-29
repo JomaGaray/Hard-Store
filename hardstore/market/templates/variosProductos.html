@@ -4,32 +4,23 @@
 {% endblock %} {% block content %}
 
 <div class="container-fluid">
-  <h2>Procesadores</h2>
   <div class="row">
-    {% for producto in productosCategoria %}
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <div class="product-top">
-        <img src="../static/Img/nvidea.jpg" alt="" />
-        <div class="overlay">
-          <button type="button" class="btn btn-secondary" title="Ver">
-            <i class="fas fa-eye"></i>
-          </button>
-          <button type="button" class="btn btn-secondary" title="Add to cart">
-            <i class="fas fa-cart-plus"></i>
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            title="Add to Wishlist"
-          >
-            <i class="fas fa-heart"></i>
-          </button>
-        </div>
-      </div>
-      <div class="producto-bottom text-center">
-        <h3>producto.nombre</h3>
-        <h5>producto.precio</h5>
-      </div>
+    {% for producto in muchosProductos %}
+    <div class="col-md-7">
+      <!-- me imprime todo-->
+
+      <p class="categoria text-center">{{ producto.categoria }}</p>
+      <h2>{{ producto.nombre }}</h2>
+      <p class="price">{{ producto.precio }}</p>
+      <p><b>Stock:</b> En Stock</p>
+      <p><b>Condition:</b>Nuevo</p>
+      <p><b>Marca:</b>{{ producto.marca }}</p>
+      <p>{{ producto.descripcion }}</p>
+      <label>Cantidad</label>
+      <input type="text" value="1" />
+      <button type="button" class="btnb btn-default carrito">
+        Agregar al Carrito
+      </button>
     </div>
     {% endfor %}
   </div>
