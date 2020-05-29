@@ -24,7 +24,7 @@ class Producto(models.Model):
 
 	# es necesario un modelo imagen que solo contenga esta relación -----------------------------------= ?????
 
-	imagen = models.ImageField(null=True,blank=True,default='default.jpg') 
+	imagen = models.ImageField(null=True,default='default.jpg') 
 
 	objects = ProductoManager()
 

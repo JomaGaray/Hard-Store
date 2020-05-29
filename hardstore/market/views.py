@@ -77,7 +77,7 @@ class VistaCRUDProducto(View):
 		producto = get_object_or_404(Producto,pk=id)
 		form = ProductoForm(instance=producto)
 		if request.method == 'POST':
-			form = ProductoForm(request.POST, instance=producto)
+			form = ProductoForm(request.POST, request.FILES, instance=producto) #request.FILES es debido a las imagenes
 			if form.is_valid():
 				form.save()
 				return redirect('/') #redirecciona a la lista de productos
