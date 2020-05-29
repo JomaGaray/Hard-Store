@@ -40,7 +40,7 @@ urlpatterns = [
     path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
 
     #eliminar un producto
-    #path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
+    path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
 
     # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico <str:pk_prod>
     path('producto/<str:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
