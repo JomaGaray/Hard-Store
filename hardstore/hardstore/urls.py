@@ -24,14 +24,19 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', market_views.VistaHome.as_view(), name='home'),
+    
     # path('', include('market.urls')), manera menos directa -Joma
     path('login/', user_views.VistaLogin.as_view(), name='login'),
     path('signup/', user_views.VistaSignup.as_view(), name='signup'),
   
-    # path para productos de una categoria en particular
-    # path('producto/<str:id_categoria>/', market_views.ProductosList.as_view(), name='productos')
-    path('productos/', market_views.VistaMuchosProductos.as_view(), name='productos'),
+    # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico 
+    path('producto/<int:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
+    path('categoriaList/<int:pk_categoria>', market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
 
+
+
+    #PATH CRUD hay que pasarlo cuando creemos todo la parte de administradores
     #crear un producto
 
     #voy a ingresar a este path mediante un boton "Crear producto" 
@@ -45,10 +50,6 @@ urlpatterns = [
     #eliminar un producto
     path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
 
-    # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico <str:pk_prod>
-    path('producto/<str:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
-
-    path('', market_views.VistaHome.as_view(), name='home'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
