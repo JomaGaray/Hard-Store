@@ -36,7 +36,7 @@
               <a
                 href="{% url 'producto' ofertas.1.producto.id %}"
                 class="btn btn-primary"
-                >Ver</a
+                >Ver aqui</a
               >
             </div>
           </div>
@@ -46,10 +46,10 @@
             <img src="" class="card-img-top" />
             <div class="card-body">
               <h4 class="card-title">
-                {{ofertas.2.producto.nombre}}
+                {{ofertas.0.producto.nombre}}
               </h4>
               <p class="card-text">
-                {{ofertas.2.descuento}} {{ofertas.2.producto.descripcion}}
+                {{ofertas.0.descuento}} {{ofertas.0.producto.descripcion}}
               </p>
               <a
                 href="{% url 'producto' ofertas.0.producto.id %}"
