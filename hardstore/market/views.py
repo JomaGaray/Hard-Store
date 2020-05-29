@@ -41,9 +41,9 @@ class VistaUnProducto(TemplateView):
 
 
 class VistaMuchosProductos(ListView):
-    template_name = 'prueba3.html'
+    template_name = 'productosCategoria.html'
     model = Producto
-    context_object_name = 'productosDeUnaCategoria'  # para el for
+    context_object_name = 'productsList'  # para el for
 #    queryset = Producto.objects.filter(categoria=self.kwargs['pk_categoria'])
 
     def get_queryset(self):
@@ -51,7 +51,7 @@ class VistaMuchosProductos(ListView):
             Categoria, id=self.kwargs['pk_categoria'])
         return Producto.objects.filter(categoria=self.pk_categoria)
 
-# https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects
+# https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
 
 
