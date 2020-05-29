@@ -18,7 +18,7 @@ class VistaHome(TemplateView):
 		context['destacados'] = Producto.objects.all()[:6]
 		context['titulo'] = 'home'
 		# traigo todas las categorias
-        context['categorias'] = Categoria.objects.all()
+		context['categorias'] = Categoria.objects.all()
 		return context
 
 
