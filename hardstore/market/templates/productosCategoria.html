@@ -1,58 +1,42 @@
 {% extends "base.html" %} {% load static %} {% block estilo %}
 <link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
+
 {% endblock %} {% block content %}
 <div class="container">
-  <h3 class="h3">Categorias</h3>
-
-  {% for producto in productosDeUnaCategoria %}
-
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4">
+    {% for producto in productsList %}
+    <div class="col-sm-12 col-md-6 col-lg-3">
       <div class="product-grid">
         <div class="product-image">
           <a href="#">
-            <img class="pic-1" src="" />
-            <img class="pic-2" src="" />
+            <img class="pic-1" src="../static/Images/procesador.jpg" /> <!-- esto tiene que ser dinamico-->
           </a>
-
+          <span class="product-trend-label">{{producto.categoria}}</span>
           <ul class="social">
             <li>
-              <a href="#" data-tip="Quick View">
-                <i class="fa fa-search"></i
-              ></a>
-            </li>
-            <li>
-              <a href="" data-tip="Add to Wishlist"
-                ><i class="fa fa-shopping-bag"></i
-              ></a>
-            </li>
-            <li>
-              <a href="" data-tip="Add to Cart"
+              <a href="#" data-tip="Add to Cart"  
                 ><i class="fa fa-shopping-cart"></i
-              ></a>
+              ></a>     <!--añadir al carrito, falta terminar-->
+            </li>
+            <li>
+              <a href="#" data-tip="Wishlist"><i class="fa fa-heart"></i></a> <!--darle me gusta, falta terminar-->
+            </li>
+            
+            <li>
+              <a href="{% url 'producto' producto.id %}" data-tip="Quick View"><i class="fa fa-search"></i></a> <!-- ver el producto-->
             </li>
           </ul>
-
-          <span class="product-new-label">Sale</span>
-          <span class="product-discount-label">20%</span>
         </div>
-
-        <ul class="rating">
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star disable"></li>
-        </ul>
-
         <div class="product-content">
-          <h3 class="title"><a href="#">producto.nombre</a></h3>
-          <div class="price">producto.precio<span>$20.00</span></div>
-          <a class="add-to-cart" href="#">+ Add To Cart</a>
+          <h3 class="title"><a href="#">{{producto.nombre}}</a></h3>
+          <div class="price">{{producto.precio}}</div>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
+
+<!--{*{}*} para datos dinamicos
+    {*% %*} para logica dinamica-->
 {% endblock %}
