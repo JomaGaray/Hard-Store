@@ -1,14 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View,ListView,TemplateView
+#from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm #formulario 
+
+from django.contrib.auth import authenticate, login, logout #para la autenticacion
+# https://docs.djangoproject.com/en/3.0/topics/auth/
+
+from django.contrib import messages
+
+class VistaUsuario(View):
+
+	def LogIn(request):
+		return render(request,  'login.html', {'titulo': 'Register'})
+
+	def Register(request):
+		form = CreateUserForm() # una instancia de forms para crear usuarios
+		
+		if request.method == 'POST':
+			form = CreateUserForm(request.POST) #si es un post, tiramos la informacion dentro del form
+
+			if form.is_valid():
+				form.save() #se fuarda en la base de datos
+				user = form.cleaned_data.get('username')
+				message.success(request, 'La cuenta fue creada con exito para '+ user)
+				return redirect('login') 
+		
+		context = {'form':form,
+					'titulo':'Register',}
 
 
-class VistaSignup(View):
-	def get(self,request):
-		return render(request,  'signup.html', {'titulo': 'SignUp'})
-
-class VistaLogin(View):
-	def get(self,request):
-		return render(request, 'login.html', {'titulo': 'Login'})
+		return render(request, 'register.html', context) #se lo mandamos al html
 
 # Corey - 
 #   https://www.youtube.com/watch?v=q4jPR-M0TAQ&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=6
