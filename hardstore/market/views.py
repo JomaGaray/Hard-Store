@@ -35,7 +35,7 @@ class VistaMuchosProductos(ListView):
     def get_queryset(self):
         self.pk_categoria = get_object_or_404(
             Categoria, id=self.kwargs['pk_categoria'])
-        return Producto.objects.filter(categoria=self.pk_categoria)
+        return Producto.productos.categorias(self.pk_categoria)
 
 # https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
@@ -50,7 +50,7 @@ class VistaUnProducto(TemplateView):
 	def get_context_data(self,**kwargs):
 		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
 		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
-		context['producto'] = Producto.objects.get(id = pk_producto) #añado otro field al modelo
+		context['producto'] = Producto.productos.producto(pk_producto) #añado otro field al modelo
 								#y le asigno una queryset para que seleccione el producto especifico 
 		return context
 
