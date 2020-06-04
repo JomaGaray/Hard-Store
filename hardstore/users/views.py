@@ -4,14 +4,39 @@ from django.views.generic import View,ListView,TemplateView
 from .forms import CreateUserForm #formulario 
 
 from django.contrib.auth import authenticate, login, logout #para la autenticacion
-# https://docs.djangoproject.com/en/3.0/topics/auth/
+# https://docs.djangoproject.com/en/3.0/topics/auth/ AUTENTICACION EN DJANGO
 
 from django.contrib import messages
 
 class VistaUsuario(View):
 
-	def LogIn(request):
-		return render(request,  'login.html', {'titulo': 'Register'})
+	def LogIn(request): 
+		#https://docs.djangoproject.com/en/3.0/topics/auth/default/#how-to-log-a-user-in
+
+		if request == 'POST':
+			username= request.POST.get('username')
+			password= request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password) #toma dos parametros y los compara con la base de datos y trae un objeto de Usuario
+
+			if user is not None:
+				login(request, user)
+				return redirect('home')
+			else:
+				message.info(request, 'Username o Password incorrecto')
+
+		context ={'titulo': 'LogIn',}
+
+		return render(request,'login.html', context)
+
+	
+	def LogOut(request):
+		#https://docs.djangoproject.com/en/3.0/topics/auth/default/#how-to-log-a-user-out
+		logout(request) # me deslogea y me redirije a la pagina de login
+		return redirect('home')
+
+
+
 
 	def Register(request):
 		form = CreateUserForm() # una instancia de forms para crear usuarios
