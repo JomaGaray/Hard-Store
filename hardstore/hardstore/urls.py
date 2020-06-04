@@ -28,6 +28,8 @@ urlpatterns = [
     
     # path('', include('market.urls')), manera menos directa -Joma
     path('login/', user_views.VistaUsuario.LogIn, name='login'),
+    path('logout/', user_views.VistaUsuario.LogOut, name='logout'),
+
     path('signup/', user_views.VistaUsuario.Register, name='signup'),
   
     # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico 
