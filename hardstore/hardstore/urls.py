@@ -27,8 +27,8 @@ urlpatterns = [
     path('', market_views.VistaHome.as_view(), name='home'),
     
     # path('', include('market.urls')), manera menos directa -Joma
-    path('login/', user_views.VistaLogin.as_view(), name='login'),
-    path('signup/', user_views.VistaSignup.as_view(), name='signup'),
+    path('login/', user_views.VistaUsuario.LogIn, name='login'),
+    path('signup/', user_views.VistaUsuario.Register, name='signup'),
   
     # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico 
     path('producto/<int:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
