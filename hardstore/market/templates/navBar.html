@@ -1,3 +1,13 @@
+<style>
+  .helloMSG{
+    font-size: 18px;
+    color: white;
+    margin-right: 50px;
+  
+  }
+</style>
+
+
 <ul class="nav">
   <li class="nav-item">
     <a class="nav-link active" href="{% url 'home' %}" style="color: #1f2833;"
@@ -11,6 +21,12 @@
     <!--href se dirige a url de hardstore- Joma-->
     <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;"
       >LogIn</a
+    >
+  </li>
+  <li class="nav-item">
+    <!--href se dirige a url de hardstore- Joma-->
+    <a class="nav-link" href="{% url 'logout' %}" style="color: #1f2833;"
+      >LogOut</a
     >
   </li>
   <li class="nav-item">
@@ -38,4 +54,8 @@
       </div>
     </div>
   </li>
+
+  <span class="helloMSG">Hello, {{request.user}} </span>
+  
 </ul>
+
