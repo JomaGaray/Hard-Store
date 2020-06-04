@@ -1,0 +1,82 @@
+{% extends "base.html" %} {%load static%}
+<head>
+  {% block estilo %}
+
+  <link rel="stylesheet" href="{% static 'signup.css' %}" />
+  {% endblock %}
+</head>
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="brand"><span> HardStore </span>Register</h1>
+    </div>
+  </div>
+
+  <div class="registro">
+    {% csrf_token %}
+    <form method="POST" action="">
+      <!--ACORDARSE DE IMPLEMENTAR CSRF_TOKEN - Agus -->
+      <div class="row">
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.first_name.label}}
+         {{form.first_name}}
+       </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+        {{form.last_name.label}}
+        {{form.last_name}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+           {{form.username.label}}
+          {{form.username}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.email.label}}
+         {{form.email}}
+       </div>
+        
+        
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.password1.label}}
+          {{form.password1}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.password2.label}}
+          {{form.password2}}
+        </div>
+
+        {{forms.error}}
+
+        <div class="col-sm-12 col-md-12 col-lg-4">
+          <button type="submit" class="btn btn-success" name="Register" </button>>
+            <input type="submit" name="Register">
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+<!--
+  <form method="POST" action="">
+
+  {% csrf_token %}
+  {{form.as_p}} form mandado desde las Views
+
+  {{form.username.label}}
+  {{form.username}}
+
+  <input type="submit" name="Register">
+
+</form>
+
+-->
+
+{% endblock content %}
