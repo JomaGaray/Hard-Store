@@ -17,7 +17,9 @@
 
   
   <div class="registro">
-    <form>
+    <form method="POST" action="">
+      {% crsf_token %}
+
       <div class="row">
         <div class="col-sm-12 col-lg-6">
           <label>Email</label>
@@ -30,9 +32,7 @@
         </div>
 
         <div class="col-sm-12 col-lg-6">
-          <button type="button" class="btn btn-success">
-            login
-          </button>
+          <input class="btn login_btn" type="submit" value="Login">
         </div>
         
         {% for message in messages %} <!-- mensaje para la verificacion de un usuario creado-->
