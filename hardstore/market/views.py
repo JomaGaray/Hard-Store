@@ -61,7 +61,7 @@ class VistaUnProducto(TemplateView):
 
 class VistaCRUDProducto(View):
 
-	def CrearProducto(request):
+	def CrearProducto(self,request):
 		form = ProductoForm()
 		if request.method == 'POST':
 			form = ProductoForm(request.POST)
@@ -71,7 +71,7 @@ class VistaCRUDProducto(View):
 				return redirect('/') #redirecciona a la lista de productos
 		return render(request,'producto_form.html',{'producto':form})
 
-	def ModProducto(request,id):
+	def ModProducto(self,request,id):
 		producto = get_object_or_404(Producto,pk=id)
 		form = ProductoForm(instance=producto)
 		if request.method == 'POST':
@@ -81,7 +81,7 @@ class VistaCRUDProducto(View):
 				return redirect('/') #redirecciona a la lista de productos
 		return render(request,'producto_form.html',{'producto':form})
 
-	def EliminarProducto(request,id):
+	def EliminarProducto(self,request,id):
 		#Producto.objecets.filter(pk=id).delete()
 		producto = get_object_or_404(Producto,pk=id)
 		if request.method == 'POST':
