@@ -1,8 +1,8 @@
-from django.shortcuts import render,get_object_or_404,redirect
-from django.http import HttpResponse,HttpRequest
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse, HttpRequest
 from .models import Categoria,Producto,Orden,Cliente,Oferta
 from .forms import ProductoForm
-from django.views.generic import View,ListView,TemplateView
+from django.views.generic import View, ListView, TemplateView, DetailView
 
 
 ################ VISTA DEL HOME ################
@@ -40,19 +40,28 @@ class VistaMuchosProductos(ListView):
 # https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
 
-
 ################ VISTA DE UN PRODUCTO ###################
 
-#Implementacion con TemplateView
-class VistaUnProducto(TemplateView):
+class VistaUnProducto(DetailView):
 	template_name = 'producto.html'
+	queryset = Producto.objects.all()
 	
-	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
-		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
-		context['producto'] = Producto.objects.get(id = pk_producto) #añado otro field al modelo
+	def get_object(self):
+		id_ = self.kwargs.get('pk_producto') #argumento pasado por el url
+		return get_object_or_404(Producto, id=id_)
+
+#Implementacion vieja con TemplateView
+# #class VistaUnProducto(TemplateView):
+#	template_name = 'producto.html'
+
+#	def get_context_data(self,**kwargs):
+#		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
+#		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
+#		context['producto'] = Producto.objects.get(id = pk_producto) #añado otro field al modelo
 								#y le asigno una queryset para que seleccione el producto especifico 
-		return context
+#		return context
+
+
 
 
 #################### VISTA CREATE,READ,UPDATE,DELETE ########################
