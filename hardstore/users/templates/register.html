@@ -16,48 +16,43 @@
   </div>
 
   <div class="registro">
-    {% csrf_token %}
     <form method="POST" action="">
+      {% csrf_token %}
       <!--ACORDARSE DE IMPLEMENTAR CSRF_TOKEN - Agus -->
       <div class="row">
-
         <div class="col-sm-12 col-md-6 col-lg-4">
-          {{form.first_name.label}}
-         {{form.first_name}}
-       </div>
-
-        <div class="col-sm-12 col-md-6 col-lg-4">
-        {{form.last_name.label}}
-        {{form.last_name}}
+          {{form.first_name.label}} {{form.first_name}}
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-4">
-           {{form.username.label}}
-          {{form.username}}
+          {{form.last_name.label}} {{form.last_name}}
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-4">
-          {{form.email.label}}
-         {{form.email}}
-       </div>
-        
-        
-        <div class="col-sm-12 col-md-6 col-lg-4">
-          {{form.password1.label}}
-          {{form.password1}}
+          {{form.username.label}} {{form.username}}
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-4">
-          {{form.password2.label}}
-          {{form.password2}}
+          {{form.email.label}} {{form.email}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.password1.label}} {{form.password1}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.password2.label}} {{form.password2}}
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          {{form.is_superuser.label}} {{form.is_superuser}}
         </div>
 
         {{forms.error}}
 
         <div class="col-sm-12 col-md-12 col-lg-4">
-          <input class="btn btn_success" type="submit" value="Registrarse">
+          <input class="btn btn_success" type="submit" value="Registrarse" />
         </div>
-
       </div>
     </form>
   </div>

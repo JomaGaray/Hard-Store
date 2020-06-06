@@ -7,7 +7,6 @@
 
 {% block content %}
 
-
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -15,10 +14,9 @@
     </div>
   </div>
 
-  
   <div class="registro">
     <form method="POST" action="">
-      {% crsf_token %}
+      {% csrf_token %}
 
       <div class="row">
         <div class="col-sm-12 col-lg-6">
@@ -32,24 +30,23 @@
         </div>
 
         <div class="col-sm-12 col-lg-6">
-          <input class="btn login_btn" type="submit" value="Login">
+          <input class="btn login_btn" type="submit" value="Login" />
         </div>
-        
-        {% for message in messages %} <!-- mensaje para la verificacion de un usuario creado-->
-          <p>{{ message }}</p>
+
+        {% for message in messages %}
+        <!-- mensaje para la verificacion de un usuario creado-->
+        <p>{{ message }}</p>
         {% endfor %}
 
         <div class="col-sm-12 col-lg-6">
-          <h5>No estas registrado? <a href="{% url 'signup' %}">Registrate!</a></h5>
+          <h5>
+            No estas registrado? <a href="{% url 'signup' %}">Registrate!</a>
+          </h5>
         </div>
       </div>
     </form>
   </div>
 </div>
-
-
-
-
 
 {% endblock %}
 
