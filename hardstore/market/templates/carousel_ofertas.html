@@ -4,6 +4,26 @@
     <!--Empieza primer item de tres cards - Agus -->
     <div class="carousel-item active">
       <div class="row justify-content-center">
+        <!--{% for i in ofertas %}
+            <div class="d-none col-md-4 d-md-block" >
+              <div class="card" style="width:200px">
+                <img src="{{ofertas.i.imagen.url}}" class="card-img-top" />
+                <div class="card-body">
+                  <h4 class="card-title">
+                    {{ofertas.i.nombre}}
+                  </h4>
+                  <p class="card-text">
+                    {{ofertas.i.descripcion}}
+                    Precio: {{ofertas.i.precio}}
+                  </p>
+                  <button type="button" class="btn btn-warning">
+                    Ver producto
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}-->
+
         <div class="d-none col-md-4 d-md-block">
           <div class="card" style="width: 200px;">
             <img src="{{ofertas.0.producto.imagen.url}}" class="card-img-top" />

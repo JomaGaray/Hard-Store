@@ -4,8 +4,28 @@
 
     <!--Empieza primer item de tres cards - Agus -->
     <div class="carousel-item active">
+      <div class="row justify-content-center">
+        <!--{% for i in range(0,2) %}
+            <div class="d-none col-md-4 d-md-block" >
+              <div class="card" style="width:200px">
+                <img src="{{destacados.i.imagen.url}}" class="card-img-top" />
+                <div class="card-body">
+                  <h4 class="card-title">
+                    {{destacados.i.nombre}}
+                  </h4>
+                  <p class="card-text">
+                    {{destacados.i.descripcion}}
+                    Precio: {{destacados.i.precio}}
+                  </p>
+                  <button type="button" class="btn btn-warning">
+                    Ver producto
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}-->
 
-        <div class="row justify-content-center">
+        
           <div class="d-none col-md-4 d-md-block" >
             <div class="card" style="width:200px">
               <img src="{{destacados.0.imagen.url}}" class="card-img-top" />
@@ -23,7 +43,7 @@
               </div>
             </div>
           </div>
-          <div class="col-8 col-md-4 d-md-block " >
+          <div class="d-none col-md-4 d-md-block"> <!--"col-8 col-md-4 d-md-block " --> 
             <div class="card" style="width:200px" >
               <img src="{{destacados.1.imagen.url}}" class="card-img-top" />
               <div class="card-body">
@@ -65,6 +85,26 @@
     <div class="carousel-item">
       
         <div class="row justify-content-center">
+          <!--{% for i in range(3,5) %}
+            <div class="d-none col-md-4 d-md-block" >
+              <div class="card" style="width:200px">
+                <img src="{{destacados.i.imagen.url}}" class="card-img-top" />
+                <div class="card-body">
+                  <h4 class="card-title">
+                    {{destacados.i.nombre}}
+                  </h4>
+                  <p class="card-text">
+                    {{destacados.i.descripcion}}
+                    Precio: {{destacados.i.precio}}
+                  </p>
+                  <button type="button" class="btn btn-warning">
+                    Ver producto
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}-->
+
           <div class="d-none col-md-4 d-md-block justify-content-center" >
             <div class="card" style="width:200px">
               <img src="{{destacados.3.imagen.url}}" class="card-img-top" />
