@@ -10,9 +10,6 @@ class Categoria(models.Model):
 	def __str__(self):
 		return self.nombre
 
-#### 	Modelo Imagen	 ####		
-class ImagenProducto(models.Model):
-	imagen = models.ImageField(null=True,default='default.jpg') 
 
 #### Queryset personalizadas para ProductoManager ####
 class ProductoQuerySet(models.QuerySet):
@@ -41,14 +38,20 @@ class Producto(models.Model):
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	categoria = models.ForeignKey(Categoria, null=True, on_delete = models.SET_NULL)
 
-	imagen = models.ManyToManyField(ImagenProducto) 
-
 	objects = models.Manager() # manager default
  
 	productos = ProductoManager() # un manager personalizado
 
 	def __str__(self):
 		return self.nombre
+
+#### 	Modelo Imagen	 ####		
+class ImagenProducto(models.Model):
+	producto = models.ForeignKey(Producto, on_delete = models.CASCADE)
+	imagen = models.ImageField(default='default.jpg') 
+
+	def __str__(self):
+		return str(self.producto.id)
 
 class Oferta(models.Model):
 	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
