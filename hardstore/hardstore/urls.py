@@ -42,6 +42,8 @@ urlpatterns = [
     #voy a ingresar a este path mediante un boton "Crear producto" 
     path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto , name='crear_producto'),
 
+    path('crear_producto_2/', market_views.ProductoCreate.as_view() , name='crear_producto2'),
+
     #modificar un producto
 
     #voy a ingresar a este path mediante un boton "Actualizar"
@@ -49,6 +51,20 @@ urlpatterns = [
 
     #eliminar un producto
     path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
+
+    #PATH CRUD para Categorias
+    #crear un producto
+
+    #voy a ingresar a este path mediante un boton "Crear producto" 
+    path('crear_categoria/', market_views.VistaCRUDCategoria.CrearCategoria , name='crear_categoria'),
+
+    #modificar un Categoria
+
+    #voy a ingresar a este path mediante un boton "Actualizar"
+    path('modificar_categoria/<int:id>/', market_views.VistaCRUDCategoria.ModCategoria , name='modificar_categoria'),
+
+    #eliminar un Categoria
+    path('eliminar_categoria/<int:id>/', market_views.VistaCRUDCategoria.EliminarCategoria , name='eliminar_categoria'),
 
 ]
 
