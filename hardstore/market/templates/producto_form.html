@@ -12,9 +12,12 @@
 
 	<div class="row">
 		<div class="formulario">
-			<form class="post-form" method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
+			<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
 			{% csrf_token %}
-			{{ producto }}
+			{{ form.as_p }}
+			
+			{{ imagenes.as_p }}
+			
 			<input type="submit" name="Submit">
 
 			</form>
