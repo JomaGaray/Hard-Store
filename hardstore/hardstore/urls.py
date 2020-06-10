@@ -42,7 +42,7 @@ urlpatterns = [
     #voy a ingresar a este path mediante un boton "Crear producto" 
     path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto , name='crear_producto'),
 
-    path('crear_producto_2/', market_views.ProductoCreate.as_view() , name='crear_producto2'),
+    #path('crear_producto_2/', market_views.ProductoCreate.as_view() , name='crear_producto2'),
 
     #modificar un producto
 
