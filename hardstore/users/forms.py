@@ -1,13 +1,16 @@
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
-from .models import Cliente
+from .models import Profile
 from django.contrib.auth.models import User
 
+#se renderizan los dos forms juntos en el templates
 
-class CreateUserForm(UserCreationForm):
-
+class UserForm(ModelForm):
     class Meta:
-        model = User  # un User que provee Django
+        model = User
         fields = ['username', 'email', 'password1',
                   'password2', 'first_name', 'last_name', 'is_superuser']
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('birth_date')
