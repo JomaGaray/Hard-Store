@@ -2,8 +2,8 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpRequest
 from .models import Categoria,Producto,Orden,Cliente,Oferta,ImagenProducto
 from .forms import ProductoForm,CategoriaForm,ImagenForm
-from django.forms import modelformset_factory
-from django.views.generic import View,ListView,TemplateView,CreateView
+from django.forms import modelformset_factory,inlineformset_factory
+from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView
 
 
 
@@ -60,54 +60,59 @@ class VistaUnProducto(TemplateView):
 #################### VISTA CREATE,READ,UPDATE,DELETE ########################
 
 #ESTA VISTA DEBE SER IMPLEMENTADA SOLAMENTE PARA LOS ADMINISTRADORES
+#
+#class ProductoCreate(CreateView):
+#	model = Producto
+#	fields = '__all__'
+#
+#	def get_context_data(self, **kwargs):
+#
+#		context = super().get_context_data(**kwargs)
+#		imagenFormset = modelformset_factory(ImagenProducto, fields=('imagen',) , extra = 2)
+#
+#		context['imagenes'] = imagenFormset(queryset = ImagenProducto.objects.none())
+#		return context
+#
+#	# Cómo implementar la validación para el form y para las imagenes 
+#	def form_valid(self, form):
+#		self.object = form.save(commit=False)
+#		for person in form.cleaned_data['members']:
+#			membership = Membership()
+#			membership.group = self.object
+#			membership.person = person
+#			membership.save()
+#		return super(ModelFormMixin, self).form_valid(form)
+#
+#
+#	def form_valid(self, form):
+#
+#	return form_valid(form)
 
 class ProductoCreate(CreateView):
-	model = Producto
-	fields = '__all__'
+	template_name = 'producto_form.html'
 
-	def get_context_data(self, **kwargs):
-
-		context = super().get_context_data(**kwargs)
-		imagenFormset = modelformset_factory(ImagenProducto, fields=('imagen',) , extra = 2)
-
-		context['imagenes'] = imagenFormset(queryset = ImagenProducto.objects.none())
-		return context
-
-	# Cómo implementar la validación para el form y para las imagenes 
-	def form_valid(self, form):
-		self.object = form.save(commit=False)
-		for person in form.cleaned_data['members']:
-			membership = Membership()
-			membership.group = self.object
-			membership.person = person
-			membership.save()
-		return super(ModelFormMixin, self).form_valid(form)
-
-
-	def form_valid(self, form):
-
-	return form_valid(form)
-
-
-
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
+		form = ProductoForm()
+		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
+		context = {
+			'form' : form,
+			'imagenes' : formset
+		}
+		ImagenFormset = modelformset_factory(ImagenProducto, fields=('imagen',) , extra = 2)
+		return context 
 
 class VistaCRUDProducto(View):
-
 	
 	def CrearProducto(request):
-		ImagenFormset = modelformset_factory(ImagenProducto, fields=('imagen',) , extra = 2)
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
 		if request.method == 'POST':
 			form = ProductoForm(request.POST)
-			formset = ImagenFormset(request.POST or None, request.FILES or None)
+			formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
 			if form.is_valid() and formset.is_valid():
-				nuevo_producto = form.save(commit=False)
-				nuevo_producto.save()
-				for f in formset:
-					img = ImagenProducto(producto=nuevo_producto,imagen=f.cleaned_data.get('imagen'))
-					img.save()
-					
-				# post.user = request.user - A futuro para saber que administrador realizo esta accion
-				return redirect('/') #redirecciona a la lista de productos
+				form.save()
+				formset.save()
+				return redirect('/') 
 		form = ProductoForm()
 		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
 		context = {
@@ -120,36 +125,27 @@ class VistaCRUDProducto(View):
 ### TRABAJAR PODER MODIFICAR IMAGENES YA CARGADAS ####
 		
 	def ModProducto(request,id):
-		ImagenFormset = modelformset_factory(ImagenProducto, ImagenForm , extra = 2)
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
 
 		producto = get_object_or_404(Producto,pk=id)
 		form = ProductoForm(instance=producto)		
-
-
-		imagenes = ImagenFormset(queryset = ImagenProducto.objects.filter(producto_id=id))
 		
 		if request.method == 'POST':
 			form = ProductoForm(request.POST or None, instance=producto) 
 
-			actualizadas = imagenes(request.POST or None, request.FILES or None) 
-			#nuevas = ImagenFormset(request.POST or None, request.FILES or None) #request.FILES es debido a las imagenes
+			formset = ImagenFormset(request.POST or None, request.FILES or None,instance=producto) 
 			
-			if form.is_valid() and nuevas.is_valid():
-				producto = form.save()
-				#data = ImagenProducto.objects.filter(producto=producto)
-				for v in imagenes:
-					v.save()
-
-				for n in nuevas:				
-					img = ImagenProducto(producto=producto,imagen=n.cleaned_data['imagen'])
-					img.save()
+			if form.is_valid() and formset.is_valid():
+				form.save()
+				formset.save()
 
 				return redirect('/') #redirecciona a la lista de productos
 
-		
+		formset = ImagenFormset(instance=producto)
+
 		context = {
 			'form' : form,
-			'imagenes' : imagenes,
+			'imagenes' : formset,
 		}
 		return render(request,'producto_form.html',context)
 
