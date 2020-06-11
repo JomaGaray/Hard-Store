@@ -14,7 +14,7 @@
 		<div class="formulario">
 			<form class="post-form" method = 'POST'> <!-- por mandar files necesitamos declarar enctype-->
 			{% csrf_token %}
-			{{ categoria }}
+			{{ form.as_p }}
 			<input type="submit" name="Submit">
 
 			</form>
