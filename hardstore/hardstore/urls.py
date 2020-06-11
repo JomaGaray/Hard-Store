@@ -30,7 +30,10 @@ urlpatterns = [
     path('login/', user_views.VistaUsuario.LogIn, name='login'),
     path('logout/', user_views.VistaUsuario.LogOut, name='logout'),
 
-    path('signup/', user_views.VistaUsuario.Register, name='signup'),
+   # path('signup/', user_views.VistaUsuario.Register, name='signup'),
+
+    path('signup/', user_views.UserRegistration.as_view(), name='signup'),
+
   
     # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico 
     path('producto/<int:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),

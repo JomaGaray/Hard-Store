@@ -20,10 +20,10 @@
       {% csrf_token %}
       <!--ACORDARSE DE IMPLEMENTAR CSRF_TOKEN - Agus -->
       <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4">
-          {{form.first_name.label}} {{form.first_name}}
+        <div class="col-sm-12 col-md-6 col-lg-4"> 
+        {{ form.as_p }}
         </div>
-
+        <!--
         <div class="col-sm-12 col-md-6 col-lg-4">
           {{form.last_name.label}} {{form.last_name}}
         </div>
@@ -49,7 +49,7 @@
         </div>
 
         {{forms.error}}
-
+        -->
         <div class="col-sm-12 col-md-12 col-lg-4">
           <input class="btn btn_success" type="submit" value="Registrarse" />
         </div>
@@ -72,4 +72,23 @@
 
 -->
 
+<!--
+<h2>Sign up Form</h2>
+<form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+    <p>
+      {{ field.label_tag }}<br>
+      {{ field }}
+      {% if field.help_text %}
+        <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </p>
+  {% endfor %}
+  <button type="submit">Sign up</button>
+</form>
+-->
 {% endblock content %}
