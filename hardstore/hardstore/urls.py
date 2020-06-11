@@ -38,7 +38,7 @@ urlpatterns = [
 
     #PATH CRUD hay que pasarlo cuando creemos todo la parte de administradores
     #crear un producto
-    path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto , name='crear_producto'),
+    path('crear_producto/', market_views.ProductoCreate.as_view() , name='crear_producto'),
 
     #modificar un producto
     path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
