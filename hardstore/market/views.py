@@ -88,38 +88,47 @@ class VistaUnProducto(TemplateView):
 #
 #	return form_valid(form)
 
-class ProductoCreate(CreateView):
+class ProductoCreate(TemplateView):
 	template_name = 'producto_form.html'
 
 	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
+		context = super().get_context_data(**kwargs)
 		form = ProductoForm()
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
 		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
-		context = {
-			'form' : form,
-			'imagenes' : formset
-		}
-		ImagenFormset = modelformset_factory(ImagenProducto, fields=('imagen',) , extra = 2)
+		context['form'] = form
+		context['imagenes'] = formset
+		
 		return context 
+
+	def post(self,request):
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+		form = ProductoForm(request.POST)
+		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
+		if form.is_valid() and formset.is_valid():
+			form.save()
+			formset.save()
+			return redirect('/') 
+
 
 class VistaCRUDProducto(View):
 	
-	def CrearProducto(request):
-		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
-		if request.method == 'POST':
-			form = ProductoForm(request.POST)
-			formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
-			if form.is_valid() and formset.is_valid():
-				form.save()
-				formset.save()
-				return redirect('/') 
-		form = ProductoForm()
-		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
-		context = {
-			'form' : form,
-			'imagenes' : formset
-		}
-		return render(request,'producto_form.html',context)
+	#def CrearProducto(request):
+	#	ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+	#	if request.method == 'POST':
+	#		form = ProductoForm(request.POST)
+	#		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
+	#		if form.is_valid() and formset.is_valid():
+	#			form.save()
+	#			formset.save()
+	#			return redirect('/') 
+	#	form = ProductoForm()
+	#	formset = ImagenFormset(queryset = ImagenProducto.objects.none())
+	#	context = {
+	#		'form' : form,
+	#		'imagenes' : formset
+	#	}
+	#	return render(request,'producto_form.html',context)
 
 
 ### TRABAJAR PODER MODIFICAR IMAGENES YA CARGADAS ####
