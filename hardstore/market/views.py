@@ -163,31 +163,52 @@ class VistaCRUDProducto(View):
 		# redirecciona a una lista de productos que NO va a ser la misma de los clientes
 		return render(request, 'eliminar_producto.html' , args)
 
-class VistaCRUDCategoria(View):
 
-	def CrearCategoria(request):
-		form = CategoriaForm()
-		if request.method == 'POST':
-			form = CategoriaForm(request.POST)
-			if form.is_valid():
-				form.save()
-				# post.user = request.user - A futuro para saber que administrador realizo esta accion
-		return render(request,'categoria_form.html',{'categoria':form})
+class CategoriaCreate(CreateView):
+	model = Categoria
+	template_name = 'categoria_form.html'
+	form_class = CategoriaForm
+	success_url = "/"
 
-	def ModCategoria(request,id):
-		categoria = get_object_or_404(Categoria,pk=id)
-		form = CategoriaForm(instance=categoria)
-		if request.method == 'POST':
-			form = CategoriaForm(request.POST, request.FILES, instance=categoria) #request.FILES es debido a las imagenes
-			if form.is_valid():
-				form.save()
-		return render(request,'categoria_form.html',{'categoria':form})
+class CategoriaUpdate(UpdateView):
+	model = Categoria
+	template_name = 'categoria_form.html'
+	form_class = CategoriaForm
 
-	def EliminarCategoria(request,id):
-		#Categoria.objecets.filter(pk=id).delete()
-		categoria = get_object_or_404(Categoria,pk=id)
-		if request.method == 'POST':
-			categoria.delete()
-		args = {'Categoria':categoria}
-		# redirecciona a una lista de productos que NO va a ser la misma de los clientes
-		return render(request, 'eliminar_categoria.html' , args)
+	success_url = "/"
+
+class CategoriaDelete(DeleteView):
+	model = Categoria
+	template_name = 'eliminar_categoria.html'
+	form_class = CategoriaForm
+
+	success_url = "/"
+
+#class VistaCRUDCategoria(View):
+
+	#def CrearCategoria(request):
+	#	form = CategoriaForm()
+	#	if request.method == 'POST':
+	#		form = CategoriaForm(request.POST)
+	#		if form.is_valid():
+	#			form.save()
+	#			# post.user = request.user - A futuro para saber que administrador realizo esta accion
+	#	return render(request,'categoria_form.html',{'categoria':form})
+
+	#def ModCategoria(request,id):
+	#	categoria = get_object_or_404(Categoria,pk=id)
+	#	form = CategoriaForm(instance=categoria)
+	#	if request.method == 'POST':
+	#		form = CategoriaForm(request.POST, request.FILES, instance=categoria) #request.FILES es debido a las imagenes
+	#		if form.is_valid():
+	#			form.save()
+	#	return render(request,'categoria_form.html',{'categoria':form})
+
+	#def EliminarCategoria(request,id):
+	#	#Categoria.objecets.filter(pk=id).delete()
+	#	categoria = get_object_or_404(Categoria,pk=id)
+	#	if request.method == 'POST':
+	#		categoria.delete()
+	#	form = CategoriaForm(instance=categoria)
+	#	# redirecciona a una lista de productos que NO va a ser la misma de los clientes
+	#	return render(request, 'eliminar_categoria.html' , form)
