@@ -38,33 +38,24 @@ urlpatterns = [
 
     #PATH CRUD hay que pasarlo cuando creemos todo la parte de administradores
     #crear un producto
-
-    #voy a ingresar a este path mediante un boton "Crear producto" 
     path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto , name='crear_producto'),
 
-    #path('crear_producto_2/', market_views.ProductoCreate.as_view() , name='crear_producto2'),
-
     #modificar un producto
-
-    #voy a ingresar a este path mediante un boton "Actualizar"
     path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
 
     #eliminar un producto
     path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
 
     #PATH CRUD para Categorias
-    #crear un producto
 
-    #voy a ingresar a este path mediante un boton "Crear producto" 
-    path('crear_categoria/', market_views.VistaCRUDCategoria.CrearCategoria , name='crear_categoria'),
+    #crear una Categoria
+    path('crear_categoria/', market_views.CategoriaCreate.as_view() , name='crear_categoria'),
 
     #modificar un Categoria
-
-    #voy a ingresar a este path mediante un boton "Actualizar"
-    path('modificar_categoria/<int:id>/', market_views.VistaCRUDCategoria.ModCategoria , name='modificar_categoria'),
+    path('modificar_categoria/<int:pk>/', market_views.CategoriaUpdate.as_view() , name='modificar_categoria'),
 
     #eliminar un Categoria
-    path('eliminar_categoria/<int:id>/', market_views.VistaCRUDCategoria.EliminarCategoria , name='eliminar_categoria'),
+    path('eliminar_categoria/<int:pk>/', market_views.CategoriaDelete.as_view() , name='eliminar_categoria'),
 
 ]
 
