@@ -31,7 +31,10 @@ urlpatterns = [
     path('signup/', user_views.VistaSignup.as_view(), name='signup'),
   
     # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico 
-    path('producto/<int:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
+    #path('producto/<int:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
+
+    path('producto/<int:pk_producto>/', market_views.ProductoDetail.as_view(), name='producto-detalle'),
+
     path('categoriaList/<int:pk_categoria>', market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
 
 

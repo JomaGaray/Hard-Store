@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpRequest
 from .models import Categoria,Producto,Orden,Cliente,Oferta,ImagenProducto
 from .forms import ProductoForm,CategoriaForm,ImagenForm
 from django.forms import modelformset_factory,inlineformset_factory
-from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView
+from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView,DetailView
 
 
 
@@ -46,15 +46,22 @@ class VistaMuchosProductos(ListView):
 ################ VISTA DE UN PRODUCTO ###################
 
 #Implementacion con TemplateView
-class VistaUnProducto(TemplateView):
+#class VistaUnProducto(TemplateView):
+#	template_name = 'producto.html'
+#	
+#	def get_context_data(self,**kwargs):
+#		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
+#		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
+#		context['producto'] = Producto.productos.producto(pk_producto) #añado otro field al modelo
+#								#y le asigno una queryset para que seleccione el producto especifico 
+#		return context
+
+class ProductoDetail(DetailView):
 	template_name = 'producto.html'
 	
-	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
-		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
-		context['producto'] = Producto.productos.producto(pk_producto) #añado otro field al modelo
-								#y le asigno una queryset para que seleccione el producto especifico 
-		return context
+	def get_object(self):
+		pk_producto = self.kwargs.get("pk_producto")
+		return get_object_or_404(Producto,id=pk_producto)
 
 
 #################### VISTA CREATE,READ,UPDATE,DELETE ########################
