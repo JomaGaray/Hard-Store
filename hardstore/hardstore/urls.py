@@ -35,7 +35,7 @@ urlpatterns = [
 
     path('producto/<int:pk_producto>/', market_views.ProductoDetail.as_view(), name='producto-detalle'),
 
-    path('categoriaList/<int:pk_categoria>', market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
+    path('productos_categoria/<int:pk_categoria>', market_views.ProductosCategoriaList.as_view(), name='productos-categoria-list'),
 
 
 
