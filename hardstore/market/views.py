@@ -28,11 +28,11 @@ class VistaHome(TemplateView):
 ################ VISTA DE UN PRODUCTO ################
 
 #vista para muchos productos de una categoria en particular 
-class VistaMuchosProductos(ListView):
-    template_name = 'productosCategoria.html'
+class ProductosCategoriaList(ListView):
+#	template_name = 'productosCategoria.html'
     model = Producto
-    context_object_name = 'productsList'  # para el for
-#    queryset = Producto.objects.filter(categoria=self.kwargs['pk_categoria'])
+    context_object_name = 'productosList'  # para el for
+#   queryset = Producto.objects.filter(categoria=self.kwargs['pk_categoria'])
 
     def get_queryset(self):
         self.pk_categoria = get_object_or_404(
@@ -57,65 +57,91 @@ class VistaMuchosProductos(ListView):
 #		return context
 
 class ProductoDetail(DetailView):
-	template_name = 'producto.html'
+	#template_name = 'producto.html' DetailView por defecto utilzia el prefijo 'modelo_detail.html' para redireccionar al template
+	model = Producto
 	
 	def get_object(self):
 		pk_producto = self.kwargs.get("pk_producto")
 		return get_object_or_404(Producto,id=pk_producto)
 
 
-#################### VISTA CREATE,READ,UPDATE,DELETE ########################
+#################### VISTAS CRUD PRODUCTO-IMAGENES ########################
 
 #ESTA VISTA DEBE SER IMPLEMENTADA SOLAMENTE PARA LOS ADMINISTRADORES
-#
-#class ProductoCreate(CreateView):
-#	model = Producto
-#	fields = '__all__'
-#
-#	def get_context_data(self, **kwargs):
-#
-#		context = super().get_context_data(**kwargs)
-#		imagenFormset = modelformset_factory(ImagenProducto, fields=('imagen',) , extra = 2)
-#
-#		context['imagenes'] = imagenFormset(queryset = ImagenProducto.objects.none())
-#		return context
-#
-#	# Cómo implementar la validación para el form y para las imagenes 
-#	def form_valid(self, form):
-#		self.object = form.save(commit=False)
-#		for person in form.cleaned_data['members']:
-#			membership = Membership()
-#			membership.group = self.object
-#			membership.person = person
-#			membership.save()
-#		return super(ModelFormMixin, self).form_valid(form)
-#
-#
-#	def form_valid(self, form):
-#
-#	return form_valid(form)
 
-class ProductoCreate(TemplateView):
-	template_name = 'producto_form.html'
+class ProductoCreate(CreateView):
+
+	success_url = '/'
+	model = Producto
+	form_class = ProductoForm
 
 	def get_context_data(self,**kwargs):
 		context = super().get_context_data(**kwargs)
-		form = ProductoForm()
 		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
 		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
-		context['form'] = form
 		context['imagenes'] = formset
 		
 		return context 
 
-	def post(self,request):
+	def post(self,request): 
+		super().post(request)
 		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
-		form = ProductoForm(request.POST)
-		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
-		if form.is_valid() and formset.is_valid():
-			form.save()
+		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=self.object)
+		if formset.is_valid():
 			formset.save()
 			return redirect('/') 
+
+#class ProductoCreate(CreateView):
+#
+#	template_name = 'producto_form.html' 
+#	success_url = '/'
+#	model = Producto
+#	form_class = ProductoForm
+#
+#	def get_context_data(self,**kwargs):
+#		context = super().get_context_data(**kwargs)
+#		form = ProductoForm()
+#		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+#		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
+#		context['form'] = form
+#		context['imagenes'] = formset
+#		
+#		return context 
+#
+#	def post(self,request):
+#		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+#		form = ProductoForm(request.POST)
+#		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
+#		if form.is_valid() and formset.is_valid():
+#			form.save()
+#			formset.save()
+#			return redirect('/') 
+	
+	### consultar con matias funcion y/o necesidad de form_valid ###
+
+	#def form_valid(self,form):
+	#	form.save()
+	#	return redirect(self.get_success_url())		
+
+	#def post(self,request): # ProcessFormView - Constructs a form, checks the form for validity, and handles it accordingly.
+	#	ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+	#	form = ProductoForm(request.POST)
+	#	formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
+	#	if form.is_valid():
+	#		return self.form_valid(form)
+	#	if formset.is_valid():
+	#		return self.form_valid(formset)
+
+
+		
+
+	#def form_valid(self,)
+	#	ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+	#	form = ProductoForm(request.POST)
+	#	formset = ImagenFormset(request.POST or None, request.FILES or None, instance=form.instance)
+	#	if form.is_valid() and formset.is_valid():
+	#		form.save()
+	#		formset.save()
 
 
 class VistaCRUDProducto(View):
