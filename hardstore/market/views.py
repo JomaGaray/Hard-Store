@@ -10,7 +10,7 @@ from django.views.generic import View,ListView,TemplateView,CreateView,UpdateVie
 ################ VISTA DEL HOME ################
 
 #Implementacion con TemplateView
-class VistaHome(TemplateView):
+class index(TemplateView):
 	template_name = 'home.html'
 	
 	def get_context_data(self,**kwargs):

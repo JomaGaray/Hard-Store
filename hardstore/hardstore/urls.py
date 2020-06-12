@@ -24,7 +24,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', market_views.VistaHome.as_view(), name='home'),
+    path('', market_views.index.as_view(), name='home'),
     
     # path('', include('market.urls')), manera menos directa -Joma
     path('login/', user_views.VistaLogin.as_view(), name='login'),
