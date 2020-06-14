@@ -19,42 +19,55 @@ from django.urls import path, include
 from users import views as user_views
 from market import views as market_views
 
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', market_views.VistaHome.as_view(), name='home'),
-    
+    path('producto/<int:pk_producto>/',
+         market_views.VistaUnProducto.as_view(), name='producto'),
+    path('categoriaList/<int:pk_categoria>',
+         market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
+
+    # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico
+    path('producto/<int:pk_producto>/',
+         market_views.VistaUnProducto.as_view(), name='producto'),
+    path('categoriaList/<int:pk_categoria>',
+         market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
+
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('signup/', user_views.UserSignUpView.as_view(), name='signup'),
+
     # path('', include('market.urls')), manera menos directa -Joma
-    path('login/', user_views.VistaUsuario.LogIn, name='login'),
-    path('logout/', user_views.VistaUsuario.LogOut, name='logout'),
+    # path('login/', user_views.UserSignInView.as_View(), name='login'),
+    # path('logout/', user_views.UserSignOutView.as_View(), name='logout'),
 
-   # path('signup/', user_views.VistaUsuario.Register, name='signup'),
-
-    path('signup/', user_views.UserRegistration.as_view(), name='signup'),
-
-  
-    # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico 
-    path('producto/<int:pk_producto>/', market_views.VistaUnProducto.as_view(), name='producto'),
-    path('categoriaList/<int:pk_categoria>', market_views.VistaMuchosProductos.as_view(), name='categoriaList'),
+    # path('signup/', user_views.VistaUsuario.Register, name='signup'),
 
 
 
-    #PATH CRUD hay que pasarlo cuando creemos todo la parte de administradores
-    #crear un producto
+    # path para un prodcuto en particular DEL LADO DEL CLIENTE, un path dinamico
 
-    #voy a ingresar a este path mediante un boton "Crear producto" 
-    path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto , name='crear_producto'),
 
-    #modificar un producto
 
-    #voy a ingresar a este path mediante un boton "Actualizar"
-    path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
+    # PATH CRUD hay que pasarlo cuando creemos todo la parte de administradores
+    # crear un producto
 
-    #eliminar un producto
-    path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
+    # voy a ingresar a este path mediante un boton "Crear producto"
+    path('crear_producto/', market_views.VistaCRUDProducto.CrearProducto,
+         name='crear_producto'),
+
+    # modificar un producto
+
+    # voy a ingresar a este path mediante un boton "Actualizar"
+    path('modificar_producto/<int:id>/',
+         market_views.VistaCRUDProducto.ModProducto, name='modificar_producto'),
+
+    # eliminar un producto
+    path('eliminar_producto/<int:id>/',
+         market_views.VistaCRUDProducto.EliminarProducto, name='eliminar_producto'),
 
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
