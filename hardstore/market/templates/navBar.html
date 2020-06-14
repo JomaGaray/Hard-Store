@@ -1,61 +1,44 @@
 <style>
-  .helloMSG{
-    font-size: 18px;
+  .helloMSG {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
     color: white;
-    margin-right: 50px;
-  
+    margin-left: 800px;
+    margin-top: auto;
+
   }
 </style>
 
 
 <ul class="nav">
   <li class="nav-item">
-    <a class="nav-link active" href="{% url 'home' %}" style="color: #1f2833;"
-      >Home</a
-    >
+    <a class="nav-link active" href="{% url 'home' %}" style="color: #1f2833;">Home</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#" style="color: #1f2833;">Sobre Nosotros</a>
   </li>
   <li class="nav-item">
     <!--href se dirige a url de hardstore- Joma-->
-    <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;"
-      >LogIn</a
-    >
+    <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
   </li>
   <li class="nav-item">
     <!--href se dirige a url de hardstore- Joma-->
-    <a class="nav-link" href="{% url 'logout' %}" style="color: #1f2833;"
-      >LogOut</a
-    >
+    <a class="nav-link" href="{% url 'logout' %}" style="color: #1f2833;">LogOut</a>
   </li>
   <li class="nav-item">
     <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Categorias
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'categoriaList' 1 %}"
-          >Procesadores</a
-        >
-        <a class="dropdown-item" href="{% url 'categoriaList' 2 %}"
-          >Placas Graficas</a
-        >
-        <a class="dropdown-item" href="{% url 'categoriaList' 3 %}"
-          >MotherBoard</a
-        >
+        <a class="dropdown-item" href="{% url 'categoriaList' 1 %}">Procesadores</a>
+        <a class="dropdown-item" href="{% url 'categoriaList' 2 %}">Placas Graficas</a>
+        <a class="dropdown-item" href="{% url 'categoriaList' 3 %}">MotherBoard</a>
       </div>
     </div>
   </li>
 
   <span class="helloMSG">Hello, {{request.user}} </span>
-  
-</ul>
 
+</ul>
