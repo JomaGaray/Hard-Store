@@ -20,12 +20,12 @@ def create_Userprofile(sender, instance, created, **kwargs):
 # forma de conectar el User con el profile
 #post_save.connect(create_profile, sender=User)
 
-@receiver(post_save, sender=User)
-def update_Userprofile(sender, instance, created, **kwargs):
+# @receiver(post_save, sender=User)
+# def update_Userprofile(sender, instance, created, **kwargs):
 
-    if created == False:
-        UserProfile.save()
-        print('Userprofile updated')
+ #   if created == False:
+   #     UserProfile.save()
+  #      print('Userprofile updated')
 
 
 #post_save.connect(update_profile, sender=User)
