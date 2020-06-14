@@ -56,7 +56,8 @@ ROOT_URLCONF = 'hardstore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [], #ACA PUEDO PONER LA DIRECCIÓN DIRECTA EN DONDE BUSCAR LOS TEMPLATES - Agus
+        # Direccion donde busca los templates por defecto, lo puse para la autenticacion-Joma
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,5 +130,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/img_productos")
 MEDIA_URL = '/media/'
 
-
-
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'  # pagina a la que redirige luego de loggearse
+LOGOUT_REDIRECT_URL = '/'  # pagina a la que redirige luego de hacer el logout
