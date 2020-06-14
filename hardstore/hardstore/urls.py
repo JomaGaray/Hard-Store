@@ -44,10 +44,11 @@ urlpatterns = [
     path('crear_producto/', market_views.ProductoCreate.as_view() , name='crear_producto'),
 
     #modificar un producto
-    path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
+    #path('modificar_producto/<int:id>/', market_views.VistaCRUDProducto.ModProducto , name='modificar_producto'),
+    path('modificar_producto/<int:pk>/', market_views.ProductoUpdate.as_view(), name='modificar_producto'),
 
     #eliminar un producto
-    path('eliminar_producto/<int:id>/', market_views.VistaCRUDProducto.EliminarProducto , name='eliminar_producto'),
+    path('eliminar_producto/<int:pk>/', market_views.ProductoDelete.as_view() , name='eliminar_producto'),
 
     #PATH CRUD para Categorias
 
