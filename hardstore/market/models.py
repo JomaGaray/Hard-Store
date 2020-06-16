@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils import timezone
-from users.models import Cliente
+from users.models import UserProfile
 
 #### 	Modelo Categoria 	####
 
 class Categoria(models.Model):
-	nombre = models.CharField(max_length=200, null=True)
+    nombre = models.CharField(max_length=200, null=True)
 
-	def __str__(self):
-		return self.nombre
+    def __str__(self):
+        return self.nombre
 
 
 #### Queryset personalizadas para ProductoManager ####
@@ -32,11 +32,12 @@ class ProductoManager(models.Manager):
 
 
 class Producto(models.Model):
-	nombre = models.CharField(max_length=200, null=True)
-	descripcion = models.CharField(max_length=200, null=True, blank=True)
-	precio = models.FloatField(null=True)
-	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
-	categoria = models.ForeignKey(Categoria, null=True, on_delete = models.SET_NULL)
+    nombre = models.CharField(max_length=200, null=True)
+    descripcion = models.CharField(max_length=200, null=True, blank=True)
+    precio = models.FloatField(null=True)
+    f_creacion = models.DateTimeField(auto_now_add=True, null=True)
+    categoria = models.ForeignKey(
+        Categoria, null=True, on_delete=models.SET_NULL)
 
 	objects = models.Manager() # manager default
  
