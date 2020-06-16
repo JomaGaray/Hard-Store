@@ -14,9 +14,10 @@
     </div>
   </div>
 
-  <!--aca van los inputs para registrarse-Joma-->
   <div class="registro">
-    <form>
+    <form method="POST" action="">
+      {% csrf_token %}
+
       <div class="row">
         <div class="col-sm-12 col-lg-6">
           <label>Email</label>
@@ -29,13 +30,18 @@
         </div>
 
         <div class="col-sm-12 col-lg-6">
-          <button type="button" class="btn btn-success">
-            login
-          </button>
+          <input class="btn login_btn" type="submit" value="Login" />
         </div>
 
+        {% for message in messages %}
+        <!-- mensaje para la verificacion de un usuario creado-->
+        <p>{{ message }}</p>
+        {% endfor %}
+
         <div class="col-sm-12 col-lg-6">
-          <h5>No estas registrado? <a href="{% url 'signup' %}">Registrate!</a></h5>
+          <h5>
+            No estas registrado? <a href="{% url 'signup' %}">Registrate!</a>
+          </h5>
         </div>
       </div>
     </form>
