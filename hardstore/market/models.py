@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from users.models import UserProfile
 
+#### 	Modelo Categoria 	####
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=200, null=True)
@@ -9,12 +10,28 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nombre
 
+#### 	Modelo Imagen	 ####		
+class ImagenProducto(models.Model):
+	imagen = models.ImageField(null=True,default='default.jpg') 
 
+#### Queryset personalizadas para ProductoManager ####
+class ProductoQuerySet(models.QuerySet):
+	def categorias(self,categoria):
+		return self.filter(categoria = categoria)
+
+	def producto(self,pk_producto):
+		return self.get(id = pk_producto)
+
+#### Manager personalizado para PRODUCTO ####
 class ProductoManager(models.Manager):
-    def crear_producto(self, nombre, descripcion, precio, categoria):
-        producto = self.create(
-            nombre=nombre, descripcion=descripcion, precio=precio)
-        return producto
+	def get_queryset(self):		
+		return ProductoQuerySet(self.model, using=self._db)
+	
+	def categorias(self,categoria):
+		return self.get_queryset().categorias(categoria)
+
+	def producto(self,pk_producto):
+		return self.get_queryset().producto(pk_producto)
 
 
 class Producto(models.Model):
@@ -25,16 +42,14 @@ class Producto(models.Model):
     categoria = models.ForeignKey(
         Categoria, null=True, on_delete=models.SET_NULL)
 
-    # img_productos es un directorio que contendrá todas las images
+	imagen = models.ManyToManyField(ImagenProducto) 
 
-    # es necesario un modelo imagen que solo contenga esta relación -----------------------------------= ?????
+	objects = models.Manager() # manager default
+ 
+	productos = ProductoManager() # un manager personalizado
 
-    imagen = models.ImageField(null=True, default='default.jpg')
-
-    objects = ProductoManager()
-
-    def __str__(self):
-        return self.nombre
+	def __str__(self):
+		return self.nombre
 
 
 class Oferta(models.Model):
@@ -48,82 +63,40 @@ class Oferta(models.Model):
     # def __str__(self):
     #	return self.producto.nombre
 
-# class Compra(models.Model):
-#	#representa la lista de una o mas ordenes confirmadas, es decir productos vendidos
-#
-#	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
-#
-#	#las ordenes confirmadas referencian a este modelo
-
-# MODELOS DE ORDEN 	#### -----------------------------------------------------------------------= ?????
-
-# Primer Modelo de Orden
-
-# La misma orden define si esta pendiente o confirmada(vendida)
-
-# El carrito solo contendrá las pendientes
-
-
-class Orden(models.Model):
-    ESTADO = (	('Pendiente', 'Pendiente'),
-               ('Confirmada', 'Confirmada'),
-               # ('Cancelada','Cancelada') que la orden este cancelada implica la inesistencia de la relacion ---------= ?????
-               )
-    # referencia a Producto
-    producto = models.ForeignKey(Producto, null=True, on_delete=models.CASCADE)
-    # referencia a cliente
-    UserProfile = models.ForeignKey(
-        UserProfile, null=True, on_delete=models.CASCADE)
-    estado = models.CharField(max_length=200, null=True, choices=ESTADO)
-
-# Segunda opcion de Modelo de Ordenes
-
-# Se dividen las ordenes por su estado y creo un modelo Compra que contiene todos las ordenes confirmadas
-
-# El carrito solo contendrá las pendientes al igual que el anterior esquema
-
-#	 class Orden(models.Model):
-#		referencia a Producto
-#		producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
-
-# Si sigo este criterio las demas ordenes heredaran de este modelo
-
-#	class OrdenPendiente(models.Model):
-#
-#		#referencia a Producto
-#		producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
-#		#referencia a carrito
-#	 	carrito = models.ForeignKey(Carrito, null=True, on_delete = models.CASCADE)
-#
-#	class OrdenConfirmada(models.Model):
-#
-#		#referencia a Producto
-#		producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
-#		#referencia a compra
-#	 	compra = models.ForeignKey(Carrito, null=True, on_delete = models.CASCADE)
-
-
-# MODELOS DE CARRITO 	#### -----------------------------------------------------------------------= ?????
-
-# Primer Modelo de Carrito
-
-# El carrito contendra solo ordenes pendientes  -------------------------------------------------------------= ?????
-# class Carrito(models.Model):
-#	# representa la lista de una o mas ordenes pendientes, es decir productos a vender
-#
-#	#referencia a un cliente
-#	cliente = models.OneToOneField(Cliente , null = True , on_delete = models.CASCADE)
-#
-#
-# Puede ser representado como la lista de ordenes que posee el cliente
-
-
 #####	MODELOS DE Favorito	 	####
-#
-# Primer Modelo de Favorito
-#
-# class Favorito(models.Model):
-#
-#	producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
-#
-#	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
+
+class Favorito(models.Model):
+
+	producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
+
+	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
+
+
+####	MODELOS DE ORDEN 	#### 
+
+
+# Representaria directamente el carrito / productos sin confirmar
+class Orden(models.Model):
+	ESTADO = (	('Pendiente','Pendiente'),
+				('Confirmada','Confirmada') )
+
+	estado = models.CharField(max_length=200, null=True, choices=ESTADO)
+	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
+	
+	#referencia a Cliente
+	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
+
+####	MODELOS DE ITEM VENDIDO 	#### 
+
+# representa el posible producto a ser comprado al crearse la orden
+# Y el producto comprado/vendido
+
+class ItemVendido(models.Model):
+	#fijar el precio de la compra
+	#precio = models.FloatField(null=True)
+	#fijar la fecha de la compra
+	#f_creacion = models.DateTimeField(auto_now_add=True, null=True)
+
+	producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
+
+	orden = models.ForeignKey(Orden, null=True, on_delete = models.CASCADE)
