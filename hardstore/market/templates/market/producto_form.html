@@ -4,22 +4,25 @@
 {% block content %}
 
 <div class="container" style="background-color: white">
-  <div class="row">
-    <div class="col-12">
-      <h1 class="brand">Producto</h1>
-    </div>
-  </div>
+	<div class="row">
+		<div class="col-12">
+			<h1 class="brand">Producto</h1>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="formulario">
-			<form class="post-form" method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
+			<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
 			{% csrf_token %}
-			{{ producto }}
+			{{ form.as_p }}
+			{{ imagenes.as_p }}
 			<input type="submit" name="Submit">
 
 			</form>
 		</div>
 	</div>
+	</div>
 </div>
+
 
 {% endblock %}

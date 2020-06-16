@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block estilo %}{% endblock %}
+{% block content %}
+
+<div class="container" style="background-color: white">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="brand">Categoria</h1>
+    </div>
+  </div>
+
+	<div class="row">
+		<div class="formulario">
+			<form class="post-form" method = 'POST'> <!-- por mandar files necesitamos declarar enctype-->
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" name="Submit">
+
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

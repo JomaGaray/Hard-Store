@@ -35,28 +35,11 @@
   <body style="background-color: #0b0c10;">
     <div class="container-fluid text-center py-3" style="background-color: #1f2833;">
       <!--<h1 style="color: #66fcf1">HardStore</h1>-->
-      <img src="{% static 'images/logo.png' %}" class="card-img-top" id="logo" style="height: 110px; width: 340px;"/>
-      <!--Ejemplo para logo de la pagina - Agus -->
+      <img src="{% static 'images/logo.png' %}" class=".img-fluid. max-width: 100%; and height: auto" id="logo" style="height: 110px; width: 340px;"/>
+      
     </div>
     <!--este es el encabezado - Agus -->
     <header style="background-color: #45a29e;">
-      <form class="navbar-form" role="search" style="float: right;">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search"
-            name="srch-term"
-            id="srch-term"
-          />
-          <div class="input-group-btn">
-            <button class="btn btn-default" type="submit">
-              <i class="glyphicon glyphicon-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-      <!--esta es la barra de navegacion - Agus -->
       {% include 'navBar.html' %}
     </header>
 

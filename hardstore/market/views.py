@@ -1,14 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpRequest
-from .models import Categoria,Producto,Orden,Cliente,Oferta
-from .forms import ProductoForm
-from django.views.generic import View,ListView,TemplateView
+from django.forms import inlineformset_factory
+from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView,DetailView
+from django.db.models import Q
+from .models import Categoria,Producto,Orden,Cliente,Oferta,ImagenProducto
+from .forms import ProductoForm,CategoriaForm,ImagenForm
 
 
-################ VISTA DEL HOME ################
 
-#Implementacion con TemplateView
-class VistaHome(TemplateView):
+class index(TemplateView):
 	template_name = 'home.html'
 	
 	def get_context_data(self,**kwargs):
@@ -21,16 +21,20 @@ class VistaHome(TemplateView):
 		context['categorias'] = Categoria.objects.all()
 		return context
 
+class SearchView(ListView):
+	model = Producto
+	template_name = 'producto_list.html'
+	context_object_name = 'productosList'
+	# pagination
+	def get_queryset(self):
+		query = self.request.GET.get('search')
+		resultado = Producto.objects.filter(nombre__icontains = query)
 
+		return resultado
 
-################ VISTA DE UN PRODUCTO ################
-
-#vista para muchos productos de una categoria en particular 
-class VistaMuchosProductos(ListView):
-    template_name = 'productosCategoria.html'
+class ProductosCategoriaList(ListView):
     model = Producto
-    context_object_name = 'productsList'  # para el for
-#    queryset = Producto.objects.filter(categoria=self.kwargs['pk_categoria'])
+    context_object_name = 'productosList'  # para el for
 
     def get_queryset(self):
         self.pk_categoria = get_object_or_404(
@@ -40,53 +44,78 @@ class VistaMuchosProductos(ListView):
 # https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
 
-
-################ VISTA DE UN PRODUCTO ###################
-
-#Implementacion con TemplateView
-class VistaUnProducto(TemplateView):
-	template_name = 'producto.html'
+class ProductoDetail(DetailView):
 	
-	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs) #obtiene los datos del modelo, en este caso "Producto"
-		pk_producto = kwargs['pk_producto'] #tomo el argumento del url que indica el numero id del producto
-		context['producto'] = Producto.productos.producto(pk_producto) #añado otro field al modelo
-								#y le asigno una queryset para que seleccione el producto especifico 
-		return context
+	model = Producto
+	
+	def get_object(self):
+		pk_producto = self.kwargs.get("pk_producto")
+		return get_object_or_404(Producto,id=pk_producto)
 
 
-#################### VISTA CREATE,READ,UPDATE,DELETE ########################
+#################### VISTAS CRUD PRODUCTO-IMAGENES ########################
 
 #ESTA VISTA DEBE SER IMPLEMENTADA SOLAMENTE PARA LOS ADMINISTRADORES
 
-class VistaCRUDProducto(View):
+class ProductoCreate(CreateView):
 
-	def CrearProducto(request):
-		form = ProductoForm()
-		if request.method == 'POST':
-			form = ProductoForm(request.POST)
-			if form.is_valid():
-				form.save()
-				# post.user = request.user - A futuro para saber que administrador realizo esta accion
-				return redirect('/') #redirecciona a la lista de productos
-		return render(request,'producto_form.html',{'producto':form})
+	success_url = '/'
+	model = Producto
+	form_class = ProductoForm
 
-	def ModProducto(request,id):
-		producto = get_object_or_404(Producto,pk=id)
-		form = ProductoForm(instance=producto)
-		if request.method == 'POST':
-			form = ProductoForm(request.POST, request.FILES, instance=producto) #request.FILES es debido a las imagenes
-			if form.is_valid():
-				form.save()
-				return redirect('/') #redirecciona a la lista de productos
-		return render(request,'producto_form.html',{'producto':form})
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs)
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+		formset = ImagenFormset(queryset = ImagenProducto.objects.none())
+		context['imagenes'] = formset
+		return context 
 
-	def EliminarProducto(request,id):
-		#Producto.objecets.filter(pk=id).delete()
-		producto = get_object_or_404(Producto,pk=id)
-		if request.method == 'POST':
-			producto.delete()
-			return redirect('/') #redirecciona a la lista de productos
-		args = {'producto':producto}
-		# redirecciona a una lista de productos que NO va a ser la misma de los clientes
-		return render(request, 'eliminar_producto.html' , args)
+	def post(self,request): 
+		# Almacena el producto por más que los archivos cargados sean inválidos.
+		super().post(request)
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=self.object)
+		if formset.is_valid():
+			formset.save()
+
+
+class ProductoUpdate(UpdateView):
+	model = Producto
+	form_class = ProductoForm
+	success_url = '/'
+
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs)
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+		formset = ImagenFormset(instance=self.object)
+		context['imagenes'] = formset	
+		return context 
+
+	def post(self,request,**kwargs): 
+		super().post(request,**kwargs)
+		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
+		formset = ImagenFormset(request.POST or None, request.FILES or None,instance=self.object) 		
+		if formset.is_valid():
+			formset.save()
+			return redirect('/')
+
+class ProductoDelete(DeleteView):
+	model = Producto
+	form_class = ProductoForm
+	success_url = '/'
+
+
+class CategoriaCreate(CreateView):
+	model = Categoria
+	form_class = CategoriaForm
+	success_url = "/"
+
+class CategoriaUpdate(UpdateView):
+	model = Categoria
+	form_class = CategoriaForm
+	success_url = "/"
+
+class CategoriaDelete(DeleteView):
+	model = Categoria
+	form_class = CategoriaForm
+	success_url = "/"

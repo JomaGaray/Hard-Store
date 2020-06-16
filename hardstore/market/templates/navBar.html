@@ -1,41 +1,42 @@
-<ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link active" href="{% url 'home' %}" style="color: #1f2833;"
-      >Home</a
-    >
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" style="color: #1f2833;">Sobre Nosotros</a>
-  </li>
-  <li class="nav-item">
-    <!--href se dirige a url de hardstore- Joma-->
-    <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;"
-      >LogIn</a
-    >
-  </li>
-  <li class="nav-item">
-    <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Categorias
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'categoriaList' 1 %}"
-          >Procesadores</a
-        >
-        <a class="dropdown-item" href="{% url 'categoriaList' 2 %}"
-          >Placas Graficas</a
-        >
-        <a class="dropdown-item" href="{% url 'categoriaList' 3 %}"
-          >MotherBoard</a
-        >
-      </div>
-    </div>
-  </li>
-</ul>
+<nav class="navbar navbar-expand-lg" >
+  <a class="navbar-brand" href="{% url 'home' %}" style="color: #1f2833;">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" style="color: #1f2833;">Sobre Nosotros <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: #1f2833;">LogIn</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;">Categorias</a>
+        <!--<button class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;">
+          <i> Aca pueden agregarse iconos para cada cosa del navbar </i>
+
+          https://icons.getbootstrap.com/
+
+          
+        </button>-->
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'productos-categoria-list' 1 %}">Procesadores</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'productos-categoria-list' 2 %}">Placas Graficas</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'productos-categoria-list' 3 %}">MotherBoard</a>
+        </div>
+      </li>
+    </ul>
+
+    <form method="GET" action="/search" class="form-inline my-2 my-lg-0">
+
+      <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+      
+    </form>
+
+  </div>
+</nav>

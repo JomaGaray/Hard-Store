@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form action="{% url 'eliminar_categoria' categoria.id %}"lass="post-form" method = 'POST'>
+	{% csrf_token %}
+	{{ categoria }}
+
+	<a href="{% url 'home' %}">Cancelar</a> <!--redirecciona a la lista de productos-->
+	<input type="submit" name="Confirmar">
+	
+</form>
+{% endblock %}
