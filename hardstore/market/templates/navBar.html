@@ -13,9 +13,14 @@
         <a class="nav-link" href="#" style="color: #1f2833;">LogIn</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;">
-          Categorias
-        </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;">Categorias</a>
+        <!--<button class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;">
+          <i> Aca pueden agregarse iconos para cada cosa del navbar </i>
+
+          https://icons.getbootstrap.com/
+
+          
+        </button>-->
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'productos-categoria-list' 1 %}">Procesadores</a>
           <div class="dropdown-divider"></div>
@@ -25,9 +30,13 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+    <form method="GET" action="/search" class="form-inline my-2 my-lg-0">
+
+      <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+      
     </form>
+
   </div>
 </nav>
