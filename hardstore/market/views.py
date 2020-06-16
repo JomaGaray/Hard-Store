@@ -1,9 +1,11 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpRequest
-from .models import Categoria,Producto,Orden,Cliente,Oferta,ImagenProducto
-from .forms import ProductoForm,CategoriaForm,ImagenForm
 from django.forms import inlineformset_factory
 from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView,DetailView
+from django.db.models import Q
+from .models import Categoria,Producto,Orden,Cliente,Oferta,ImagenProducto
+from .forms import ProductoForm,CategoriaForm,ImagenForm
+
 
 
 class index(TemplateView):
@@ -18,6 +20,17 @@ class index(TemplateView):
 		# traigo todas las categorias
 		context['categorias'] = Categoria.objects.all()
 		return context
+
+class SearchView(ListView):
+	model = Producto
+	template_name = 'producto_list.html'
+	context_object_name = 'productosList'
+	# pagination
+	def get_queryset(self):
+		query = self.request.GET.get('search')
+		resultado = Producto.objects.filter(nombre__icontains = query)
+
+		return resultado
 
 class ProductosCategoriaList(ListView):
     model = Producto
@@ -58,6 +71,7 @@ class ProductoCreate(CreateView):
 		return context 
 
 	def post(self,request): 
+		# Almacena el producto por más que los archivos cargados sean inválidos.
 		super().post(request)
 		ImagenFormset = inlineformset_factory(Producto, ImagenProducto, ImagenForm , extra = 2)
 		formset = ImagenFormset(request.POST or None, request.FILES or None, instance=self.object)
@@ -86,9 +100,9 @@ class ProductoUpdate(UpdateView):
 			return redirect('/')
 
 class ProductoDelete(DeleteView):
-		model = Producto
-		form_class = ProductoForm
-		success_url = '/'
+	model = Producto
+	form_class = ProductoForm
+	success_url = '/'
 
 
 class CategoriaCreate(CreateView):

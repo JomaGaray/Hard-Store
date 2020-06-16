@@ -55,9 +55,12 @@ class ImagenProducto(models.Model):
 
 class Oferta(models.Model):
 	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
-	descuento = models.FloatField(null=True) # que tipo de Field debe ser un descuento -----------------= ?????
+	descuento = models.FloatField(null=True) 
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	f_expira = models.DateTimeField(null=True)
+
+	def __str__(self):
+		return str(self.producto.id)
 
 	#def __str__(self):
 	#	return self.producto.nombre
