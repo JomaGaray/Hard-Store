@@ -23,22 +23,35 @@ class index(TemplateView):
 
 class SearchView(ListView):
 	model = Producto
-	template_name = 'producto_list.html'
+	template_name = 'market/producto_search_list.html'
 	context_object_name = 'productosList'
-	# pagination
-	def get_queryset(self):
-		query = self.request.GET.get('search')
-		resultado = Producto.objects.filter(nombre__icontains = query)
+	paginate_by = 8
+	def get(self,request,*args,**kwargs):
+		self.nombre = self.request.GET.get('nombre')
+		self.categoria = self.request.GET.get('categoria')
+		self.descripcion = self.request.GET.get('descripcion')
+		self.precio = self.request.GET.get('precio')
+		return super().get(request,*args,**kwargs)
 
+	def get_queryset(self):		
+		resultado = Producto.objects.all()
+		if self.nombre:
+			resultado = resultado.filter(nombre__icontains = self.nombre)
+		if self.categoria:
+			resultado = resultado.filter(categoria__nombre__icontains = self.categoria)
+		if self.descripcion:
+			resultado = resultado.filter(descripcion__icontains = self.descripcion)
+		if self.precio:
+			resultado = resultado.filter(precio__lte = self.precio)
 		return resultado
 
 class ProductosCategoriaList(ListView):
     model = Producto
+    template_name = 'market/producto_categoria_list.html'
     context_object_name = 'productosList'  # para el for
 
     def get_queryset(self):
-        self.pk_categoria = get_object_or_404(
-            Categoria, id=self.kwargs['pk_categoria'])
+        self.pk_categoria = get_object_or_404(Categoria, id=self.kwargs['pk_categoria'])
         return Producto.productos.categorias(self.pk_categoria)
 
 # https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO

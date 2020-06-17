@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% load static %} {% block estilo %}
+<link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
+
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    {% include 'market/productos.html'%}
+  </div>
+</div>
+
+<!--{*{}*} para datos dinamicos
+    {*% %*} para logica dinamica-->
+{% endblock %}

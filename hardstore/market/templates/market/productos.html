@@ -1,15 +1,9 @@
-{% extends "base.html" %} {% load static %} {% block estilo %}
-<link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
-
-{% endblock %} {% block content %}
-<div class="container">
-  <div class="row">
-    {% for producto in productosList %}
+{% for producto in productosList %}
     <div class="col-sm-12 col-md-6 col-lg-3">
       <div class="product-grid">
         <div class="product-image">
           <a href="#">
-            <img class="pic-1" src="{{producto.imagen.url}}" /> <!-- esto tiene que ser dinamico-->
+            <img class="pic-1" src="{{imagenes.0.url}}" /> <!-- esto tiene que ser dinamico-->
           </a>
           <span class="product-trend-label">{{producto.categoria}}</span>
           <ul class="social">
@@ -34,9 +28,3 @@
       </div>
     </div>
     {% endfor %}
-  </div>
-</div>
-
-<!--{*{}*} para datos dinamicos
-    {*% %*} para logica dinamica-->
-{% endblock %}
