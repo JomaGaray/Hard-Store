@@ -1,30 +1,3 @@
 {% for producto in productosList %}
-    <div class="col-sm-12 col-md-6 col-lg-3">
-      <div class="product-grid">
-        <div class="product-image">
-          <a href="#">
-            <img class="pic-1" src="{{imagenes.0.url}}" /> <!-- esto tiene que ser dinamico-->
-          </a>
-          <span class="product-trend-label">{{producto.categoria}}</span>
-          <ul class="social">
-            <li>
-              <a href="#" data-tip="Add to Cart"  
-                ><i class="fa fa-shopping-cart"></i
-              ></a>     <!--añadir al carrito, falta terminar-->
-            </li>
-            <li>
-              <a href="#" data-tip="Wishlist"><i class="fa fa-heart"></i></a> <!--darle me gusta, falta terminar-->
-            </li>
-            
-            <li>
-              <a href="{% url 'producto-detalle' producto.id %}" data-tip="Quick View"><i class="fa fa-search"></i></a> <!-- ver el producto-->
-            </li>
-          </ul>
-        </div>
-        <div class="product-content">
-          <h3 class="title"><a href="#">{{producto.nombre}}</a></h3>
-          <div class="price">{{producto.precio}}</div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
+  {% include 'market/producto_card.html' %}
+{% endfor %}
