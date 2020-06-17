@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpRequest
 from django.forms import inlineformset_factory
 from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView,DetailView
 from django.db.models import Q
-from .models import Categoria,Producto,Orden,Cliente,Oferta,ImagenProducto
+from .models import Categoria,Producto,Orden,Oferta,ImagenProducto
 from .forms import ProductoForm,CategoriaForm,ImagenForm
 
 

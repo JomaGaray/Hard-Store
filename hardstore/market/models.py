@@ -32,15 +32,14 @@ class ProductoManager(models.Manager):
 
 
 class Producto(models.Model):
-    nombre = models.CharField(max_length=200, null=True)
-    descripcion = models.CharField(max_length=200, null=True, blank=True)
-    precio = models.FloatField(null=True)
-    f_creacion = models.DateTimeField(auto_now_add=True, null=True)
-    categoria = models.ForeignKey(
-        Categoria, null=True, on_delete=models.SET_NULL)
+	nombre = models.CharField(max_length=200, null=True)
+	descripcion = models.CharField(max_length=200, null=True, blank=True)
+	precio = models.FloatField(null=True)
+	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
+	categoria = models.ForeignKey( Categoria, null=True, on_delete=models.SET_NULL)
 
 	objects = models.Manager() # manager default
- 
+
 	productos = ProductoManager() # un manager personalizado
 
 	def __str__(self):
@@ -72,7 +71,7 @@ class Favorito(models.Model):
 
 	producto = models.ForeignKey(Producto, null=True, on_delete = models.CASCADE)
 
-	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
+	usuario = models.ForeignKey(UserProfile, null=True, on_delete = models.CASCADE)
 
 
 ####	MODELOS DE ORDEN 	#### 
@@ -87,7 +86,7 @@ class Orden(models.Model):
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	
 	#referencia a Cliente
-	cliente = models.ForeignKey(Cliente, null=True, on_delete = models.CASCADE)
+	usuario = models.ForeignKey(UserProfile, null=True, on_delete = models.CASCADE)
 
 ####	MODELOS DE ITEM VENDIDO 	#### 
 

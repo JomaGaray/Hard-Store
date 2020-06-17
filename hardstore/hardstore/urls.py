@@ -29,8 +29,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', user_views.UserSignUpView.as_view(), name='signup'),
     # path('', include('market.urls')), manera menos directa -Joma
-    path('login/', user_views.VistaLogin.as_view(), name='login'),
-    path('signup/', user_views.VistaSignup.as_view(), name='signup'),
+    #path('login/', user_views.VistaLogin.as_view(), name='login'),
+    #path('signup/', user_views.VistaSignup.as_view(), name='signup'),
 
     path('search/', market_views.SearchView.as_view(), name='search'),
   
