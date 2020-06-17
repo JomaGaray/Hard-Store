@@ -65,6 +65,11 @@ class ProductoDetail(DetailView):
 		pk_producto = self.kwargs.get("pk_producto")
 		return get_object_or_404(Producto,id=pk_producto)
 
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context['imagenes'] = ImagenProducto.objects.filter(producto = self.object)
+		return context
+
 
 #################### VISTAS CRUD PRODUCTO-IMAGENES ########################
 
