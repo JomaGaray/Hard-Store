@@ -3,10 +3,13 @@ from django.views.generic import View, ListView, TemplateView
 from django.contrib.auth import authenticate, login, logout  # para la autenticacion
 
 from django.contrib.auth.views import LoginView, LogoutView
-from .models import UserProfile
-from .forms import UserForm
+from .models import UserProfile, AdminProfile
+
+from .forms import UserForm, AdminForm
 
 from django.views.generic.edit import CreateView
+# PARA LOS PERMISOS
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 #from django.contrib.auth.forms import UserCreationForm
 # https://docs.djangoproject.com/en/3.0/topics/auth/ AUTENTICACION EN DJANGO
@@ -20,6 +23,23 @@ class UserSignUpView(CreateView):
     model = UserProfile
     form_class = UserForm
     template_name = 'signUp.html'
+
+    def form_valid(self, form):
+        form.save()
+        usuario = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        usuario = authenticate(username=usuario, password=password)
+        login(self.request, usuario)
+        return redirect('/')
+
+
+class AdminSignUpView(UserPassesTestMixin, CreateView):
+    model = AdminProfile
+    form_class = AdminForm
+    template_name = 'signUp.html'
+
+    def test_func(self):
+        return self.request.user.is_staff
 
     def form_valid(self, form):
         form.save()
