@@ -1,28 +1,38 @@
 {% extends 'base.html' %}
+
 {% load static %}
-{% block estilo %}{% endblock %}
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block estilo %}
+{% endblock %}
+
 {% block content %}
 
-<div class="container" style="background-color: white">
-	<div class="row">
+<div class="container" >
+	<div class="row mt-4 text-center" >
 		<div class="col-12">
-			<h1 class="brand">Producto</h1>
+			<h1 class="brand" style="color:white">Agregar producto</h1>
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="formulario">
-			<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
-			{% csrf_token %}
-			{{ form.as_p }}
-			{{ imagenes.as_p }}
-			<input type="submit" name="Submit">
-
-			</form>
+	<div class="row justify-content-center">
+		<div class="col-7">
+			<div class="card ml-4 mt-4 mb-4" style="background-color: white">
+				<div class="card-body">
+					<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
+					{% csrf_token %}
+					{{ form|crispy }}
+					{{ imagenes.as_p }}
+					<button type="submit" class='btn btn-primary' name="Submit">Guardar</button>
+					</form>
+				</div>
+			</div>
 		</div>
-	</div>
 	</div>
 </div>
+
 
 
 {% endblock %}

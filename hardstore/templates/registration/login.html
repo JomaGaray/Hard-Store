@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {%load static%}
+
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+
 {% block estilo %}
 <link rel="stylesheet" href="{% static 'signup.css' %}" />
 {% endblock %}
@@ -18,25 +24,30 @@
 {% endif %}
 {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-
-    <div>
-        <td>{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td>
+<div class="container" >
+    <div class="row mt-4 text-center" >
+        <div class="col-12">
+            <h1 class="brand" style="color:white">Log-in</h1>
+        </div>
     </div>
-    <div>
-        <td>{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td>
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+                <div class="card-body">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <button type="submit" class='btn btn-primary' name="Submit">Login</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                        <a href="{% url 'password_reset' %}" class="ml-4">Olvidaste la Contraseña?</a> 
+                        <a href="{% url 'signup' %}" class="ml-4">No estas Registrado?</a>
+                    </form>
+                   
+              </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div>
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </div>
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Olvidaste la Contraseña?</a></p>
-<p><a href="{% url 'signup' %}">No estas Registrado?</a></p>
 {% endblock %}

@@ -1,34 +1,34 @@
-{% extends "base.html" %} {%load static%}
+{% extends "base.html" %}
 
-<head>
-  {% block estilo %}
+{%load static%}
 
-  <link rel="stylesheet" href="{% static 'signup.css' %}" />
-  {% endblock %}
-</head>
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
 
 {% block content %}
 
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <h1 class="brand"><span> HardStore </span>Register</h1>
+    <div class="col text-center">
+      <h1 class="brand" style="color: white">Sign-Up</h1>
     </div>
   </div>
 
-  <div class="registro">
-    <form method="POST" action="">
-      {% csrf_token %}
-      <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4">
-          {{ form.as_p }}
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-4">
-          <input class="btn btn_success" type="submit" value="Registrarse" />
-        </div>
-      </div>
-    </form>
-  </div>
+  <div class="row justify-content-center">
+          <div class="col-7">
+              <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+                  <div class="card-body">
+                    <form method="POST" action="">
+                      {% csrf_token %}
+                      {{ form|crispy }}
+                      <input class="btn btn-primary" type="submit" value="Registrarse" />
+                      
+                    </form>
+                  </div>
+              </div>
+          </div>
+  </div>        
 </div>
 
 <!--
