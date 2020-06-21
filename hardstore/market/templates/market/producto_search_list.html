@@ -47,7 +47,9 @@
 
 <div class="container">
   <div class="row">
-    {% include 'market/productos.html'%}
+    {% for producto in productosList %}
+      {% include 'market/producto_card.html' %}
+    {% endfor %}
   </div>
 </div>
 
