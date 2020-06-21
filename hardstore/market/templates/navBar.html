@@ -12,6 +12,16 @@
   
   <a class="navbar-brand" href="{% url 'home' %}" ><i class="fas fa-home" style="color:#1f2833"></i></a>
 
+  <span class="nav-link mr-auto" href="#" style="color: #1f2833;">{{request.user}}<i class="fas fa-user" style="color:#1f2833"></i></span>
+
+  <form method="GET" action="/search" class="form-inline">
+
+    <input class="form-control d-none d-lg-block" type="text" name="nombre" placeholder="Buscar..." aria-label="Search">
+    <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#1f2833"></i></button>
+    
+  </form>
+
+  <a class="navbar-brand" href="{% url 'carrito' %}" ><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-align-justify" style="color:#1f2833"></i>
@@ -19,14 +29,6 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-
-      <li class="nav-item active">
-        <span class="nav-link" href="#" style="color: #1f2833;">Hello, {{request.user}}</span>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#" style="color: #1f2833;">Sobre Nosotros <span class="sr-only">(current)</span></a>
-      </li>
       
       <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
@@ -45,13 +47,5 @@
         </div>
       </li>
     </ul>
-
-    <form method="GET" action="/search" class="form-inline my-2 my-lg-0">
-
-      <input class="form-control mr-sm-2" type="text" name="nombre" placeholder="Buscar..." aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-      
-    </form>
-
   </div>
 </nav>
