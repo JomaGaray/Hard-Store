@@ -53,18 +53,6 @@ class ImagenProducto(models.Model):
 	def __str__(self):
 		return str(self.producto.id)
 
-class Oferta(models.Model):
-	producto = models.ForeignKey(Producto, null=True, on_delete = models.SET_NULL)
-	descuento = models.FloatField(null=True) 
-	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
-	f_expira = models.DateTimeField(null=True)
-
-	def __str__(self):
-		return str(self.producto.id)
-
-	#def __str__(self):
-	#	return self.producto.nombre
-
 #####	MODELOS DE Favorito	 	####
 
 class Favorito(models.Model):
@@ -86,7 +74,7 @@ class Orden(models.Model):
 	f_creacion = models.DateTimeField(auto_now_add=True, null=True)
 	
 	#referencia a Cliente
-	usuario = models.ForeignKey(UserProfile, null=True, on_delete = models.CASCADE)
+	usuario = models.ForeignKey(UserProfile, null=True, on_delete = models.SET_NULL)
 
 ####	MODELOS DE ITEM VENDIDO 	#### 
 

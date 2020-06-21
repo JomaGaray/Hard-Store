@@ -3,10 +3,14 @@ from django.http import HttpResponse,HttpRequest
 from django.forms import inlineformset_factory
 from django.views.generic import View,ListView,TemplateView,CreateView,UpdateView,DeleteView,DetailView
 from django.db.models import Q
-from .models import Categoria,Producto,Orden,Oferta,ImagenProducto
+from .models import Categoria,Producto,Orden,ImagenProducto
 from .forms import ProductoForm,CategoriaForm,ImagenForm
 
 
+class CarritoView(TemplateView):
+	template_name = 'market/carrito.html'
+class CompraView(TemplateView):
+		template_name = 'market/compra_concretada.html'
 
 class index(TemplateView):
 	template_name = 'home.html'
@@ -14,7 +18,6 @@ class index(TemplateView):
 	def get_context_data(self,**kwargs):
 		context = super().get_context_data(**kwargs)
 		context['productos'] = Producto.objects.all()
-		context['ofertas'] = Oferta.objects.all()[:6]
 		context['destacados'] = Producto.objects.all()[:6]
 		context['titulo'] = 'home'
 		# traigo todas las categorias
