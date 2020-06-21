@@ -9,6 +9,7 @@ from .forms import ProductoForm,CategoriaForm,ImagenForm
 
 class CarritoView(TemplateView):
 	template_name = 'market/carrito.html'
+
 class CompraView(TemplateView):
 		template_name = 'market/compra_concretada.html'
 
@@ -17,10 +18,7 @@ class index(TemplateView):
 	
 	def get_context_data(self,**kwargs):
 		context = super().get_context_data(**kwargs)
-		context['productos'] = Producto.objects.all()
-		context['destacados'] = Producto.objects.all()[:6]
-		context['titulo'] = 'home'
-		# traigo todas las categorias
+		context['productos'] = Producto.objects.all()[:3]
 		context['categorias'] = Categoria.objects.all()
 		return context
 
@@ -28,7 +26,7 @@ class SearchView(ListView):
 	model = Producto
 	template_name = 'market/producto_search_list.html'
 	context_object_name = 'productosList'
-	paginate_by = 8
+	
 	def get(self,request,*args,**kwargs):
 		self.nombre = self.request.GET.get('nombre')
 		self.categoria = self.request.GET.get('categoria')
@@ -47,6 +45,8 @@ class SearchView(ListView):
 		if self.precio:
 			resultado = resultado.filter(precio__lte = self.precio)
 		return resultado
+
+
 
 class ProductosCategoriaList(ListView):
     model = Producto
