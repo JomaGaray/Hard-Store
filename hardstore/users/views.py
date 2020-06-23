@@ -1,24 +1,69 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View, ListView, TemplateView
 from django.contrib.auth import authenticate, login, logout  # para la autenticacion
-
-from django.contrib.auth.views import LoginView, LogoutView
-from .models import UserProfile, AdminProfile
-
-from .forms import UserForm, AdminForm
-
 from django.views.generic.edit import CreateView
-# PARA LOS PERMISOS
-from django.contrib.auth.mixins import UserPassesTestMixin
 
-#from django.contrib.auth.forms import UserCreationForm
+# permisos
+from django.contrib.auth.mixins import UserPassesTestMixin
+from .forms import CommonUserForm, ManagerUserForm, ExecutiveUserForm
+from .models import CustomUser
+
+# from django.contrib.auth.forms import UserCreationForm
 # https://docs.djangoproject.com/en/3.0/topics/auth/ AUTENTICACION EN DJANGO
 
-#from django.contrib import messages
 
-# vista para el registro de los Usuarios
+class CommonUserSignUpView(CreateView):
+    model = CustomUser
+    form_class = CommonUserForm
+    template_name = 'signUp.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'commonUser'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
 
 
+class ManagerUserSignUpView(UserPassesTestMixin, CreateView):
+    model = CustomUser
+    form_class = ManagerUserForm
+    template_name = 'signUp.html'
+
+    def test_func(self):
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'managerUser'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+
+class ExecutiveUserSignUpView(UserPassesTestMixin, CreateView):
+    model = CustomUser
+    form_class = ExecutiveUserForm
+    template_name = 'signUp.html'
+
+    def test_func(self):
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'executiveUser'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+
+"""
 class UserSignUpView(CreateView):
     model = UserProfile
     form_class = UserForm
@@ -49,7 +94,7 @@ class AdminSignUpView(UserPassesTestMixin, CreateView):
         login(self.request, usuario)
         return redirect('/')
 
-
+"""
 # Corey -
 #   https://www.youtube.com/watch?v=q4jPR-M0TAQ&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=6
 #   https://www.youtube.com/watch?v=3aVqWaLjqS4&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p&index=7
