@@ -27,7 +27,20 @@ urlpatterns = [
     path('', market_views.index.as_view(), name='home'),
 
     path('accounts/', include('django.contrib.auth.urls')),
-    path('signup/', user_views.UserSignUpView.as_view(), name='signup'),
+    # para el 'login_url' de las vistas, necesito hacer un url especifico, esto esta en la docu
+    path('accounts/login/', include('django.contrib.auth.urls'), name='login'),
+    #  path('accounts/login/<next>', include('django.contrib.auth.urls'), name='login'),
+
+
+
+    path('signup/CommonUser/',
+         user_views.CommonUserSignUpView.as_view(), name='signup'),
+    path('signup/ManagerUser/',
+         user_views.ManagerUserSignUpView.as_view(), name='signupManagerUser'),
+    path('signup/ExecutiveUser/',
+         user_views.ExecutiveUserSignUpView.as_view(), name='signupExecutiveUser'),
+
+
     # path('', include('market.urls')), manera menos directa -Joma
     #path('login/', user_views.VistaLogin.as_view(), name='login'),
     #path('signup/', user_views.VistaSignup.as_view(), name='signup'),
@@ -75,7 +88,7 @@ urlpatterns = [
 
 
     # crear admin, path de prueba
-    path('crearAdmin/', user_views.AdminSignUpView.as_view(), name='crear_Admin'),
+    #path('crearAdmin/', user_views.AdminSignUpView.as_view(), name='crear_Admin'),
 
 
 ]
