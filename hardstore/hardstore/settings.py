@@ -133,3 +133,6 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'  # pagina a la que redirige luego de loggearse
 LOGOUT_REDIRECT_URL = '/'  # pagina a la que redirige luego de hacer el logout
+
+# para que django no levante el User por defecto que ya viene y levant el que yo cree
+AUTH_USER_MODEL = "users.CustomUser"
