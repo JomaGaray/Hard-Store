@@ -1,4 +1,4 @@
-from .models import UserProfile, AdminProfile
+#from .models import UserProfile, AdminProfile
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
@@ -9,6 +9,8 @@ from django.dispatch import receiver
 
 # SIGNALS https://docs.djangoproject.com/en/3.0/topics/signals/#module-django.dispatch
 
+
+"""
 @receiver(post_save, sender=User)
 def create_Userprofile(sender, instance, created, **kwargs):
 
@@ -20,15 +22,15 @@ def create_Userprofile(sender, instance, created, **kwargs):
             UserProfile.objects.create(user=instance)
             print('UserProfile created')
 
-
+"""
 # forma de conectar el User con el profile
 # post_save.connect(create_profile, sender=User)
 
 # @receiver(post_save, sender=User)
 # def update_Userprofile(sender, instance, created, **kwargs):
 
- #   if created == False:
- #     UserProfile.save()
+#   if created == False:
+#     UserProfile.save()
 #      print('Userprofile updated')
 
 
