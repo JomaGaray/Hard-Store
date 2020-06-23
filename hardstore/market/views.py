@@ -6,11 +6,8 @@ from django.db.models import Q
 from .models import Categoria, Producto, Orden, Oferta, ImagenProducto
 from .forms import ProductoForm, CategoriaForm, ImagenForm
 
-# PARA PERMISOS
-from django.contrib.auth.decorators import permission_required
 # PARA PERMISOS EN VISTAS BASADAS EN CLASES
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.mixins import UserPassesTestMixin  # este es el que funciono
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 class index(TemplateView):
@@ -85,18 +82,17 @@ class ProductoDetail(DetailView):
         return context
 
 
-#################### VISTAS CRUD PRODUCTO-IMAGENES ########################
+#--------------ADMINISTRACION--------------#
 
-# ESTA VISTA DEBE SER IMPLEMENTADA SOLAMENTE PARA LOS ADMINISTRADORES
+class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    login_url = 'login'
 
-class ProductoCreate(UserPassesTestMixin, CreateView):
-    # permission_required = 'users.crear_producto'
     success_url = '/'
     model = Producto
     form_class = ProductoForm
 
     def test_func(self):
-        return self.request.user.is_staff
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -117,13 +113,14 @@ class ProductoCreate(UserPassesTestMixin, CreateView):
             formset.save()
 
 
-class ProductoUpdate(UserPassesTestMixin, UpdateView):
+class ProductoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    login_url = 'login'
     model = Producto
     form_class = ProductoForm
     success_url = '/'
 
     def test_func(self):
-        return self.request.user.is_staff
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,37 +141,41 @@ class ProductoUpdate(UserPassesTestMixin, UpdateView):
             return redirect('/')
 
 
-class ProductoDelete(UserPassesTestMixin, DeleteView):
+class ProductoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    login_url = 'login'
     model = Producto
     form_class = ProductoForm
     success_url = '/'
 
     def test_func(self):
-        return self.request.user.is_staff
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
 
 
-class CategoriaCreate(UserPassesTestMixin, CreateView):
+class CategoriaCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    login_url = 'login'
     model = Categoria
     form_class = CategoriaForm
     success_url = "/"
 
     def test_func(self):
-        return self.request.user.is_staff
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
 
 
-class CategoriaUpdate(UserPassesTestMixin, UpdateView):
+class CategoriaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    login_url = 'login'
     model = Categoria
     form_class = CategoriaForm
     success_url = "/"
 
     def test_func(self):
-        return self.request.user.is_staff
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
 
 
-class CategoriaDelete(UserPassesTestMixin, DeleteView):
+class CategoriaDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    login_url = 'login'
     model = Categoria
     form_class = CategoriaForm
     success_url = "/"
 
     def test_func(self):
-        return self.request.user.is_staff
+        return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
