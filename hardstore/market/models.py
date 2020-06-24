@@ -20,6 +20,8 @@ class ProductoQuerySet(models.QuerySet):
     def producto(self, pk_producto):
         return self.get(id=pk_producto)
 
+
+
 #### Manager personalizado para PRODUCTO ####
 
 
@@ -32,6 +34,11 @@ class ProductoManager(models.Manager):
 
     def producto(self, pk_producto):
         return self.get_queryset().producto(pk_producto)
+
+    def random(self):
+        return super(ProductoManager,self).get_queryset().order_by('?')
+
+
 
 
 class Producto(models.Model):

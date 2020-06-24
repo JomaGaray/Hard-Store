@@ -22,7 +22,7 @@ class index(TemplateView):
         context = super().get_context_data(**kwargs)
 
         if(Producto.objects.count()>=3):
-            context['productos'] = Producto.objects.all()[:3]
+            context['productos'] = Producto.productos.random()[:3]
             context['hayProductos'] = True
         else:
             context['hayProductos'] = False
