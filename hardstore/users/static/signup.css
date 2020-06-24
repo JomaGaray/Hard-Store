@@ -19,6 +19,7 @@ body {
 .registro {
   background-color: white;
   padding: 1em;
+
 }
 
 .registro form label {
@@ -26,7 +27,7 @@ body {
 }
 
 .registro form input {
-  width: 70%;
+  width: 40%;
   padding: 0.5em;
   border: 2px solid #c9e6ff;
 }
