@@ -1,28 +1,68 @@
-{% extends 'base.html' %} {% load static %} {% block estilo %}
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block estilo %}
 <link rel="stylesheet" href="{% static 'producto.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 <div class="container" style="background-color: white">
-  <div class="row">
-    <div class="col-md-5">
-      <img src="{{imagenes.0.imagen.url}}" alt="" />
-    </div>
+  <div class="row ">
     <div class="col-md-7">
-      <!-- me imprime todo-->
-      
-      <p class="categoria text-center">{{ producto.categoria }}</p>
-      <h2>{{ producto.nombre }}</h2>
-      <p class="price">{{ producto.precio }}</p>
-      <p><b>Stock:</b> En Stock</p>
-      <p><b>Condition:</b>Nuevo</p>
-      <p><b>Marca:</b>{{ producto.marca }}</p>
-      <p>{{ producto.descripcion }}</p>
-      <label>Cantidad</label>
-      <input type="text" value="1" />
-      <button type="button" class="btnb btn-default carrito">
-        Agregar al Carrito
-      </button>
+      <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+        <div class="card-body">
+          <p class="categoria text-center">{{ producto.categoria }}</p>
+          <h2>{{ producto.nombre }}</h2>
+          <b>Precio:</b>
+          <p class="price">${{ producto.precio }}</p>
+          <p><b>Stock:</b> En Stock</p>
+          <p><b>Condition: </b>Nuevo</p>
+          <p><b>Marca:</b>{{ producto.marca }}</p>
+          <label>Cantidad</label>
+          <input type="text" value="1" />
+          <button type="button" class="btn btn-primary">
+            Agregar al Carrito
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="col-md-5 text-center">
+      <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+        <div class="card-body">
+
+
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            
+            <div class="carousel-inner">
+
+              {% for imag in imagenes %}
+                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                  <img src="{{ imag.imagen.url }}" class="img-fluid" alt="imagen-producto" style="margin-top:10%" />
+                </div>
+            
+              {% endfor %}
+      
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+        <div class="card-body text-left">
+          <h1 class="brand">Descripción</h1>
+          <p>{{ producto.descripcion }}</p>
+        </div>
+      </div>
+    </div>
 </div>
 
 {% endblock %}

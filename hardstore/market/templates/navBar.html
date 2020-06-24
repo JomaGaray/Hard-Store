@@ -1,57 +1,69 @@
-<style>
-  .helloMSG {
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    margin-left: 800px;
-    margin-top: auto;
-  }
-</style>
-
 <nav class="navbar navbar-expand-lg">
+  <div class="container-fluid justify-content-between">
+    
 
-  <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-home" style="color:#1f2833"></i></a>
+      <!-- HOME -->
+      
+        <a class="navbar-brand" href="{% url 'home' %}" ><i class="fas fa-home" style="color:#1f2833"></i></a>
+     
 
+      
+        <!-- DROPDOWN DE CATEGORIAS -->
+        <div class="row ">
+          <div class="nav-item dropdown">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-align-justify" style="color:#1f2833"></i>
-  </button>
+            <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="categoriasDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'productos-categoria-list' 1 %}">Procesadores</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'productos-categoria-list' 2 %}">Placas Graficas</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'productos-categoria-list' 3 %}">MotherBoard</a>
+            </div>
 
+          </div>
 
-      {% if user.is_authenticated %}
-      <li class="nav-item active">
-        <span class="nav-link" href="#" style="color: #1f2833;">Hello, {{request.user}}</span>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}" style="color: #1f2833;">LogOut</a>
-      </li>
-      {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
-      </li>
-      {% endif %}
+          <!-- BARRA DE BUSQUEDA -->
+          <form method="GET" action="/search" class="form-inline ml-4">
 
-
-      <li class="nav-item">
-        <a class="nav-link" href="#" style="color: #1f2833;">Sobre Nosotros <span class="sr-only">(current)</span></a>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'productos-categoria-list' 1 %}">Procesadores</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'productos-categoria-list' 2 %}">Placas Graficas</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'productos-categoria-list' 3 %}">MotherBoard</a>
+            <input class="form-control d-none d-lg-block" type="text" name="nombre" placeholder="Buscar..." aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#1f2833"></i></button>
+            
+          </form>
         </div>
-      </li>
+      
 
+        <div class="row">
+          <!-- CARRITO -->
+          <a class="navbar-brand" href="{% url 'carrito' %}" ><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
+        
+
+        
+          <!-- USUARIO LOGEADO -->
+          {% if user.is_authenticated %}
+
+
+          <!-- DROPDOWN DE USUARIO -->
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown" style="color: #1f2833;">{{request.user}}
+            <i class="fas fa-user" style="color:#1f2833"></i></a>
+                
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+
+              <div class="dropdown-divider"></div>
+              <a class="nav-link" href="{% url 'logout' %}" style="color: #1f2833;">LogOut</a>
+              <div class="dropdown-divider"></div>
+              <a class="nav-link" href="#" style="color: #1f2833;">Configuracion</a>
+              <div class="dropdown-divider"></div>
+              
+            </div>
+          </div>
+          {% else %}
+            <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
+          {% endif %}
+        </div>
+     
       {% if user.is_managerUser or user.is_executiveUser  %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
@@ -77,16 +89,6 @@
       </li>
       {% endif %}
 
+    </div>
 
-    </ul>
-
-
-    <form method="GET" action="/search" class="form-inline my-2 my-lg-0">
-
-      <input class="form-control mr-sm-2" type="text" name="nombre" placeholder="Buscar..." aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-
-    </form>
-
-  </div>
 </nav>

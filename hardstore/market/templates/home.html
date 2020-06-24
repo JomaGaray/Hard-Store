@@ -4,26 +4,6 @@
 <!--aca van la barra de navegacioin -Joma-->
 {% block content %}
 
-    <!-- PRODUCTOS EN OFERTA CARRUSEL -->
-    <div class="container-fluid" > <!--En width = 991px a mas chico empieza a mostrarse mal  - Agus -->
-      <div class="row justify-content-center" style="margin-top:80px;">
-        <div class="col-10 text-center rounded" style="background-color: #1f2833">
-              <h3 style="color: #66fcf1">Ofertas</h3>
-        </div>
-      </div>
-      <div class="row justify-content-center" style="margin-top: 50px">
-        <div class="col-10 ">  
-
-          <!-- include 'carousel_ofertas.html' -->
-
-        </div>
-
-        
-      </div>
-      <!--termina elemento carousel-->
-    </div>
-    <!--  TERMINA PRODUCTOS EN OFERTA CARRUSEL -->
-
     <!-- PRODUCTOS DESTACADOS CARRUSEL -->
     <div class="container-fluid" >
       <div class="row justify-content-center" style="margin-top:80px;">
@@ -31,14 +11,14 @@
               <h3 style="color: #66fcf1">Destacados</h3>
         </div>
       </div>
-      <div class="row justify-content-center" style="margin-top: 50px">
-        <div class="col-10 ">    
+      <div class="row justify-content-center mt-4" >
+        <div class="col-10" >    
 
-         <!--include 'carousel_destacados.html' -->
+         {% include 'market/carousel_destacados.html' %}
 
         </div>
 
-      </div> <!-- Sliders del carrusel -->
+      </div>
     </div>
     <!-- TERMINA PRODUCTOS EN OFERTA CARRUSEL -->
 

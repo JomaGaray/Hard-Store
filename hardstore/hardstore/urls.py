@@ -41,6 +41,8 @@ urlpatterns = [
 
     # Busqueda de productos
     path('search/', market_views.SearchView.as_view(), name='search'),
+    path('carrito/', market_views.CarritoView.as_view(), name='carrito'),
+    path('compra_concretada/', market_views.CompraView.as_view(), name='compra_concretada'),
     path('producto/<int:pk_producto>/',
          market_views.ProductoDetail.as_view(), name='producto-detalle'),
     path('productos_categoria/<int:pk_categoria>',

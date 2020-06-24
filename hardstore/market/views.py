@@ -3,15 +3,26 @@ from django.http import HttpResponse, HttpRequest
 from django.forms import inlineformset_factory
 from django.views.generic import View, ListView, TemplateView, CreateView, UpdateView, DeleteView, DetailView
 from django.db.models import Q
-from .models import Categoria, Producto, Orden, Oferta, ImagenProducto
-from .forms import ProductoForm, CategoriaForm, ImagenForm
+from .models import Categoria,Producto,Orden,ImagenProducto
+from .forms import ProductoForm,CategoriaForm,ImagenForm
 
 # PARA PERMISOS EN VISTAS BASADAS EN CLASES
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
+class CarritoView(TemplateView):
+	template_name = 'market/carrito.html'
+
+class CompraView(TemplateView):
+		template_name = 'market/compra_concretada.html'
 
 class index(TemplateView):
-    template_name = 'home.html'
+	template_name = 'home.html'
+	
+	def get_context_data(self,**kwargs):
+		context = super().get_context_data(**kwargs)
+		context['productos'] = Producto.objects.all()[:3]
+		context['categorias'] = Categoria.objects.all()
+		return context
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,18 +36,20 @@ class index(TemplateView):
 
 
 class SearchView(ListView):
+	def get(self,request,*args,**kwargs):
+		self.nombre = self.request.GET.get('nombre')
+		self.categoria = self.request.GET.get('categoria')
+		self.descripcion = self.request.GET.get('descripcion')
+		self.precio = self.request.GET.get('precio')
+		return super().get(request,*args,**kwargs)
 
     model = Producto
     template_name = 'market/producto_search_list.html'
     context_object_name = 'productosList'
     paginate_by = 8
 
-    def get(self, request, *args, **kwargs):
-        self.nombre = self.request.GET.get('nombre')
-        self.categoria = self.request.GET.get('categoria')
-        self.descripcion = self.request.GET.get('descripcion')
-        self.precio = self.request.GET.get('precio')
-        return super().get(request, *args, **kwargs)
+
+
 
     def get_queryset(self):
         resultado = Producto.objects.all()

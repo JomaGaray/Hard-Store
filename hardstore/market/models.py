@@ -49,29 +49,14 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
-#### 	Modelo Imagen	 ####
-
-
+	def imagenes(self):
+		return ImagenProducto.objects.filter(producto=self)
 class ImagenProducto(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     imagen = models.ImageField(default='default.jpg')
 
     def __str__(self):
         return str(self.producto.id)
-
-
-class Oferta(models.Model):
-    producto = models.ForeignKey(
-        Producto, null=True, on_delete=models.SET_NULL)
-    descuento = models.FloatField(null=True)
-    f_creacion = models.DateTimeField(auto_now_add=True, null=True)
-    f_expira = models.DateTimeField(null=True)
-
-    def __str__(self):
-        return str(self.producto.id)
-
-    # def __str__(self):
-    #	return self.producto.nombre
 
 #####	MODELOS DE Favorito	 	####
 

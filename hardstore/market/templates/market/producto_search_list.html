@@ -2,42 +2,54 @@
 
 {% load static %} 
 
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
 {% block estilo %}
 <link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
 {% endblock %} 
 
 {% block content %}
 
-<div class="container-fluid" style="padding-left:5%;margin-top:5%;padding-right:5%;">
+<div class="container">
+
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 text-center">
         <h1 class="brand" style="color: white">Busqueda Avanzada</h1>
       </div>
     </div>
-    <div class="row justify-content-center" style="background-color:white;">
-      <div class="col-expand-lg justify-content-center" style="margin-top:20px;margin-bottom:20px">
-        <form method="GET" action="/search" class="form-inline my-2 my-lg-0" >
 
-          <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="Nombre del producto" aria-label="Search">
+    <div class="row" >
+      <div class="col" >
+        <div class="card justify-content-center mt-4 mb-4" style="background-color: white">
+          <div class="card-body">
+            <form method="GET" action="/search" class="form-inline my-2 my-lg-0" >
 
-          <select id="categorias" name="categoria" class="form-control mr-sm-2 mx-auto mx-md-2" >
-            <option value="" selected>Todas las categorias</option>
-            <option value="procesador">Procesador</option>
-            <option value="placas graficas">Placas graficas</option>
-            <option value="MotherBoard">MotherBoard</option>
-          </select>
+              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="Nombre del producto" aria-label="Search">
 
-          <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripcion" aria-label="Search">
-          <input class="form-control mr-sm-2 mx-auto mx-md-2" type="number" name="precio" placeholder="Precio máximo" aria-label="Search"> 
-          <button class="btn btn-secondary my-2 my-sm-0 mx-auto mx-md-2" type="submit">Buscar</button>
+              <select id="categorias" name="categoria" class="form-control mr-sm-2 mx-auto mx-md-2" >
+                <option value="" selected>Todas las categorias</option>
+                <option value="procesador">Procesador</option>
+                <option value="placas graficas">Placas graficas</option>
+                <option value="MotherBoard">MotherBoard</option>
+              </select>
 
-        </form>
+              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripcion" aria-label="Search">
+              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="number" name="precio" placeholder="Precio máximo" aria-label="Search"> 
+              <button class="btn btn-primary my-2 my-sm-0 mx-auto mx-md-2" type="submit">Buscar</button>
+
+            </form>
+          </div>
+        </div>
       </div>
     </div>
 </div>
+
 <div class="container">
   <div class="row">
-    {% include 'market/productos.html'%}
+    {% for producto in productosList %}
+      {% include 'market/producto_card.html' %}
+    {% endfor %}
   </div>
 </div>
 

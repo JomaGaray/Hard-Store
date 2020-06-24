@@ -1,82 +1,64 @@
-{% extends "base.html" %} {%load static%}
+{% extends "base.html" %}
 
-<head>
-  {% block estilo %}
+{%load static%}
 
-  <link rel="stylesheet" href="{% static 'signup.css' %}" />
-  {% endblock %}
-</head>
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
 
 {% block content %}
 
 <div class="container">
   <div class="row">
-    <div class="col-12">
-      <h1 class="brand"><span> HardStore </span>Register</h1>
+    <div class="col text-center">
+      <h1 class="brand" style="color: white">Sign-Up</h1>
     </div>
   </div>
 
-  <div class="registro">
-    <form method="POST" action="">
-      {% csrf_token %}
-      <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4">
-          {{ form.as_p }}
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-4">
-          <input class="btn btn_success" type="submit" value="Registrarse" />
-        </div>
-      </div>
-      <!--
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fas fa-user"></i></span>
-        </div>
-        <label for="username">Username</label>
-        <input type="text" name="username">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fas fa-user"></i></span>
-        </div>
-        <label for="first_name">First Name</label>
-        <input type="text" name="first_name">
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fas fa-user"></i></span>
-        </div>
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name">
-      </div>
-      <div class="input-group mb-2">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-        </div>
-        <label for="email">Email</label>
-        <input type="email" name="email">
-      </div>
-      <div class="input-group mb-2">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fas fa-key"></i></span>
-        </div>
-        <label for="password1">Password</label>
-        <input type="text" name="password1">
-      </div>
-      <div class="input-group mb-2">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fas fa-key"></i></span>
-        </div>
-        <label for="password2">Repeat Password</label>
-        <input type="text" name="password2">
-      </div>
-      
-      <div class="d-flex justify-content-center mt-3 login_container">
-        <input class="btn login_btn" type="submit" value="Register Account">
-      </div>
-    -->
-    </form>
-  </div>
+  <div class="row justify-content-center">
+          <div class="col-12 col-md-7">
+              <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+                  <div class="card-body">
+                    <form method="POST" action="">
+                      {% csrf_token %}
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.username|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.last_name|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-12 mb-0">
+                          {{ form.email|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.password1|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.password2|as_crispy_field }}
+                        </div>
+                      </div>
+                      
+                      <input class="btn btn-primary" type="submit" value="Registrarse" />
+                      
+                    </form>
+                  </div>
+              </div>
+          </div>
+  </div>        
 </div>
 
 <!--
