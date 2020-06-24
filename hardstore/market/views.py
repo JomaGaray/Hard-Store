@@ -24,31 +24,18 @@ class index(TemplateView):
 		context['categorias'] = Categoria.objects.all()
 		return context
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['productos'] = Producto.objects.all()
-        context['ofertas'] = Oferta.objects.all()[:6]
-        context['destacados'] = Producto.objects.all()[:6]
-        context['titulo'] = 'home'
-        # traigo todas las categorias
-        context['categorias'] = Categoria.objects.all()
-        return context
-
 
 class SearchView(ListView):
-	def get(self,request,*args,**kwargs):
-		self.nombre = self.request.GET.get('nombre')
-		self.categoria = self.request.GET.get('categoria')
-		self.descripcion = self.request.GET.get('descripcion')
-		self.precio = self.request.GET.get('precio')
-		return super().get(request,*args,**kwargs)
-
     model = Producto
     template_name = 'market/producto_search_list.html'
     context_object_name = 'productosList'
-    paginate_by = 8
 
-
+    def get(self,request,*args,**kwargs):
+        self.nombre = self.request.GET.get('nombre')
+        self.categoria = self.request.GET.get('categoria')
+        self.descripcion = self.request.GET.get('descripcion')
+        self.precio = self.request.GET.get('precio')
+        return super().get(request,*args,**kwargs)
 
 
     def get_queryset(self):

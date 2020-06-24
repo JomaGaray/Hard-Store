@@ -49,8 +49,9 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
 
-	def imagenes(self):
-		return ImagenProducto.objects.filter(producto=self)
+    def imagenes(self):
+    	return ImagenProducto.objects.filter(producto=self)
+        
 class ImagenProducto(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     imagen = models.ImageField(default='default.jpg')
