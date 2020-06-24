@@ -32,41 +32,32 @@ urlpatterns = [
     path('accounts/login/', include('django.contrib.auth.urls'), name='login'),
 
     # signUp de distintos Usuarios
-    path('signup/CommonUser/',
-         user_views.CommonUserSignUpView.as_view(), name='signup'),
-    path('signup/ManagerUser/',
-         user_views.ManagerUserSignUpView.as_view(), name='signupManagerUser'),
-    path('signup/ExecutiveUser/',
-         user_views.ExecutiveUserSignUpView.as_view(), name='signupExecutiveUser'),
+    path('signup/CommonUser/',user_views.CommonUserSignUpView.as_view(), name='signup'),
+
+    path('signup/ManagerUser/',user_views.ManagerUserSignUpView.as_view(), name='signupManagerUser'),
+
+    path('signup/ExecutiveUser/',user_views.ExecutiveUserSignUpView.as_view(), name='signupExecutiveUser'),
 
     # Busqueda de productos
     path('search/', market_views.SearchView.as_view(), name='search'),
     path('carrito/', market_views.CarritoView.as_view(), name='carrito'),
     path('compra_concretada/', market_views.CompraView.as_view(), name='compra_concretada'),
-    path('producto/<int:pk_producto>/',
-         market_views.ProductoDetail.as_view(), name='producto-detalle'),
-    path('productos_categoria/<int:pk_categoria>',
-         market_views.ProductosCategoriaList.as_view(), name='productos-categoria-list'),
+    path('producto/<int:pk_producto>/',market_views.ProductoDetail.as_view(), name='producto-detalle'),
+    path('productos_categoria/<int:pk_categoria>',market_views.ProductosCategoriaList.as_view(), name='productos-categoria-list'),
 
 
     # -------Administracion-------
-    path('crear_producto/', market_views.ProductoCreate.as_view(),
-         name='crear_producto'),
+    path('crear_producto/', market_views.ProductoCreate.as_view(),name='crear_producto'),
 
-    path('modificar_producto/<int:pk>/',
-         market_views.ProductoUpdate.as_view(), name='modificar_producto'),
+    path('modificar_producto/<int:pk>/',market_views.ProductoUpdate.as_view(), name='modificar_producto'),
 
-    path('eliminar_producto/<int:pk>/',
-         market_views.ProductoDelete.as_view(), name='eliminar_producto'),
+    path('eliminar_producto/<int:pk>/',market_views.ProductoDelete.as_view(), name='eliminar_producto'),
 
-    path('crear_categoria/', market_views.CategoriaCreate.as_view(),
-         name='crear_categoria'),
+    path('crear_categoria/', market_views.CategoriaCreate.as_view(),name='crear_categoria'),
 
-    path('modificar_categoria/<int:pk>/',
-         market_views.CategoriaUpdate.as_view(), name='modificar_categoria'),
+    path('modificar_categoria/<int:pk>/',market_views.CategoriaUpdate.as_view(), name='modificar_categoria'),
 
-    path('eliminar_categoria/<int:pk>/',
-         market_views.CategoriaDelete.as_view(), name='eliminar_categoria'),
+    path('eliminar_categoria/<int:pk>/',market_views.CategoriaDelete.as_view(), name='eliminar_categoria'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
