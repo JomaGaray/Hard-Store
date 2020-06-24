@@ -25,18 +25,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', market_views.index.as_view(), name='home'),
-
-    # autenticacion
-    path('accounts/', include('django.contrib.auth.urls')),
-    # para el 'login_url' de las vistas, necesito hacer un url especifico, esto esta en la docu
-    path('accounts/login/', include('django.contrib.auth.urls'), name='login'),
-
-    # signUp de distintos Usuarios
-    path('signup/CommonUser/',user_views.CommonUserSignUpView.as_view(), name='signup'),
-
-    path('signup/ManagerUser/',user_views.ManagerUserSignUpView.as_view(), name='signupManagerUser'),
-
-    path('signup/ExecutiveUser/',user_views.ExecutiveUserSignUpView.as_view(), name='signupExecutiveUser'),
+    path('', include('users.urls')),
+    
 
     # Busqueda de productos
     path('search/', market_views.SearchView.as_view(), name='search'),
