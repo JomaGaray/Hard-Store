@@ -14,12 +14,15 @@
 
             <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="categoriasDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
 
-            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'productos-categoria-list' 1 %}">Procesadores</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'productos-categoria-list' 2 %}">Placas Graficas</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'productos-categoria-list' 3 %}">MotherBoard</a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              {% if hayCategorias %}
+              {% for categoria in categorias %}
+                <a class="dropdown-item" href="{% url 'productos-categoria-list' categoria.id %}">{{categoria.nombre}}</a>
+                <div class="dropdown-divider"></div>
+              {% endfor %}
+              {% else %}
+                <a class="dropdown-item" href="#">No disponible</a>
+              {% endif %}
             </div>
 
           </div>
@@ -38,24 +41,26 @@
           <!-- CARRITO -->
           <a class="navbar-brand" href="{% url 'carrito' %}" ><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
           {% if user.is_managerUser or user.is_executiveUser %}
+          <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tools"></i></a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'signupManagerUser'  %}">crearAdmin</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'signupManagerUser'  %}">Crear Gerente</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}">crearEjecutivo</a>
+            <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}">Crear Gestor</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'crear_producto'  %}">CrearProd</a>
+            <a class="dropdown-item" href="{% url 'crear_producto'  %}">Añadir producto</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}">ModificarProd</a>
+            <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}">Modificar producto</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}">EliminarProd</a>
+            <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}">Eliminar producto</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'crear_categoria'  %}">CrearCat</a>
+            <a class="dropdown-item" href="{% url 'crear_categoria'  %}">Añadir categoria</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}">ModiCat</a>
+            <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}">Modificar categoria</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}">EliminarCat</a>
+            <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}">Eliminar categoria</a>
+          </div>
           </div>
           {% endif %}
           <!-- USUARIO LOGEADO -->

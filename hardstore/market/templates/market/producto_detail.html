@@ -37,7 +37,7 @@
             
             <div class="carousel-inner">
 
-              {% for imag in imagenes %}
+              {% for imag in producto.imagenes %}
                 <div class="carousel-item {% if forloop.first %} active {% endif %}">
                   <img src="{{ imag.imagen.url }}" class="img-fluid" alt="imagen-producto" style="margin-top:10%" />
                 </div>

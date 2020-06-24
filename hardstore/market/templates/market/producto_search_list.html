@@ -28,10 +28,14 @@
               <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="Nombre del producto" aria-label="Search">
 
               <select id="categorias" name="categoria" class="form-control mr-sm-2 mx-auto mx-md-2" >
-                <option value="" selected>Todas las categorias</option>
-                <option value="procesador">Procesador</option>
-                <option value="placas graficas">Placas graficas</option>
-                <option value="MotherBoard">MotherBoard</option>
+              {% if hayCategorias %}
+                <option value="" selected="">Todas las categorias</option>
+              {% for categoria in categorias %}
+                <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
+              {% endfor %}
+              {% else %}
+                <option value="" selected>No disponible</option>
+              {% endif %}
               </select>
 
               <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripcion" aria-label="Search">

@@ -16,13 +16,24 @@ class CompraView(TemplateView):
 		template_name = 'market/compra_concretada.html'
 
 class index(TemplateView):
-	template_name = 'home.html'
-	
-	def get_context_data(self,**kwargs):
-		context = super().get_context_data(**kwargs)
-		context['productos'] = Producto.objects.all()[:3]
-		context['categorias'] = Categoria.objects.all()
-		return context
+    template_name = 'home.html'
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if(Producto.objects.count()>=3):
+            context['productos'] = Producto.objects.all()[:3]
+            context['hayProductos'] = True
+        else:
+            context['hayProductos'] = False
+
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+
+        return context
 
 
 class SearchView(ListView):
@@ -52,6 +63,15 @@ class SearchView(ListView):
             resultado = resultado.filter(precio__lte=self.precio)
         return resultado
 
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
+
 
 class ProductosCategoriaList(ListView):
     model = Producto
@@ -62,6 +82,15 @@ class ProductosCategoriaList(ListView):
         self.pk_categoria = get_object_or_404(
             Categoria, id=self.kwargs['pk_categoria'])
         return Producto.productos.categorias(self.pk_categoria)
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
 
 # https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
@@ -77,8 +106,12 @@ class ProductoDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['imagenes'] = ImagenProducto.objects.filter(
-            producto=self.object)
+        
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
         return context
 
 
@@ -96,8 +129,7 @@ class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ImagenFormset = inlineformset_factory(
-            Producto, ImagenProducto, ImagenForm, extra=2)
+        ImagenFormset = inlineformset_factory( Producto, ImagenProducto, ImagenForm, extra=2)
         formset = ImagenFormset(queryset=ImagenProducto.objects.none())
         context['imagenes'] = formset
         return context
@@ -111,6 +143,7 @@ class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
                                 request.FILES or None, instance=self.object)
         if formset.is_valid():
             formset.save()
+            return redirect('/')
 
 
 class ProductoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
