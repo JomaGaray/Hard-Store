@@ -12,16 +12,15 @@
 {% block content %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Su usuario y/o contraseña no coinciden. Intente de nuevo.</p>
 {% endif %}
 
 {% if next %}
 {% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <p>Su usuario no cuenta con el permiso para acceder a este lugar. Para proseguir logee con una cuenta con permiso</p>
 {% else %}
 <div class="container" style="text-align: center; color: red;">
-    <h3>Please login to see this page.</h3>
+    <h3>Por favor, logea para acceder a este sitio</h3>
 </div>
 {% endif %}
 {% endif %}
