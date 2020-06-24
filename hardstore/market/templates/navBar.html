@@ -37,12 +37,29 @@
         <div class="row">
           <!-- CARRITO -->
           <a class="navbar-brand" href="{% url 'carrito' %}" ><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
-        
-
-        
+          {% if user.is_managerUser or user.is_executiveUser %}
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tools"></i></a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'signupManagerUser'  %}">crearAdmin</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}">crearEjecutivo</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'crear_producto'  %}">CrearProd</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}">ModificarProd</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}">EliminarProd</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'crear_categoria'  %}">CrearCat</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}">ModiCat</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}">EliminarCat</a>
+          </div>
+          {% endif %}
           <!-- USUARIO LOGEADO -->
           {% if user.is_authenticated %}
-
 
           <!-- DROPDOWN DE USUARIO -->
           <div class="nav-item dropdown">
@@ -54,40 +71,13 @@
               <div class="dropdown-divider"></div>
               <a class="nav-link" href="{% url 'logout' %}" style="color: #1f2833;">LogOut</a>
               <div class="dropdown-divider"></div>
-              <a class="nav-link" href="#" style="color: #1f2833;">Configuracion</a>
-              <div class="dropdown-divider"></div>
-              
+          
             </div>
           </div>
           {% else %}
             <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
           {% endif %}
         </div>
-     
-      {% if user.is_managerUser or user.is_executiveUser  %}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tools"></i></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'signupManagerUser'  %}">crearAdmin</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}">crearEjecutivo</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'crear_producto'  %}">CrearProd</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}">ModificarProd</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}">EliminarProd</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'crear_categoria'  %}">CrearCat</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}">ModiCat</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}">EliminarCat</a>
-        </div>
-      </li>
-      </li>
-      {% endif %}
 
     </div>
 
