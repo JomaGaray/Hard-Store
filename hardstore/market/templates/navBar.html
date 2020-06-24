@@ -1,89 +1,96 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid justify-content-between">
-    
 
-      <!-- HOME -->
-      
-        <a class="navbar-brand" href="{% url 'home' %}" ><i class="fas fa-home" style="color:#1f2833"></i></a>
-     
 
-      
-        <!-- DROPDOWN DE CATEGORIAS -->
-        <div class="row ">
-          <div class="nav-item dropdown">
+    <!-- HOME -->
 
-            <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="categoriasDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
+    <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-home" style="color:#1f2833"></i></a>
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: #0b0c10">
-              {% if hayCategorias %}
-              {% for categoria in categorias %}
-                <a class="dropdown-item" href="{% url 'productos-categoria-list' categoria.id %}" style="color:#66fcf1">{{categoria.nombre}}</a>
-                <div class="dropdown-divider"></div>
-              {% endfor %}
-              {% else %}
-                <a class="dropdown-item" href="#">No disponible</a>
-              {% endif %}
-            </div>
 
-          </div>
 
-          <!-- BARRA DE BUSQUEDA -->
-          <form method="GET" action="/search" class="form-inline ml-4">
+    <!-- DROPDOWN DE CATEGORIAS -->
+    <div class="row ">
+      <div class="nav-item dropdown">
 
-            <input class="form-control d-none d-lg-block" type="text" name="nombre" placeholder="Buscar..." aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#1f2833"></i></button>
-            
-          </form>
-        </div>
-      
+        <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="categoriasDropdown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
 
-        <div class="row">
-          <!-- CARRITO -->
-          <a class="navbar-brand" href="{% url 'carrito' %}" ><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
-          {% if user.is_managerUser or user.is_executiveUser %}
-          <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tools"></i></a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: #0b0c10">
-            <a class="dropdown-item" href="{% url 'signupManagerUser'  %}" style="color:#66fcf1">Crear Gerente</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}" style="color:#66fcf1">Crear Gestor</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'crear_producto'  %}" style="color:#66fcf1">Añadir producto</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}" style="color:#66fcf1">Modificar producto</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}" style="color:#66fcf1">Eliminar producto</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'crear_categoria'  %}" style="color:#66fcf1">Añadir categoria</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}" style="color:#66fcf1">Modificar categoria</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}" style="color:#66fcf1">Eliminar categoria</a>
-          </div>
-          </div>
-          {% endif %}
-          <!-- USUARIO LOGEADO -->
-          {% if user.is_authenticated %}
-
-          <!-- DROPDOWN DE USUARIO -->
-          <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown" style="color: #1f2833;">{{request.user}}
-            <i class="fas fa-user" style="color:#1f2833"></i></a>
-                
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="background-color: #0b0c10">
-
-              <div class="dropdown-divider"></div>
-              <a class="nav-link" href="{% url 'logout' %}" style="color:#66fcf1";>LogOut</a>
-              <div class="dropdown-divider"></div>
-          
-            </div>
-          </div>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+          style="background-color: #0b0c10">
+          {% if hayCategorias %}
+          {% for categoria in categorias %}
+          <a class="dropdown-item" href="{% url 'productos-categoria-list' categoria.id %}"
+            style="color:#66fcf1">{{categoria.nombre}}</a>
+          <div class="dropdown-divider"></div>
+          {% endfor %}
           {% else %}
-            <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
+          <a class="dropdown-item" href="#">No disponible</a>
           {% endif %}
         </div>
 
+      </div>
+
+      <!-- BARRA DE BUSQUEDA -->
+      <form method="GET" action="/search" class="form-inline ml-4">
+
+        <input class="form-control d-none d-lg-block" type="text" name="nombre" placeholder="Buscar..."
+          aria-label="Search">
+        <button class="btn my-2 my-sm-0" type="submit"><i class="fas fa-search" style="color:#1f2833"></i></button>
+
+      </form>
     </div>
+
+
+    <div class="row">
+      <!-- CARRITO -->
+      <a class="navbar-brand" href="{% url 'carrito' %}"><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
+      {% if user.is_managerUser or user.is_executiveUser %}
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tools"></i></a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+          style="background-color: #0b0c10">
+          <a class="dropdown-item" href="{% url 'signupManagerUser'  %}" style="color:#66fcf1">Crear Gestor</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}" style="color:#66fcf1">Crear Gerente</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'crear_producto'  %}" style="color:#66fcf1">Añadir producto</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}" style="color:#66fcf1">Modificar producto</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}" style="color:#66fcf1">Eliminar producto</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'crear_categoria'  %}" style="color:#66fcf1">Añadir categoria</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}" style="color:#66fcf1">Modificar
+            categoria</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}" style="color:#66fcf1">Eliminar categoria</a>
+        </div>
+      </div>
+      {% endif %}
+      <!-- USUARIO LOGEADO -->
+      {% if user.is_authenticated %}
+
+      <!-- DROPDOWN DE USUARIO -->
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-toggle="dropdown"
+          style="color: #1f2833;">{{request.user}}
+          <i class="fas fa-user" style="color:#1f2833"></i></a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="background-color: #0b0c10">
+
+          <div class="dropdown-divider"></div>
+          <a class="nav-link" href="{% url 'logout' %}" style="color:#66fcf1" ;>LogOut</a>
+          <div class="dropdown-divider"></div>
+
+        </div>
+      </div>
+      {% else %}
+      <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
+      {% endif %}
+    </div>
+
+  </div>
 
 </nav>
