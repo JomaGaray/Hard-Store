@@ -54,18 +54,9 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'signupExecutiveUser'  %}" style="color:#66fcf1">Crear Gerente</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'crear_producto'  %}" style="color:#66fcf1">Añadir producto</a>
+          <a class="dropdown-item" href="{% url 'modificar_producto' %}" style="color:#66fcf1">Manipular productos</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'modificar_producto' 2 %}" style="color:#66fcf1">Modificar producto</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'eliminar_producto' 3 %}" style="color:#66fcf1">Eliminar producto</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'crear_categoria'  %}" style="color:#66fcf1">Añadir categoria</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'modificar_categoria' 3 %}" style="color:#66fcf1">Modificar
-            categoria</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'eliminar_categoria' 3 %}" style="color:#66fcf1">Eliminar categoria</a>
+          <a class="dropdown-item" href="{% url 'modificar_categoria'  %}" style="color:#66fcf1">Manipular categorías</a>
         </div>
       </div>
       {% endif %}
@@ -81,13 +72,13 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="background-color: #0b0c10">
 
           <div class="dropdown-divider"></div>
-          <a class="nav-link" href="{% url 'logout' %}" style="color:#66fcf1" ;>LogOut</a>
+          <a class="nav-link" href="{% url 'logout' %}" style="color:#66fcf1" ;>Log-Out</a>
           <div class="dropdown-divider"></div>
 
         </div>
       </div>
       {% else %}
-      <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">LogIn</a>
+      <a class="nav-link" href="{% url 'login' %}" style="color: #1f2833;">Log-In</a>
       {% endif %}
     </div>
 

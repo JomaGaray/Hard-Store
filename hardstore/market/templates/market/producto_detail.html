@@ -59,7 +59,11 @@
       <div class="card ml-4 mt-4 mb-4" style="background-color: white">
         <div class="card-body text-left">
           <h1 class="brand">Descripción</h1>
-          <p>{{ producto.descripcion }}</p>
+          {% if producto.descripcion %}
+            <p>{{ producto.descripcion }}</p>
+          {% else %}
+            <p>No hay descripción</p>
+          {% endif %}
         </div>
       </div>
     </div>

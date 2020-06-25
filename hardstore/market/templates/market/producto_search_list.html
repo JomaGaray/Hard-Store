@@ -14,22 +14,22 @@
 <div class="container">
 
     <div class="row">
-      <div class="col-12 text-center">
-        <h1 class="brand" style="color: white">Busqueda Avanzada</h1>
+      <div class="col-12 text-center mt-4">
+        <h1 class="brand" style="color: #66fcf1">Búsqueda Avanzada</h1>
       </div>
     </div>
 
     <div class="row" >
       <div class="col" >
-        <div class="card justify-content-center mt-4 mb-4" style="background-color: white">
-          <div class="card-body">
+        <div class="card justify-content-center mt-4 mb-4" style="background-color: #45a29e;">
+          <div class="card-body " >
             <form method="GET" action="/search" class="form-inline my-2 my-lg-0" >
 
               <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="Nombre del producto" aria-label="Search">
 
               <select id="categorias" name="categoria" class="form-control mr-sm-2 mx-auto mx-md-2" >
               {% if hayCategorias %}
-                <option value="" selected="">Todas las categorias</option>
+                <option value="" selected="">Todas las categorías</option>
               {% for categoria in categorias %}
                 <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
               {% endfor %}
@@ -38,7 +38,7 @@
               {% endif %}
               </select>
 
-              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripcion" aria-label="Search">
+              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripción" aria-label="Search">
               <input class="form-control mr-sm-2 mx-auto mx-md-2" type="number" name="precio" placeholder="Precio máximo" aria-label="Search"> 
               <button class="btn btn-primary my-2 my-sm-0 mx-auto mx-md-2" type="submit">Buscar</button>
 
@@ -55,6 +55,36 @@
       {% include 'market/producto_card.html' %}
     {% endfor %}
   </div>
+  {% if is_paginated %}
+
+  <div class="row justify-content-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page=1">Primera</a></li>  
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>  
+        {% endif %}
+
+        {% for page in page_obj.paginator.page_range %}
+
+          {% if page_obj.number == page %}
+            <li class="page-item "><a class="btn btn-primary" href="?page={{ page }}">{{page}}</a></li>
+          {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %}
+            <li class="page-item"><a class="page-link btn btn-outline-primary" href="?page={{ page }}">{{page}}</a></li>
+          {% endif %}
+          
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>  
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Último</a></li>  
+        {% endif %}
+
+      </ul>
+    </nav>
+  </div>
+
+  {% endif %}
 </div>
 
 <!--{*{}*} para datos dinamicos

@@ -3,6 +3,9 @@
 
 {% endblock %} {% block content %}
 <div class="container">
+  <div class="row justify-content-center mt-4">
+  	<h1 class="brand" style="color: #66fcf1">{{ productosList.first.categoria}} </h1>
+  </div>
   <div class="row">
     {% for producto in productosList %}
       {% include 'market/producto_card.html' %}

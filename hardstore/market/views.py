@@ -40,6 +40,7 @@ class SearchView(ListView):
     model = Producto
     template_name = 'market/producto_search_list.html'
     context_object_name = 'productosList'
+    paginate_by = 8
 
     def get(self,request,*args,**kwargs):
         self.nombre = self.request.GET.get('nombre')
@@ -72,30 +73,6 @@ class SearchView(ListView):
             context['hayCategorias'] = False
         return context
 
-
-class ProductosCategoriaList(ListView):
-    model = Producto
-    template_name = 'market/producto_categoria_list.html'
-    context_object_name = 'productosList'  # para el for
-
-    def get_queryset(self):
-        self.pk_categoria = get_object_or_404(
-            Categoria, id=self.kwargs['pk_categoria'])
-        return Producto.productos.categorias(self.pk_categoria)
-
-    def get_context_data(self,**kwargs):
-        context = super().get_context_data(**kwargs)
-        if(Categoria.objects.count()>0):
-            context['categorias'] = Categoria.objects.all()
-            context['hayCategorias'] = True
-        else:
-            context['hayCategorias'] = False
-        return context
-
-# https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
-# https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
-
-
 class ProductoDetail(DetailView):
 
     model = Producto
@@ -114,6 +91,63 @@ class ProductoDetail(DetailView):
             context['hayCategorias'] = False
         return context
 
+
+class ProductosCategoriaList(ListView):
+    model = Producto
+    template_name = 'market/producto_categoria_list.html'
+    context_object_name = 'productosList'  # para el for
+
+    def get_queryset(self):
+        if(self.kwargs):
+            self.pk_categoria = get_object_or_404(Categoria, id=self.kwargs['pk_categoria'])
+            return Producto.productos.categorias(self.pk_categoria)
+        else:
+            return Producto.objects.all()
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
+
+class ProductosList(ListView):
+    model = Producto
+    template_name = 'market/producto_list.html'
+    context_object_name = 'productosList'  # para el for
+
+    def get_queryset(self):
+        return Producto.objects.all()
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
+# https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
+# https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
+
+class CategoriasList(ListView):
+    model = Categoria
+    template_name = 'market/categoria_list.html'
+    context_object_name = 'categoriasList' 
+
+    def get_queryset(self):
+        return Categoria.objects.all()
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
 
 #--------------ADMINISTRACION--------------#
 
@@ -143,7 +177,7 @@ class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
                                 request.FILES or None, instance=self.object)
         if formset.is_valid():
             formset.save()
-            return redirect('/')
+            return redirect('../modificar_producto/')
 
 
 class ProductoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -171,14 +205,14 @@ class ProductoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
                                 request.FILES or None, instance=self.object)
         if formset.is_valid():
             formset.save()
-            return redirect('/')
+            return redirect('../')
 
 
 class ProductoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = 'login'
     model = Producto
     form_class = ProductoForm
-    success_url = '/'
+    success_url = '../../modificar_producto/'
 
     def test_func(self):
         return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
@@ -193,12 +227,20 @@ class CategoriaCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
         return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
 
+    def post(self, request, **kwargs):
+        super().post(request, **kwargs)
+        return redirect('../modificar_categoria/')
+
 
 class CategoriaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = 'login'
     model = Categoria
     form_class = CategoriaForm
     success_url = "/"
+
+    def post(self, request, **kwargs):
+        super().post(request, **kwargs)
+        return redirect('../')
 
     def test_func(self):
         return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
@@ -208,7 +250,7 @@ class CategoriaDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = 'login'
     model = Categoria
     form_class = CategoriaForm
-    success_url = "/"
+    success_url = "../../modificar_categoria/"
 
     def test_func(self):
         return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
