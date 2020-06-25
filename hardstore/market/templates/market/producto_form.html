@@ -13,7 +13,7 @@
 <div class="container" >
 	<div class="row mt-4 text-center" >
 		<div class="col-12">
-			<h1 class="brand" style="color:white">Agregar producto</h1>
+			<h1 class="brand" style="color:#66fcf1">Agregar producto</h1>
 		</div>
 	</div>
 
@@ -24,7 +24,12 @@
 					<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
 					{% csrf_token %}
 					{{ form|crispy }}
-					{{ imagenes.as_p }}
+					{% for img in imagenes %}
+					<br>
+					{{ img }}
+					{{ img.url }}
+					<br>
+					{% endfor%}
 					<button type="submit" class='btn btn-primary' name="Submit">Guardar</button>
 					</form>
 				</div>

@@ -1,32 +1,28 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% load crispy_forms_tags %}
-{% crispy form form.helper %}
-
-{% block content %}
-
-<div class="container" >
-	<div class="row mt-4 text-center" >
-		<div class="col-12">
-			<h1 class="brand" style="color:white">Eliminar categoria</h1>
-		</div>
-	</div>
-
-	<div class="row justify-content-center">
-		<div class="col-7">
-			<div class="card ml-4 mt-4 mb-4" style="background-color: white">
-				<div class="card-body">
-					<form action="{% url 'eliminar_categoria' categoria.id %}" class="post-form" method = 'POST'>
-						{% csrf_token %}
-						{{ form|crispy }}
-						{{ categoria }}
-						<button type="submit" class='btn btn-primary' name="Submit">Confirmar</button>
-						<a href="{% url 'home' %}" class="btn btn-danger">Cancelar</a>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="modal fade" id="myModal{{categoria.id}}" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header justify-contenr-center">
+        <h4 class="modal-title">Eliminar Categoría</h4>
+      </div>
+      <div class="modal-body text-center">
+      	<p>¿Seguro desea eliminar estre categoría?</p>
+        <form action="{% url 'eliminar_categoria' categoria.id %}"lass="post-form" method = 'POST'>
+        	{% csrf_token %}
+        	{{ categoria.nombre }}
+        	
+        	<br>
+        	<div class="modal-footer">
+        	  <button type="submit" class='btn btn-danger' name="Submit">Confirmar</button>
+        	  <a class='btn btn-primary' href="">Cancelar</a>
+        	</div>
+        	
+        </form>
+        
+      </div>
+      
+    </div>
+    
+  </div>
 </div>
-{% endblock %}

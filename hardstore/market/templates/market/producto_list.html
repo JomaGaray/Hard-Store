@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block estilo %}
+<link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+<div class="text-center mt-4"	><h1 style="color:#66fcf1">Productos</h1></div>
+<div class="container mt-4 mb-4" style="background-color: #45a29e;">
+  <div class="row mb-4">
+  	<div class="col-6 mt-4 ml-4">
+  		<a href="{% url 'crear_producto' %}" class="btn btn-primary mr-4"><i class="fas fa-edit"></i>Nuevo Producto</a> 
+  		<a href="{% url 'modificar_categoria' %}" class="btn btn-primary mr-4"><i class="fas fa-edit"></i>Ir a Categorias</a> 
+  	</div>
+  </div>
+  <div class="row">
+  	<table class="table table-hover table-bordered text-danger-center" style="background-color: white;">
+	      <tr class="text-center">
+	        <th>Nombre</th>
+	        <th>Descripción</th>
+	        <th>Precio</th>
+	        <th>Categoria</th>
+	        <th>Opciones</th>
+	      </tr>  
+      	{% for producto in productosList %}
+      	<tr> <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
+	      	<td>{{ producto.nombre }}</td>
+	      	<td>{{ producto.descripcion }}</td>
+	      	<td>{{ producto.precio }}</td>
+	      	<td>{{ producto.categoria }}</td>
+	        <td colspan="5" class="text-center">
+	        	<a href="{% url 'modificar_producto_x' producto.id %}" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a> 
+	        	<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal{{producto.id}}"><i class="fas fa-eye ml-2"></i>Eliminar</a>
+	        </td>
+	        <!-- Modal -->
+	        	{% include 'market/producto_confirm_delete.html' %}
+	    </tr>		        
+	    {% endfor %}
+	      
+    </table>
+    
+    
+  </div>
+  
+</div>
+
+<!--{*{}*} para datos dinamicos
+    {*% %*} para logica dinamica-->
+{% endblock %}
