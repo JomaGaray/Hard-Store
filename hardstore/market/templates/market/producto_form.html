@@ -24,12 +24,7 @@
 					<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
 					{% csrf_token %}
 					{{ form|crispy }}
-					{% for img in imagenes %}
-					<br>
-					{{ img }}
-					{{ img.url }}
-					<br>
-					{% endfor%}
+					{{ imagenes.as_p }}
 					<button type="submit" class='btn btn-primary' name="Submit">Guardar</button>
 					</form>
 				</div>
