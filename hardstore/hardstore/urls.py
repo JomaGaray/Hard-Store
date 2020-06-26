@@ -49,6 +49,9 @@ urlpatterns = [
          market_views.LikeProductList.as_view(), name='LikeList'),
 
 
+    # ----PRUEBA DE CARRITO FUNCION
+    path('addToCart/<int:pk_producto>/',
+         market_views.addToCart, name='añadir-carrito'),
 
 
 
