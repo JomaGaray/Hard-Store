@@ -3,12 +3,13 @@ from django.http import HttpResponse, HttpRequest
 from django.forms import inlineformset_factory
 from django.views.generic import View, ListView, TemplateView, CreateView, UpdateView, DeleteView, DetailView
 from django.db.models import Q
-from .models import Categoria,Producto,Orden,ImagenProducto
+
+from .models import Categoria,Producto,Orden,ImagenProducto,ItemVendido
 from .forms import ProductoForm,CategoriaForm,ImagenForm
 
 # PARA PERMISOS EN VISTAS BASADAS EN CLASES
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-
+from django.contrib.auth.decorators import login_required
 class CarritoView(TemplateView):
 	template_name = 'market/carrito.html'
 
@@ -148,6 +149,16 @@ class CategoriasList(ListView):
         else:
             context['hayCategorias'] = False
         return context
+
+@login_required
+def addToCart(request,pk_producto):
+    producto = Producto.objects.get(id = pk_producto)
+
+    orden, created = Orden.objects.get_or_create(usuario= request.user)
+
+    item = ItemVendido.objects.create(producto=producto,orden=orden)
+
+    return redirect('/')
 
 #--------------ADMINISTRACION--------------#
 
