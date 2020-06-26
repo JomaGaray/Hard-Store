@@ -1,16 +1,16 @@
-<div class="modal fade" id="myModal{{categoria.id}}" role="dialog">
+<div class="modal fade" id="myModal{{item.id}}" role="dialog">
   <div class="modal-dialog">
   
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header justify-contenr-center">
-        <h4 class="modal-title">Eliminar Categoría</h4>
+        <h4 class="modal-title">Eliminar Producto</h4>
       </div>
       <div class="modal-body text-center">
-      	<p>¿Seguro desea eliminar estre categoría?</p>
-        <form action="{% url 'eliminar_categoria' categoria.id %}" class="post-form" method = 'POST'>
+      	<p>¿Seguro desea eliminar estre producto del carrito?</p>
+        <form action="{% url 'eliminar-item' item.id %}" class="post-form" method = 'POST'>
         	{% csrf_token %}
-        	{{ categoria.nombre }}
+        	{{ item.producto.nombre }}
         	
         	<br>
         	<div class="modal-footer">

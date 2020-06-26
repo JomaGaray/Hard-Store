@@ -13,13 +13,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 
-class CarritoView(TemplateView):
-    template_name = 'market/carrito.html'
-
-
-class CompraView(TemplateView):
-    template_name = 'market/compra_concretada.html'
-
 
 class index(TemplateView):
     template_name = 'home.html'
@@ -189,16 +182,57 @@ class LikeProductList(LoginRequiredMixin, ListView):
             context['hayCategorias'] = False
         return context
 
+class ItemCreate(LoginRequiredMixin, View):
 
-@login_required
-def addToCart(request, pk_producto):
-    producto = Producto.objects.get(id=pk_producto)
+    login_url = 'login'
+    success_url = '/' 
 
-    orden, created = Orden.objects.get_or_create(usuario=request.user)
+    def get(self,request,**kwargs):
+        
+        producto = Producto.objects.get(id = kwargs['pk_producto'])
+        # tengo que traer la ultiama orden que haya creado el usuario, las anteriores se dan a entender
+        # que fueron confirmadas
+        orden, created = Orden.objects.get_or_create(estado='Pendiente',usuario= request.user)
+        item = ItemVendido.objects.create(producto=producto,orden=orden)
+        return redirect(reverse('carrito'))
 
-    item = ItemVendido.objects.create(producto=producto, orden=orden)
+class ItemDelete(LoginRequiredMixin, DeleteView):
+    login_url = 'login'
+    model = ItemVendido
+    success_url = "/"
 
-    return redirect('/')
+    def post(self,request,**kwargs):
+        super().post(request, **kwargs)
+        return redirect(reverse('carrito'))    
+            
+
+
+class CarritoList(ListView):
+    template_name = 'market/carrito.html'    
+    model = ItemVendido    
+    context_object_name = 'itemList'  
+
+    def get_queryset(self):
+        return ItemVendido.objects.filter(orden__usuario = self.request.user)
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count()>0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+
+        items = ItemVendido.objects.filter(orden__usuario = self.request.user)
+        total=0
+        for item in items:
+            total+=item.producto.precio
+        context['total'] = total
+
+        return context
+
+class CompraView(TemplateView):
+    template_name = 'market/compra_concretada.html'
 
 
 #--------------ADMINISTRACION--------------#
@@ -231,7 +265,7 @@ class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
                                 request.FILES or None, instance=self.object)
         if formset.is_valid():
             formset.save()
-            return redirect('../modificar_producto/')
+            return redirect(reverse('modificar_producto'))
 
 
 class ProductoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -259,7 +293,7 @@ class ProductoUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
                                 request.FILES or None, instance=self.object)
         if formset.is_valid():
             formset.save()
-            return redirect('../')
+            return redirect(reverse('modificar_producto'))
 
 
 class ProductoDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -283,7 +317,7 @@ class CategoriaCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def post(self, request, **kwargs):
         super().post(request, **kwargs)
-        return redirect('../modificar_categoria/')
+        return redirect(reverse('modificar_categoria'))
 
 
 class CategoriaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -294,7 +328,7 @@ class CategoriaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def post(self, request, **kwargs):
         super().post(request, **kwargs)
-        return redirect('../')
+        return redirect(reverse('modificar_categoria'))
 
     def test_func(self):
         return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)
@@ -304,7 +338,18 @@ class CategoriaDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = 'login'
     model = Categoria
     form_class = CategoriaForm
-    success_url = "../../modificar_categoria/"
+    success_url = "/"
+
+    def post(self,request,**kwargs):
+        
+        categoria = Producto.objects.filter(categoria=kwargs['pk'])
+        if not categoria:
+            super().post(request, **kwargs)
+            return redirect(reverse('modificar_categoria'))
+        else:  
+            return redirect(reverse('modificar_producto'))
+        
+
 
     def test_func(self):
         return (self.request.user.is_managerUser) or (self.request.user.is_executiveUser)

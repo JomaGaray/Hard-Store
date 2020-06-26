@@ -30,16 +30,21 @@ urlpatterns = [
 
     # Busqueda de productos
     path('search/', market_views.SearchView.as_view(), name='search'),
-    path('carrito/', market_views.CarritoView.as_view(), name='carrito'),
-    path('compra_concretada/', market_views.CompraView.as_view(),
-         name='compra_concretada'),
-    path('producto/<int:pk_producto>/',
-         market_views.ProductoDetail.as_view(), name='producto-detalle'),
-    path('productos_categoria/<int:pk_categoria>',
-         market_views.ProductosCategoriaList.as_view(), name='productos-categoria-list'),
+    
+    path('producto/<int:pk_producto>/',market_views.ProductoDetail.as_view(), name='producto-detalle'),
+    path('productos_categoria/<int:pk_categoria>',market_views.ProductosCategoriaList.as_view(), name='productos-categoria-list'),
 
+    
 
+    path('carrito/', market_views.CarritoList.as_view(), name='carrito'),
     # ------PRUEBA DE LIKES
+
+    path('add-carrito/<int:pk_producto>/', market_views.ItemCreate.as_view(), name='carrito-add'),
+
+    path('eliminar-item/<int:pk>/',market_views.ItemDelete.as_view(), name='eliminar-item'),
+
+
+    path('compra_concretada/', market_views.CompraView.as_view(), name='compra_concretada'),
 
 
     path('likeProducto/<int:pk_producto>',
@@ -47,14 +52,6 @@ urlpatterns = [
 
     path('LikeList/',
          market_views.LikeProductList.as_view(), name='LikeList'),
-
-
-    # ----PRUEBA DE CARRITO FUNCION
-    path('addToCart/<int:pk_producto>/',
-         market_views.addToCart, name='añadir-carrito'),
-
-
-
     # -------Administracion-------
     path('crear_producto/', market_views.ProductoCreate.as_view(),
          name='crear_producto'),
