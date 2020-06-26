@@ -42,8 +42,11 @@
 
 
     <div class="row">
+
       <!-- CARRITO -->
+      {% if user.is_authenticated %}
       <a class="navbar-brand" href="{% url 'carrito' %}"><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
+      {% endif %}
       {% if user.is_managerUser or user.is_executiveUser %}
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"

@@ -12,18 +12,21 @@
     <div class="col-md-7">
       <div class="card ml-4 mt-4 mb-4" style="background-color: white">
         <div class="card-body">
-          <p class="categoria text-center">{{ producto.categoria }}</p>
-          <h2>{{ producto.nombre }}</h2>
-          <b>Precio:</b>
-          <p class="price">${{ producto.precio }}</p>
-          <p><b>Stock:</b> En Stock</p>
-          <p><b>Condition: </b>Nuevo</p>
-          <p><b>Marca:</b>{{ producto.marca }}</p>
-          <label>Cantidad</label>
-          <input type="text" value="1" />
-          <a type="btn btn-primary" href="{% url 'añadir-carrito' producto.id %}" class="btn btn-primary">
-            Agregar al Carrito
-          </a>
+          
+            <p class="categoria text-center">{{ producto.categoria }}</p>
+            <h2>{{ producto.nombre }}</h2>
+            <b>Precio:</b>
+            <p class="price">${{ producto.precio }}</p>
+            <p><b>Stock:</b> En Stock</p>
+            <p><b>Condition: </b>Nuevo</p>
+            <p><b>Marca:</b>{{ producto.marca }}</p>
+            <label>Cantidad</label>
+            <input type="text" value="1" />
+
+            <a type="btn btn-primary" href="{% url 'carrito-add' producto.id %}" class="btn btn-primary" method='post' >
+              Agregar al Carrito
+            </a>
+
         </div>
       </div>
     </div>

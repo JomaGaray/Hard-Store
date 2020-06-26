@@ -33,7 +33,7 @@
 	      	<td>{{ producto.categoria }}</td>
 	        <td colspan="5" class="text-center">
 	        	<a href="{% url 'modificar_producto_x' producto.id %}" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a> 
-	        	<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal{{producto.id}}"><i class="fas fa-eye ml-2"></i>Eliminar</a>
+	        	<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal{{producto.id}}"><i class="fas fa-trash ml-2"></i>Eliminar</a>
 	        </td>
 	        <!-- Modal -->
 	        	{% include 'market/producto_confirm_delete.html' %}
