@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block estilo %}
+<link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+<div class="text-center mt-4">
+    <h1 style="color:#66fcf1">Productos</h1>
+</div>
+<div class="container mt-4 mb-4" style="background-color: #45a29e;">
+
+    <div class="row">
+        <table class="table table-hover table-bordered text-danger-center" style="background-color: white;">
+            <tr class="text-center">
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Categoria</th>
+                <th>Opciones</th>
+            </tr>
+            {% for like in LikeList %}
+            <tr>
+                <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
+                <td>{{ like.producto.nombre }}</td>
+                <td>{{ like.producto.descripcion }}</td>
+                <td>{{ like.producto.precio }}</td>
+                <td>{{ like.producto.categoria }}</td>
+
+                <td colspan="5" class="text-center">
+                    <a href="{% url 'producto-detalle' like.producto.id %}" class="btn btn-primary"><i
+                            class="fas fa-edit"></i>Ver</a>
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+    </div>
+
+</div>
+
+<!--{*{}*} para datos dinamicos
+    {*% %*} para logica dinamica-->
+{% endblock %}
