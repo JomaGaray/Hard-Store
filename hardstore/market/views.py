@@ -1,34 +1,39 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.urls import reverse
 from django.forms import inlineformset_factory
 from django.views.generic import View, ListView, TemplateView, CreateView, UpdateView, DeleteView, DetailView
 from django.db.models import Q
 
-from .models import Categoria,Producto,Orden,ImagenProducto,ItemVendido
-from .forms import ProductoForm,CategoriaForm,ImagenForm
+from .models import Categoria, Producto, Orden, ImagenProducto, ItemVendido, Favorito
+from .forms import ProductoForm, CategoriaForm, ImagenForm
 
 # PARA PERMISOS EN VISTAS BASADAS EN CLASES
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+
+
 class CarritoView(TemplateView):
-	template_name = 'market/carrito.html'
+    template_name = 'market/carrito.html'
+
 
 class CompraView(TemplateView):
-		template_name = 'market/compra_concretada.html'
+    template_name = 'market/compra_concretada.html'
+
 
 class index(TemplateView):
     template_name = 'home.html'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        if(Producto.objects.count()>=3):
+        if(Producto.objects.count() >= 3):
             context['productos'] = Producto.productos.random()[:3]
             context['hayProductos'] = True
         else:
             context['hayProductos'] = False
 
-        if(Categoria.objects.count()>0):
+        if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
         else:
@@ -43,13 +48,12 @@ class SearchView(ListView):
     context_object_name = 'productosList'
     paginate_by = 8
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         self.nombre = self.request.GET.get('nombre')
         self.categoria = self.request.GET.get('categoria')
         self.descripcion = self.request.GET.get('descripcion')
         self.precio = self.request.GET.get('precio')
-        return super().get(request,*args,**kwargs)
-
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         resultado = Producto.objects.all()
@@ -65,14 +69,15 @@ class SearchView(ListView):
             resultado = resultado.filter(precio__lte=self.precio)
         return resultado
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if(Categoria.objects.count()>0):
+        if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
         else:
             context['hayCategorias'] = False
         return context
+
 
 class ProductoDetail(DetailView):
 
@@ -84,8 +89,8 @@ class ProductoDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        if(Categoria.objects.count()>0):
+
+        if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
         else:
@@ -100,19 +105,21 @@ class ProductosCategoriaList(ListView):
 
     def get_queryset(self):
         if(self.kwargs):
-            self.pk_categoria = get_object_or_404(Categoria, id=self.kwargs['pk_categoria'])
+            self.pk_categoria = get_object_or_404(
+                Categoria, id=self.kwargs['pk_categoria'])
             return Producto.productos.categorias(self.pk_categoria)
         else:
             return Producto.objects.all()
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if(Categoria.objects.count()>0):
+        if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
         else:
             context['hayCategorias'] = False
         return context
+
 
 class ProductosList(ListView):
     model = Producto
@@ -122,9 +129,9 @@ class ProductosList(ListView):
     def get_queryset(self):
         return Producto.objects.all()
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if(Categoria.objects.count()>0):
+        if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
         else:
@@ -133,34 +140,69 @@ class ProductosList(ListView):
 # https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-display/#generic-views-of-objects FILTRADO DINAMICO
 # https://stackoverflow.com/questions/36950416/when-to-use-get-get-queryset-get-context-data-in-django
 
+
 class CategoriasList(ListView):
     model = Categoria
     template_name = 'market/categoria_list.html'
-    context_object_name = 'categoriasList' 
+    context_object_name = 'categoriasList'
 
     def get_queryset(self):
         return Categoria.objects.all()
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if(Categoria.objects.count()>0):
+        if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
         else:
             context['hayCategorias'] = False
         return context
 
+
+class LikeProduct(LoginRequiredMixin, View):
+    login_url = 'login'
+
+    def get(self, request, pk_producto):
+        producto = Producto.objects.get(id=pk_producto)
+        favorito, created = Favorito.objects.get_or_create(
+            usuario=request.user, producto=producto)
+        # redirijo a la misma pagina del producto
+        return HttpResponseRedirect(reverse('producto-detalle', args=[str(pk_producto)]))
+
+
+class LikeProductList(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    template_name = 'market/likeList.html'
+    context_object_name = 'LikeList'
+
+    def get_queryset(self):
+        favoritos = Favorito.objects.filter(
+            usuario=self.request.user)  # likeados por
+        return favoritos
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count() > 0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
+
+
 @login_required
-def addToCart(request,pk_producto):
-    producto = Producto.objects.get(id = pk_producto)
+def addToCart(request, pk_producto):
+    producto = Producto.objects.get(id=pk_producto)
 
-    orden, created = Orden.objects.get_or_create(usuario= request.user)
+    orden, created = Orden.objects.get_or_create(usuario=request.user)
 
-    item = ItemVendido.objects.create(producto=producto,orden=orden)
+    item = ItemVendido.objects.create(producto=producto, orden=orden)
 
     return redirect('/')
 
+
 #--------------ADMINISTRACION--------------#
+
 
 class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     login_url = 'login'
@@ -174,7 +216,8 @@ class ProductoCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ImagenFormset = inlineformset_factory( Producto, ImagenProducto, ImagenForm, extra=2)
+        ImagenFormset = inlineformset_factory(
+            Producto, ImagenProducto, ImagenForm, extra=2)
         formset = ImagenFormset(queryset=ImagenProducto.objects.none())
         context['imagenes'] = formset
         return context
