@@ -21,9 +21,9 @@
           <p><b>Marca:</b>{{ producto.marca }}</p>
           <label>Cantidad</label>
           <input type="text" value="1" />
-          <button type="button" class="btn btn-primary">
+          <a type="btn btn-primary" href="{% url 'añadir-carrito' producto.id %}" class="btn btn-primary">
             Agregar al Carrito
-          </button>
+          </a>
         </div>
       </div>
     </div>
