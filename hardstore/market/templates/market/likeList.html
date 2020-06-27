@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="text-center mt-4">
-    <h1 style="color:#66fcf1">Productos</h1>
+    <h1 style="color:#66fcf1">Favoritos</h1>
 </div>
 <div class="container mt-4 mb-4" style="background-color: #45a29e;">
 
@@ -31,11 +31,11 @@
                 <td>{{ like.producto.categoria }}</td>
 
                 <td colspan="5" class="text-center">
-                    <a href="{% url 'producto-detalle' like.producto.id %}" class="btn btn-primary"><i
-                            class="fas fa-edit"></i>Ver</a>
+                    <a href="{% url 'producto-detalle' like.producto.id %}" class="btn btn-primary"><i class="fas fa-eye"></i>Ver</a>
+                    <a href="{% url 'eliminar-like' like.id %}" class="btn btn-danger" data-toggle="modal" data-target="#myModal{{like.id}}"><i class="fas fa-trash"></i>Eliminar</a>
 
                 </td>
-
+                {% include 'market/favorito_confirm_delete.html' %}
             </tr>
             {% endfor %}
 

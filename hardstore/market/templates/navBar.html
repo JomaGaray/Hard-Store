@@ -47,7 +47,7 @@
       {% if user.is_authenticated %}
 
       <a class="navbar-brand" href="{% url 'carrito' %}"><i class="fas fa-cart-plus" style="color:#1f2833"></i></a>
-      <a href="{% url 'LikeList' %}" data-tip="Wishlist"><i class="fas fa-heart"></i></a>
+      
       {% if user.is_managerUser or user.is_executiveUser %}
       <div class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
@@ -77,9 +77,9 @@
           <i class="fas fa-user" style="color:#1f2833"></i></a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="background-color: #0b0c10">
-
+          <a class="nav-link" href="{% url 'LikeList' %}" style="color:#66fcf1";>Favoritos</a>
           <div class="dropdown-divider"></div>
-          <a class="nav-link" href="{% url 'logout' %}" style="color:#66fcf1" ;>Log-Out</a>
+          <a class="nav-link" href="{% url 'logout' %}" style="color:#66fcf1";>Log-Out</a>
           <div class="dropdown-divider"></div>
 
         </div>

@@ -37,7 +37,6 @@ urlpatterns = [
     
 
     path('carrito/', market_views.CarritoList.as_view(), name='carrito'),
-    # ------PRUEBA DE LIKES
 
     path('add-carrito/<int:pk_producto>/', market_views.ItemCreate.as_view(), name='carrito-add'),
 
@@ -46,12 +45,14 @@ urlpatterns = [
 
     path('compra_concretada/', market_views.CompraView.as_view(), name='compra_concretada'),
 
+    # ------PRUEBA DE LIKES
 
-    path('likeProducto/<int:pk_producto>',
-         market_views.LikeProduct.as_view(), name='Like'),
+    path('likeProducto/<int:pk_producto>',market_views.LikeProduct.as_view(), name='Like'),
 
-    path('LikeList/',
-         market_views.LikeProductList.as_view(), name='LikeList'),
+    path('LikeList/',market_views.LikeProductList.as_view(), name='LikeList'),
+
+    path('eliminar-like/<int:pk>/',market_views.LikeDelete.as_view(), name='eliminar-like'),
+    
     # -------Administracion-------
     path('crear_producto/', market_views.ProductoCreate.as_view(),
          name='crear_producto'),

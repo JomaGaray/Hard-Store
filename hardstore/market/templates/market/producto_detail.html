@@ -26,6 +26,7 @@
             <a type="btn btn-primary" href="{% url 'carrito-add' producto.id %}" class="btn btn-primary" method='post' >
               Agregar al Carrito
             </a>
+            <a  href="{% url 'Like' producto.id %}" method='post' ><i class=" btn btn-danger fas fa-heart"></i></a>
 
         </div>
       </div>

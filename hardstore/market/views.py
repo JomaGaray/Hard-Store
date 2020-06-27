@@ -162,6 +162,14 @@ class LikeProduct(LoginRequiredMixin, View):
         # redirijo a la misma pagina del producto
         return HttpResponseRedirect(reverse('producto-detalle', args=[str(pk_producto)]))
 
+class LikeDelete(LoginRequiredMixin, DeleteView):
+    login_url = 'login'
+    model = Favorito
+    success_url = "/"
+
+    def post(self,request,**kwargs):
+        super().post(request, **kwargs)
+        return redirect(reverse('LikeList'))    
 
 class LikeProductList(LoginRequiredMixin, ListView):
     login_url = 'login'

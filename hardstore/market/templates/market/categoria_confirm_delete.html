@@ -7,7 +7,7 @@
         <h4 class="modal-title">Eliminar Categoría</h4>
       </div>
       <div class="modal-body text-center">
-      	<p>¿Seguro desea eliminar estre categoría?</p>
+      	<p>¿Seguro desea eliminar esta categoría?</p>
         <form action="{% url 'eliminar_categoria' categoria.id %}" class="post-form" method = 'POST'>
         	{% csrf_token %}
         	{{ categoria.nombre }}

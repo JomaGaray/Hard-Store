@@ -11,9 +11,11 @@
 <div class="text-center mt-4"	><h1 style="color:#66fcf1">Categorías</h1></div>
 <div class="container mt-4 mb-4" style="background-color: #45a29e;">
   <div class="row mb-4">
+  	<div class="col-5 mt-4 ml-4">
+  		<a href="{% url 'modificar_producto' %}" class="btn btn-primary mr-4"><i class="fas fa-arrow-left"></i>Ir a Productos</a> 
+  	</div>
   	<div class="col-6 mt-4 ml-4">
-  		<a href="{% url 'crear_categoria' %}" class="btn btn-primary mr-4"><i class="fas fa-edit"></i>Nueva Categoría</a> 
-  		<a href="{% url 'modificar_producto' %}" class="btn btn-primary mr-4"><i class="fas fa-edit"></i>Ir a Productos</a> 
+  		<a href="{% url 'crear_categoria' %}" class="pull-right btn btn-primary mr-4"><i class="fas fa-edit"></i>Nueva Categoría</a> 
   	</div>
   </div>
   <div class="row">

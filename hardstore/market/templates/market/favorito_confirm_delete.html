@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal{{producto.id}}" role="dialog">
+<div class="modal fade" id="myModal{{like.id}}" role="dialog">
   <div class="modal-dialog">
   
     <!-- Modal content-->
@@ -7,10 +7,10 @@
         <h4 class="modal-title">Eliminar Producto</h4>
       </div>
       <div class="modal-body text-center">
-      	<p>¿Seguro desea eliminar este producto?</p>
-        <form action="{% url 'eliminar_producto' producto.id %}"lass="post-form" method = 'POST'>
+      	<p>¿Seguro desea eliminar este artículo de favoritos?</p>
+        <form action="{% url 'eliminar-like' like.id %}" class="post-form" method = 'POST'>
         	{% csrf_token %}
-        	{{ producto.nombre }}
+        	{{ like.producto.nombre }}
         	
         	<br>
         	<div class="modal-footer">

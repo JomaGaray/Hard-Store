@@ -7,7 +7,7 @@
         <h4 class="modal-title">Eliminar Producto</h4>
       </div>
       <div class="modal-body text-center">
-      	<p>¿Seguro desea eliminar estre producto del carrito?</p>
+      	<p>¿Seguro desea eliminar este producto del carrito?</p>
         <form action="{% url 'eliminar-item' item.id %}" class="post-form" method = 'POST'>
         	{% csrf_token %}
         	{{ item.producto.nombre }}

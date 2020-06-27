@@ -11,7 +11,9 @@
 	<div class="container">
 		<div class="row">
 		  <div class="col-12">
-		    <h1 class="brand" style="color: white">Carrito</h1>
+		    <div class="text-center mt-4">
+		        <h1 style="color:#66fcf1">Carrito</h1>
+		    </div>
 		  </div>
 		</div>	
 		<div class="row" style="background-color: white">
@@ -28,12 +30,13 @@
 		          	{% for item in itemList %}
 		          	<tr> <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
 		          		<td colspan="1" class="text-center">
-		          			<!-- ACA TENGO QUE IR A UNA VIEW DONDE ELIMINE EL ITEMVENDIDO -->
+		          			
+		          			<a href="{% url 'producto-detalle' item.producto.id %}" class="btn btn-primary"><i class="fas fa-eye"></i>Ver</a>
 		    	        	<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#myModal{{item.id}}"><i class="fas fa-trash ml-2"></i>Eliminar</a>
 		    	        </td>
 		    	      	<td>{{ item.producto.nombre }}</td>
-		    	      	<td>{{ item.producto.descripcion }}</td>
-		    	      	<td>{{ item.producto.precio }}</td>
+		    	      	<td>{% if not item.producto.descripcion %}{{ item.producto.descripcion }}{%else%}No hay descripción{% endif %}</td>
+		    	      	<td>${{ item.producto.precio }}</td>
 		    	        
 		    	        <!-- Modal -->
 		    	        {% include 'market/itemvendido_confirm_delete.html' %}
@@ -45,13 +48,13 @@
 		</div>
 		<div class="row" style="background-color: white">
 			<div class="col">
-				<a href="{% url 'compra_concretada' %}" class=" btn btn-primary">Confirmar compra</a>
+				<a href="{% url 'compra_concretada' %}" class=" pull-right btn btn-primary">Confirmar compra</a>
 			</div>
 			<div class="col-5">
 				<table class="table table-bordered" style="background-color: white;">
 					<tr class="text-center">
 			    	    <th>Total</th>
-				    	<th>{{ total }}</th> 
+				    	<th>${{ total }}</th> 
 			    	</tr>  
 				</table>
 			</div>

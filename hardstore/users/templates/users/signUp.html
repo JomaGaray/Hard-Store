@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{%load static%}
+
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <h1 class="brand" style="color: white">Sign-Up</h1>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+          <div class="col-12 col-md-7">
+              <div class="card ml-4 mt-4 mb-4" style="background-color: white">
+                  <div class="card-body">
+                    <form method="POST" action="">
+                      {% csrf_token %}
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.username|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.last_name|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-12 mb-0">
+                          {{ form.email|as_crispy_field }}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.password1|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                          {{ form.password2|as_crispy_field }}
+                        </div>
+                      </div>
+                      
+                      <input class="btn btn-primary" type="submit" value="Registrarse" />
+                      
+                    </form>
+                  </div>
+              </div>
+          </div>
+  </div>        
+</div>
+
+<!--
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    {{form.last_name.label}} {{form.last_name}}
+  </div>
+    
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        {{form.username.label}} {{form.username}}
+      </div>
+    
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        {{form.email.label}} {{form.email}}
+      </div>
+    
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        {{form.password1.label}} {{form.password1}}
+      </div>
+    
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        {{form.password2.label}} {{form.password2}}
+      </div>
+    
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        {{form.is_superuser.label}} {{form.is_superuser}}
+      </div>
+    
+      {{forms.error}}
+      -->
+<!--
+  <form method="POST" action="">
+
+  {% csrf_token %}
+  {{form.as_p}} form mandado desde las Views
+
+  {{form.username.label}}
+  {{form.username}}
+
+  <input type="submit" name="Register">
+
+</form>
+
+-->
+
+<!--
+  <h2>Sign up Form</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <p>
+      {{ field.label_tag }}<br>
+      {{ field }}
+      {% if field.help_text %}
+      <small style="color: grey">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+      <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+-->
+{% endblock content %}
