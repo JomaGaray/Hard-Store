@@ -28,7 +28,7 @@
 		    	       
 		    	      </tr>  
 		          	{% for item in itemList %}
-		          	<tr> <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
+		          	<tr> 
 		          		<td colspan="1" class="text-center">
 		          			
 		          			<a href="{% url 'producto-detalle' item.producto.id %}" class="btn btn-primary"><i class="fas fa-eye"></i>Ver</a>
@@ -61,33 +61,3 @@
 		</div>
 	</div>
 {% endblock %}
-<!--
- {% for item in order.get_cart_items %}
-   <tr>
-     <td>{{ forloop.counter }}</td>
-     <td>
-       {{ item.product.name }}
-       <span class="pull-right">
-         <a href="{% url 'shopping_cart:delete_item' item.id %}" data-balloon="remove this item from cart" class="text-danger" onclick="return confirm_delete();">
-           <i class="fas fa-trash"></i>
-         </a>
-       </span>
-     </td>
-     <td>{{ item.product.price }}</td>
-   </tr>
- {% empty %}
-   <tr>
-     <td colspan= 3> You have not added any items yet.</td>
-   </tr>
- {% endfor %}
- <tr>
-   {% if order.get_cart_total != None %}
-   <td colspan=2>
-     <strong class="pull-right">Order Total:</strong>
-   </td>
-   
-   <td colspan= 1>
-     $<strong>{{ order.get_cart_total }}</strong>
-   </td>
-   {% endif %}
- </tr> -->

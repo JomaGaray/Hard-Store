@@ -24,7 +24,7 @@
             </tr>
             {% for like in LikeList %}
             <tr>
-                <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
+               
                 <td>{{ like.producto.nombre }}</td>
                 <td>{{ like.producto.descripcion }}</td>
                 <td>{{ like.producto.precio }}</td>
@@ -45,7 +45,4 @@
     </div>
 
 </div>
-
-<!--{*{}*} para datos dinamicos
-    {*% %*} para logica dinamica-->
 {% endblock %}
