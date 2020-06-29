@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{% static 'producto.css' %}" />
 {% endblock %} 
 
+
 {% block content %}
 <div class="container" style="background-color: white">
   <div class="row ">
@@ -20,13 +21,11 @@
             <p><b>Stock:</b> En Stock</p>
             <p><b>Condition: </b>Nuevo</p>
             <p><b>Marca:</b>{{ producto.marca }}</p>
-            <label>Cantidad</label>
-            <input type="text" value="1" />
 
             <a type="btn btn-primary" href="{% url 'carrito-add' producto.id %}" class="btn btn-primary" method='post' >
               Agregar al Carrito
             </a>
-            <a  href="{% url 'Like' producto.id %}" method='post' ><i class=" btn btn-danger fas fa-heart"></i></a>
+            <a  href="{% url 'Like' producto.id %}" method='post'><i class=" btn btn-outline-danger fas fa-heart"></i></a>
 
         </div>
       </div>

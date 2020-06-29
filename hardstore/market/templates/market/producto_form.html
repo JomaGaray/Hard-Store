@@ -21,7 +21,7 @@
 		<div class="col-7">
 			<div class="card ml-4 mt-4 mb-4" style="background-color: white">
 				<div class="card-body">
-					<form method = 'POST' enctype="multipart/form-data"> <!-- por mandar files necesitamos declarar enctype-->
+					<form method = 'POST' enctype="multipart/form-data"> 
 					{% csrf_token %}
 					{{ form|crispy }}
 					{{ imagenes.as_p }}

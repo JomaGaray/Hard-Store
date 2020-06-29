@@ -28,7 +28,7 @@
 	        <th>Opciones</th>
 	      </tr>  
       	{% for producto in productosList %}
-      	<tr> <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
+      	<tr> 
 	      	<td>{{ producto.nombre }}</td>
 	      	<td>{{ producto.descripcion }}</td>
 	      	<td>{{ producto.precio }}</td>
@@ -48,7 +48,4 @@
   </div>
   
 </div>
-
-<!--{*{}*} para datos dinamicos
-    {*% %*} para logica dinamica-->
 {% endblock %}

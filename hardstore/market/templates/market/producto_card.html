@@ -4,18 +4,18 @@
             <div class="product-grid mt-2">
               <div class="product-image">
                 <a href="#">
-                  <img class="img-thumbnail" src="{{ producto.imagenes.0.imagen.url }}" /> <!-- esto tiene que ser dinamico-->
+                  <img class="img-thumbnail" src="{{ producto.imagenes.0.imagen.url }}" /> 
                 </a>
                 <ul class="social">
                   <li>
-                    <a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a> <!--añadir al carrito, falta terminar-->
+                    <a href="{% url 'carrito-add' producto.id %}" data-tip="Al carrito"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                   <li>
-                    <a href="#" data-tip="Wishlist"><i class="fa fa-heart"></i></a> <!--darle me gusta, falta terminar-->
+                    <a href="{% url 'Like' producto.id %}" data-tip="Like"><i class="fa fa-heart"></i></a>
                   </li>
                   
                   <li>
-                    <a href="{% url 'producto-detalle' producto.id %}" data-tip="Quick View"><i class="fa fa-search"></i></a> <!-- ver el producto-->
+                    <a href="{% url 'producto-detalle' producto.id %}" data-tip="Ver"><i class="fa fa-search"></i></a> 
                   </li>
                 </ul>
               </div>

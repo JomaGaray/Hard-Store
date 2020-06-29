@@ -25,7 +25,7 @@
 	        <th>Opciones</th>
 	      </tr>  
       	{% for categoria in categoriasList %}
-      	<tr> <!-- ACA VA A IR CADA PRODUCTO QUE ESTE EN EL CARRITO-->
+      	<tr> 
 	      	<td>{{ categoria.nombre }}</td>
 	        <td colspan="5" class="text-center">
 	        	<a href="{% url 'modificar_categoria_x' categoria.id %}" class="btn btn-primary"><i class="fas fa-edit"></i>Editar</a> 
