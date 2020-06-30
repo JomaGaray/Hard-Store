@@ -3,7 +3,7 @@
 
   <div class="carousel-inner" >
     {% if hayProductos %}
-    {% for producto in productos %}
+    {% for producto in destacados %}
       <div class="carousel-item {% if forloop.first %} active {% endif %}" >
         <a class="text-center" href="{% url 'producto-detalle' producto.id %}" style="color:#66fcf1">
         <h1>{{ producto.nombre }}</h1>

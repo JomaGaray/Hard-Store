@@ -3,7 +3,7 @@
           <div class="card-body">
             <div class="product-grid mt-2">
               <div class="product-image">
-                <a href="#">
+                <a href="{% url 'producto-detalle' producto.id %}">
                   <img class="img-thumbnail" src="{{ producto.imagenes.0.imagen.url }}" /> 
                 </a>
                 <ul class="social">

@@ -21,7 +21,8 @@ class index(TemplateView):
         context = super().get_context_data(**kwargs)
 
         if(Producto.objects.count() >= 3):
-            context['productos'] = Producto.productos.random()[:3]
+            context['destacados'] = Producto.productos.random()[:3]
+            context['productosList'] = Producto.productos.random().all()[:12]
             context['hayProductos'] = True
         else:
             context['hayProductos'] = False
@@ -120,7 +121,7 @@ class ProductosList(ListView):
     context_object_name = 'productosList'  # para el for
 
     def get_queryset(self):
-        return Producto.objects.all()
+        return Producto.objects.order_by('categoria')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -140,7 +141,7 @@ class CategoriasList(ListView):
     context_object_name = 'categoriasList'
 
     def get_queryset(self):
-        return Categoria.objects.all()
+        return Categoria.objects.order_by('nombre')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,26 +1,73 @@
 {% extends "base.html" %} 
 
 {% load static %}
-<!--aca van la barra de navegacioin -Joma-->
+
+{% block estilo %}
+<link rel="stylesheet" href="{% static 'productosCategoria.css' %}" />
+{% endblock %} 
+
 {% block content %}
 
-    <!-- PRODUCTOS DESTACADOS CARRUSEL -->
-    <div class="container-fluid" >
+    
+    <div class="container" >
+
       <div class="row justify-content-center" style="margin-top:80px;">
         <div class="col-10 text-center rounded" style="background-color: #1f2833">
               <h3 style="color: #66fcf1">Destacados</h3>
         </div>
       </div>
+
       <div class="row justify-content-center mt-4" >
         <div class="col-10" >    
-
          {% include 'market/carousel_destacados.html' %}
-
         </div>
-
       </div>
     </div>
-    <!-- TERMINA PRODUCTOS EN OFERTA CARRUSEL -->
+
+    <div class="container ">
+        <div class="row justify-content-center " style="margin-top:80px;">
+          <div class="col-10 text-center rounded" style="background-color: #1f2833">
+                <h3 style="color: #66fcf1">Algunos productos</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          {% for producto in productosList %}
+            {% include 'market/producto_card.html' %}
+          {% endfor %}
+        </div>
+        {% if is_paginated %}
+
+        <div class="row justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">Primera</a></li>  
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>  
+              {% endif %}
+
+              {% for page in page_obj.paginator.page_range %}
+
+                {% if page_obj.number == page %}
+                  <li class="page-item "><a class="btn btn-primary" href="?page={{ page }}">{{page}}</a></li>
+                {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3' %}
+                  <li class="page-item"><a class="page-link btn btn-outline-primary" href="?page={{ page }}">{{page}}</a></li>
+                {% endif %}
+                
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>  
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Último</a></li>  
+              {% endif %}
+
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      {% endif %}
+   
 
 
 {% endblock %} 

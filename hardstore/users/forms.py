@@ -11,7 +11,7 @@ class CommonUserForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name',
+        fields = ('username', 'first_name',
                   'email', 'password1', 'password2',)
 
     def save(self, commit=True):
@@ -26,7 +26,7 @@ class ManagerUserForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name',
+        fields = ('username', 'first_name',
                   'email', 'password1', 'password2',)
 
     def save(self, commit=True):
@@ -41,7 +41,7 @@ class ExecutiveUserForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name',
+        fields = ('username', 'first_name',
                   'email', 'password1', 'password2',)
 
     def save(self, commit=True):
