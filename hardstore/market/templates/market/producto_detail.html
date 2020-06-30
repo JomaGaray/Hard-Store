@@ -20,7 +20,7 @@
             <p class="price">${{ producto.precio }}</p>
             <p><b>Stock:</b> En Stock</p>
             <p><b>Condition: </b>Nuevo</p>
-            <p><b>Marca:</b>{{ producto.marca }}</p>
+            
 
             <a type="btn btn-primary" href="{% url 'carrito-add' producto.id %}" class="btn btn-primary" method='post' >
               Agregar al Carrito
