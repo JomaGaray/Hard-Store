@@ -63,13 +63,13 @@ class CategoriaDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = "/"
 
     def post(self,request,**kwargs):
-        
-        categoria = Producto.objects.filter(categoria=kwargs['pk'])
+        pk_categoria =kwargs['pk']
+        categoria = Producto.objects.filter(categoria=pk_categoria)
         if not categoria:
             super().post(request, **kwargs)
             return redirect(reverse('modificar_categoria'))
         else:  
-            return redirect(reverse('modificar_producto'))
+            return redirect(reverse('modificar_producto_cat',kwargs={'pk_categoria': pk_categoria}))
         
 
 
