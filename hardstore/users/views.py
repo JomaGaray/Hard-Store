@@ -8,9 +8,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from .forms import CommonUserForm, ManagerUserForm, ExecutiveUserForm
 from .models import CustomUser
 
-# from django.contrib.auth.forms import UserCreationForm
-# https://docs.djangoproject.com/en/3.0/topics/auth/ AUTENTICACION EN DJANGO
-
 
 class CommonUserSignUpView(CreateView):
     model = CustomUser
