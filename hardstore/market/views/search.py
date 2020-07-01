@@ -1,16 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
-from django.urls import reverse
-
-from django.views.generic import View, ListView, TemplateView, CreateView, UpdateView, DeleteView, DetailView
-
-from .models import Categoria, Producto, Orden, ImagenProducto, ItemVendido, Favorito
-from .forms import ProductoForm, CategoriaForm, ImagenForm
-
-# PARA PERMISOS EN VISTAS BASADAS EN CLASES
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-
+from market.models import Categoria, Producto
+from django.views.generic import ListView
 
 class SearchView(ListView):
     model = Producto
