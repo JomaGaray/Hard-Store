@@ -12,21 +12,23 @@
     <div class="row ">
       <div class="nav-item dropdown">
 
-        <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="categoriasDropdown" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
+        <form method="GET" class="form-inline my-2 my-lg-0" >
+          <a class="nav-link dropdown-toggle d-none d-lg-block" href="#" id="categoriasDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="color: #1f2833;"><i class="fas fa-tags"></i></a>
 
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
-          style="background-color: #0b0c10">
-          {% if hayCategorias %}
-          {% for categoria in categorias %}
-          <a class="dropdown-item" href="{% url 'productos-categoria-list' categoria.id %}"
-            style="color:#66fcf1">{{categoria.nombre}}</a>
-          <div class="dropdown-divider"></div>
-          {% endfor %}
-          {% else %}
-          <a class="dropdown-item" href="#">No disponible</a>
-          {% endif %}
-        </div>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+            style="background-color: #0b0c10">
+            {% if hayCategorias %}
+            {% for categoria in categorias %}
+            <a class="dropdown-item" href="{% url 'productos-categoria-list' categoria.id %}"
+              style="color:#66fcf1">{{categoria.nombre}}</a>
+            <div class="dropdown-divider"></div>
+            {% endfor %}
+            {% else %}
+            <a class="dropdown-item" href="#">No disponible</a>
+            {% endif %}
+          </div>
+        </form>
 
       </div>
 

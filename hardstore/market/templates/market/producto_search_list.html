@@ -24,12 +24,22 @@
         <div class="card justify-content-center mt-4 mb-4" style="background-color: #45a29e;">
           <div class="card-body " >
             <form method="GET" action="/search" class="form-inline my-2 my-lg-0" >
-
-              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="Nombre del producto" aria-label="Search">
+              {% if nombre %}
+                <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="{{nombre}}" aria-label="Search">
+              {% else %}
+                <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="nombre" placeholder="Nombre del producto" aria-label="Search">
+              {% endif%}
 
               <select id="categorias" name="categoria" class="form-control mr-sm-2 mx-auto mx-md-2" >
-              {% if hayCategorias %}
-                <option value="" selected="">Todas las categorías</option>
+              {% if hayCategorias %} <!--  Si existen categorias las muestro en la busqueda avanzada -->
+
+                {% if categoria %} <!-- Almaceno en placeholder datos anteriormente buscados -->
+                  <option value="{{ categoria }}" selected="">{{ categoria }}</option>
+                  <option value="" >Todas las categorías</option>
+                {% else %}
+                  <option value="" >Todas las categorías</option>
+                {% endif %}
+                
               {% for categoria in categorias %}
                 <option value="{{ categoria.nombre }}">{{ categoria.nombre }}</option>
               {% endfor %}
@@ -38,8 +48,18 @@
               {% endif %}
               </select>
 
-              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripción" aria-label="Search">
-              <input class="form-control mr-sm-2 mx-auto mx-md-2" type="number" name="precio" placeholder="Precio máximo" aria-label="Search"> 
+              {% if descripcion %}
+                <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="{{descripcion}}" aria-label="Search">
+              {% else %}
+                <input class="form-control mr-sm-2 mx-auto mx-md-2" type="text" name="descripcion" placeholder="Descripción" aria-label="Search">
+              {% endif %}
+
+              {% if descripcion %}
+                <input class="form-control mr-sm-2 mx-auto mx-md-2" type="number" name="precio" placeholder="{{precio}}" aria-label="Search"> 
+              {% else %}
+                <input class="form-control mr-sm-2 mx-auto mx-md-2" type="number" name="precio" placeholder="Precio máximo" aria-label="Search"> 
+              {% endif %}
+
               <button class="btn btn-primary my-2 my-sm-0 mx-auto mx-md-2" type="submit">Buscar</button>
 
             </form>
@@ -50,10 +70,18 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    {% for producto in productosList %}
-      {% include 'market/producto_card.html' %}
-    {% endfor %}
+  
+    {% if productosList %}
+      <div class="row">
+        {% for producto in productosList %}
+          {% include 'market/producto_card.html' %}
+        {% endfor %}
+      <div >
+    {% else %}
+      <div class="row justify-content-center">
+          <h1 style="color: #66fcf1"> No se encontraron artículos </h1>
+      </div>
+    {% endif %}
   </div>
   {% if is_paginated %}
 

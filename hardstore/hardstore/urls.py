@@ -54,29 +54,23 @@ urlpatterns = [
     path('eliminar-like/<int:pk>/',market_views.LikeDelete.as_view(), name='eliminar-like'),
     
     # -------Administracion-------
-    path('crear_producto/', market_views.ProductoCreate.as_view(),
-         name='crear_producto'),
+    path('crear_producto/', market_views.ProductoCreate.as_view(),name='crear_producto'),
 
-    path('modificar_producto/', market_views.ProductosList.as_view(),
-         name='modificar_producto'),
+    path('modificar_producto/', market_views.ProductosList.as_view(),name='modificar_producto'),
 
-    path('modificar_producto/<int:pk>/',
-         market_views.ProductoUpdate.as_view(), name='modificar_producto_x'),
+    path('modificar_producto/<int:pk_categoria>', market_views.ProductosListCat.as_view(),name='modificar_producto_cat'),
 
-    path('eliminar_producto/<int:pk>/',
-         market_views.ProductoDelete.as_view(), name='eliminar_producto'),
+    path('modificar_producto/<int:pk>/',market_views.ProductoUpdate.as_view(), name='modificar_producto_x'),
 
-    path('crear_categoria/', market_views.CategoriaCreate.as_view(),
-         name='crear_categoria'),
+    path('eliminar_producto/<int:pk>/',market_views.ProductoDelete.as_view(), name='eliminar_producto'),
 
-    path('modificar_categoria/', market_views.CategoriasList.as_view(),
-         name='modificar_categoria'),
+    path('crear_categoria/', market_views.CategoriaCreate.as_view(),name='crear_categoria'),
 
-    path('modificar_categoria/<int:pk>/',
-         market_views.CategoriaUpdate.as_view(), name='modificar_categoria_x'),
+    path('modificar_categoria/', market_views.CategoriasList.as_view(),name='modificar_categoria'),
 
-    path('eliminar_categoria/<int:pk>/',
-         market_views.CategoriaDelete.as_view(), name='eliminar_categoria'),
+    path('modificar_categoria/<int:pk>/',market_views.CategoriaUpdate.as_view(), name='modificar_categoria_x'),
+
+    path('eliminar_categoria/<int:pk>/',market_views.CategoriaDelete.as_view(), name='eliminar_categoria'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

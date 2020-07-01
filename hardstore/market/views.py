@@ -65,6 +65,10 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['nombre'] = self.nombre 
+        context['categoria'] = self.categoria 
+        context['descripcion'] = self.descripcion
+        context['precio'] = self.precio
         if(Categoria.objects.count() > 0):
             context['categorias'] = Categoria.objects.all()
             context['hayCategorias'] = True
@@ -115,11 +119,29 @@ class ProductosCategoriaList(ListView):
         return context
 
 
+class ProductosListCat(ListView):
+    model = Producto
+    template_name = 'market/producto_list.html'
+    context_object_name = 'productosList'  # para el for
+
+    def get_queryset(self):
+        return Producto.productos.categorias(self.kwargs['pk_categoria'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if(Categoria.objects.count() > 0):
+            context['categorias'] = Categoria.objects.all()
+            context['hayCategorias'] = True
+        else:
+            context['hayCategorias'] = False
+        return context
+
 class ProductosList(ListView):
     model = Producto
     template_name = 'market/producto_list.html'
     context_object_name = 'productosList'  # para el for
 
+    def get
     def get_queryset(self):
         return Producto.objects.order_by('categoria')
 
